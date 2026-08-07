@@ -65,49 +65,57 @@
      "task_id": "7935",
      "task": "Patrol an assigned area by vehicle or on foot to ensure public compliance with existing parking ordinance.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, patrol requires physical presence in the assigned area."
     },
     {
      "task_id": "7936",
      "task": "Maintain close communications with dispatching personnel, using two-way radios or cell phones.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P2 draft/route, D2. The field endpoint is still a person."
     },
     {
      "task_id": "7937",
      "task": "Write warnings and citations for illegally parked vehicles.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 3 and 2. A parking summons is an appealable due-process record affirmed by the issuing agent; it looks clerical and is not."
     },
     {
      "task_id": "7939",
      "task": "Respond to and make radio dispatch calls regarding parking violations and complaints.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - context_dependent, read as radio communication at the lowest-consequence plausible use (rubric context-inheritance rule). D2."
     },
     {
      "task_id": "7940",
      "task": "Train new or temporary staff.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P1, field mentoring is the material human portion; materials are producible. D2."
     },
     {
      "task_id": "7941",
      "task": "Identify vehicles in violation of parking codes, checking with dispatchers when necessary to confirm identities or to determine whether vehicles need to be booted or towed.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - compound. 'Identify vehicles in violation' is P3/D3 automatable; the boot-or-tow clause is D1 (property seizure, falls on a member of the public, not cheaply reversible) and carries the statement."
     },
     {
      "task_id": "7942",
      "task": "Perform simple vehicle maintenance procedures, such as checking oil and gas, and report mechanical problems to supervisors.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, bodily act on a vehicle."
     },
     {
      "task_id": "7943",
      "task": "Observe and report hazardous conditions, such as missing traffic signals or signs, and street markings that need to be repainted.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - compound. 'Observe' is P0; 'report' alone would be automatable. This is the clearest erodes-with-sensors item in the set."
     }
    ]
   },
@@ -159,49 +167,57 @@
      "task_id": "2131",
      "task": "Patrol industrial or commercial premises to prevent and detect signs of intrusion and ensure security of doors, windows, and gates.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, patrol."
     },
     {
      "task_id": "2132",
      "task": "Answer alarms and investigate disturbances.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, responding to an alarm is embodied."
     },
     {
      "task_id": "2133",
      "task": "Monitor and authorize entrance and departure of employees, visitors, and other persons to guard against theft and maintain security of premises.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - compound. 'Monitor' is producible; 'authorize entrance' is D1 (consequence falls on a member of the public, not reversible in the moment)."
     },
     {
      "task_id": "2134",
      "task": "Write reports of daily activities and irregularities, such as equipment or property damage, theft, presence of unauthorized persons, or unusual occurrences.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P2/D1(nominal). The round-1 case-3 family: a signed, discoverable activity record. Under A3's proposed widened attestation test this would move to human_anchored/authority; A3 is NOT adopted in v0.1, so it stays augmentable and is flagged."
     },
     {
      "task_id": "2135",
      "task": "Call police or fire departments in cases of emergency, such as fire or presence of unauthorized persons.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P1, recognising the emergency on scene is the material human portion; D1."
     },
     {
      "task_id": "2136",
      "task": "Circulate among visitors, patrons, or employees to preserve order and protect property.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, circulating among people to preserve order."
     },
     {
      "task_id": "2137",
      "task": "Answer telephone calls to take messages, answer questions, and provide information during non-business hours or when switchboard is closed.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "automatable",
+     "anchor": "n/a - P3/D3. Off-hours message-taking and information provision names no consequence and no anchored consumer."
     },
     {
      "task_id": "2138",
      "task": "Warn persons of rule infractions or violations, and apprehend or evict violators from premises, using force when necessary.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 4. Apprehension, eviction, and use of force are coercive power over a person; delegation is void regardless of output quality."
     }
    ]
   },
@@ -225,49 +241,57 @@
      "task_id": "22852",
      "task": "Administer first aid treatment or life support care to sick or injured persons in prehospital settings.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, bodily act on a person. D0 test 5 also fires (reserved professional act, certified scope of practice); the decision procedure stops at P0 first."
     },
     {
      "task_id": "22853",
      "task": "Assess nature and extent of illness or injury to establish and prioritize medical procedures.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0/P1 hands-on assessment. D0 test 5 also fires."
     },
     {
      "task_id": "22854",
      "task": "Attend training classes to maintain certification licensure, keep abreast of new developments in the field, or maintain existing knowledge.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - the certification attaches to the person; the maintenance obligation cannot be delegated to a non-person."
     },
     {
      "task_id": "22855",
      "task": "Comfort and reassure patients.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, physical presence with a patient."
     },
     {
      "task_id": "22856",
      "task": "Communicate with dispatchers or treatment center personnel to provide information about situation, to arrange reception of survivors, or to receive instructions for further treatment.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P2, a structured handoff report is draftable; D1, the consequence lands on a patient and is not cheaply reversible."
     },
     {
      "task_id": "22857",
      "task": "Coordinate work with other emergency medical team members or police or fire department personnel.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P2 coordination messaging; D1, multi-agency scene coordination."
     },
     {
      "task_id": "22858",
      "task": "Decontaminate ambulance interior following treatment of patient with infectious disease, and report case to proper authorities.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - compound. Decontamination is P0; the mandated case report alone would be augmentable."
     },
     {
      "task_id": "22859",
      "task": "Drive mobile intensive care unit to specified location, following instructions from emergency medical dispatcher.",
      "task_type": "n/a",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, driving. The single most likely item in this whole demo to erode with technology - and note that it erodes for the EMT and not for task 2138."
     }
    ]
   },
@@ -291,49 +315,57 @@
      "task_id": "9538",
      "task": "Service, clean, or supply restrooms.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0."
     },
     {
      "task_id": "9539",
      "task": "Gather and empty trash.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0."
     },
     {
      "task_id": "9540",
      "task": "Clean building floors by sweeping, mopping, scrubbing, or vacuuming.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0."
     },
     {
      "task_id": "9541",
      "task": "Follow procedures for the use of chemical cleaners and power equipment to prevent damage to floors and fixtures.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0, embodied use of chemicals and power equipment."
     },
     {
      "task_id": "9542",
      "task": "Mix water and detergents or acids in containers to prepare cleaning solutions, according to specifications.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0."
     },
     {
      "task_id": "9544",
      "task": "Notify managers concerning the need for major repairs or additions to building operating systems.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "augmentable",
+     "anchor": "n/a - P1/P2, spotting the fault needs presence; drafting the notification does not. D2, internal and correctable."
     },
     {
      "task_id": "9545",
      "task": "Requisition supplies or equipment needed for cleaning and maintenance duties.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "automatable",
+     "anchor": "n/a - P3/D3. Requisitioning from consumption data names no external consequence and is cheaply reversible."
     },
     {
      "task_id": "9546",
      "task": "Clean windows, glass partitions, or mirrors, using soapy water or other cleaners, sponges, or squeegees.",
      "task_type": "Core",
-     "class": "unclassified"
+     "class": "human_anchored",
+     "anchor": "capability - P0."
     }
    ]
   },

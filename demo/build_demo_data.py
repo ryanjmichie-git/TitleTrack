@@ -47,6 +47,9 @@ def main():
     task_rows = load_tsv(ROOT / "data/raw/onet_Task_Statements.txt")
     cls_path = ROOT / "demo/task_classifications.json"
     cls = json.loads(cls_path.read_text(encoding="utf-8")) if cls_path.exists() else {}
+    # Anchors are why a task is human_anchored: "capability" (P0) erodes as models
+    # and robotics improve; "authority" (D0) does not move until a rule changes.
+    anchors = cls.get("_anchors", {})
 
     titles = []
     for name, d in DECISIONS.items():
@@ -69,7 +72,8 @@ def main():
             entry["tasks"] = [
                 {"task_id": r["Task ID"], "task": r["Task"],
                  "task_type": r.get("Task Type", ""),
-                 "class": cls.get(d["soc"], {}).get(r["Task ID"], "unclassified")}
+                 "class": cls.get(d["soc"], {}).get(r["Task ID"], "unclassified"),
+                 "anchor": anchors.get(d["soc"], {}).get(r["Task ID"], "")}
                 for r in rows[:MAX_TASKS]
             ]
         titles.append(entry)
