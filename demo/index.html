@@ -51,6 +51,50 @@ h1 em{font-style:italic;color:var(--flag);font-weight:300}
 .eyebrow{font:700 .66rem/1 var(--meta);letter-spacing:.19em;text-transform:uppercase;
          color:var(--ink-2);margin-bottom:.9rem}
 
+/* ── search ───────────────────────────────────────────────── */
+.search{
+  width:100%;font:400 1.25rem/1.4 var(--body);color:var(--ink);background:var(--paper-2);
+  border:1px solid var(--rule);border-bottom:3px solid var(--ink);padding:.85rem 1rem;
+  margin-bottom:.7rem;border-radius:0;
+}
+.search:focus{outline:none;border-bottom-color:var(--flag);background:#fff}
+.search::placeholder{color:var(--rule)}
+.count{font:500 .78rem/1.4 var(--meta);letter-spacing:.05em;color:var(--ink-2);margin-bottom:1.1rem}
+.noresult{padding:2rem 0;color:var(--ink-2);font-style:italic}
+
+/* ── task categories (collapsible) ────────────────────────── */
+details.cat{border-top:1px solid var(--rule)}
+details.cat[open]{padding-bottom:.6rem}
+details.cat summary{
+  list-style:none;cursor:pointer;padding:.85rem 0;display:flex;align-items:center;gap:.75rem;
+}
+details.cat summary::-webkit-details-marker{display:none}
+details.cat summary::after{
+  content:"▸";margin-left:auto;color:var(--ink-2);font-size:.9rem;transition:transform .18s
+}
+details.cat[open] summary::after{transform:rotate(90deg)}
+details.cat summary:hover{background:var(--paper-2)}
+.cat-n{font:700 .8rem/1.5 var(--meta);color:var(--ink-2)}
+.cat-say{font:400 .92rem/1.4 var(--body);color:var(--ink-2)}
+details.cat .task:first-of-type{border-top:1px solid var(--rule)}
+details.cat .task:last-child{border-bottom:none}
+
+/* ── partner handoffs (ILLUSTRATIVE, not real integrations) ─ */
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem;margin-top:.9rem}
+.partner{
+  display:block;border:1px solid var(--rule);background:var(--paper-2);padding:.95rem 1.05rem;
+  text-decoration:none;color:inherit;transition:border-color .15s,transform .15s
+}
+.partner:hover{border-color:var(--flag);transform:translateY(-2px)}
+.partner b{display:block;font:600 1.05rem/1.25 var(--display);margin-bottom:.25rem}
+.partner span{font:500 .78rem/1.45 var(--meta);color:var(--ink-2);display:block}
+.partner .go{color:var(--flag);font:700 .7rem/1.6 var(--meta);letter-spacing:.11em;
+             text-transform:uppercase;margin-top:.5rem;display:block}
+.mock{font:700 .64rem/1.7 var(--meta);letter-spacing:.12em;text-transform:uppercase;
+      color:#fff;background:var(--auto);padding:0 .5rem;border-radius:2px;display:inline-block}
+.examlink{color:var(--flag);text-decoration:none;border-bottom:1px solid currentColor}
+.examlink:hover{background:#fdf6ec}
+
 /* ── tiles ────────────────────────────────────────────────── */
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:0;
        border-top:1px solid var(--rule)}
@@ -177,7 +221,11 @@ footer{color:var(--ink-2);font:400 .78rem/1.6 var(--meta);margin-top:4rem;
        Built on the city's own payroll and exam data, task by task. No scores, no guesses.</p>
   </header>
   <div class="rule"></div>
-  <p class="eyebrow">Pick a title</p>
+  <label class="eyebrow" for="q">Find your title</label>
+  <input id="q" class="search" type="search" autocomplete="off"
+         placeholder="Type a title — try “safety”, “EMT”, “teacher”…"
+         oninput="renderTiles()">
+  <p class="count" id="count"></p>
   <div class="tiles" id="tiles"></div>
 </section>
 
@@ -206,7 +254,7 @@ footer{color:var(--ink-2);font:400 .78rem/1.6 var(--meta);margin-top:4rem;
     </div>
   </div>
   <div class="card skipbox hide" id="r-skip">
-    <h2>This title isn't a job — and that matters</h2>
+    <h2 id="r-skiptitle">This title isn't a job — and that matters</h2>
     <p id="r-skipreason"></p>
     <p class="lede" style="margin-top:1rem">A generic "AI risk score" for this title would be wrong for every
        person under it. Making the work visible has to come first.</p>
@@ -265,6 +313,57 @@ const ANCHOR_LABEL={
   capability:"stays human because of the body, not the law — this one erodes as technology improves",
   authority:"stays human because the law vests it in a person — no model release changes this"
 };
+const DCAS_URL="https://www.nyc.gov/site/dcas/employment/take-an-exam.page";
+
+/* Tasks grouped into three collapsible categories. Eight verbatim O*NET statements
+   at once reads as a wall of text; the category is the unit a worker actually
+   reasons about ("what could go", "what changes", "what stays"). */
+const CATS=[
+  {k:"automatable",   label:"AI could do much of this"},
+  {k:"augmentable",   label:"AI assists — a person still decides"},
+  {k:"human_anchored",label:"Stays with people"}
+];
+function renderCats(tasks){
+  let first=true;
+  return CATS.map(c=>{
+    const rows=tasks.filter(x=>x.class===c.k);
+    if(!rows.length) return "";
+    const open=first?" open":""; first=false;
+    return `<details class="cat"${open}>
+      <summary><span class="pill ${c.k}">${c.k.replace("_"," ")}</span>
+        <span class="cat-n">${rows.length} task${rows.length>1?"s":""}</span>
+        <span class="cat-say">${c.label}</span></summary>
+      ${rows.map((x,n)=>
+        `<div class="task" style="animation-delay:${n*40}ms">
+           <span><span class="task-type">${/^(Core|Supplemental)$/.test(x.task_type)?x.task_type:""}</span></span>
+           <span class="task-txt">${esc(x.task)}${why(x)}</span></div>`).join("")}
+    </details>`;
+  }).join("");
+}
+
+/* ILLUSTRATIVE partner handoffs. These are NOT real integrations and the UI says so
+   in the badge — the same seam rule as the next-rung block. */
+function partners(t){
+  const q=encodeURIComponent(t.title_description);
+  const skill=encodeURIComponent(t.occupation_title||t.title_description);
+  return `<div class="partners">
+    <a class="partner" href="https://www.jobs.com/jobs?q=${q}&l=New+York%2C+NY"
+       target="_blank" rel="noopener">
+      <b>Similar jobs on Jobs.com</b>
+      <span class="mock">illustrative partnership</span>
+      <span class="go">See openings &nearr;</span></a>
+    <a class="partner" href="https://www.coursera.org/search?query=${skill}"
+       target="_blank" rel="noopener">
+      <b>Build the augmentable skills</b>
+      <span class="mock">illustrative partnership</span>
+      <span class="go">Find courses &nearr;</span></a>
+  </div>
+  <p class="legend" style="margin-top:.8rem">The two cards above are a
+     <b>mock partner handoff</b> for this demo — a real version would pass your title
+     and SOC code to a partner and filter to your borough. The exam links go to the
+     live DCAS site.</p>`;
+}
+
 function why(x){
   const kind=String(x.anchor||"").split(" - ")[0];
   if(!ANCHOR_LABEL[kind]) return "";
@@ -274,16 +373,26 @@ function why(x){
 fetch("demo_data.json").then(r=>r.json()).then(d=>{DATA=d;renderTiles();});
 
 function renderTiles(){
-  $("tiles").innerHTML=DATA.titles.map((t,i)=>
-    `<button class="tile" style="animation-delay:${i*70}ms" onclick="openRole(${i})">
+  const q=($("q")?$("q").value:"").trim().toLowerCase();
+  /* keep the ORIGINAL index so openRole() stays correct under filtering */
+  const hits=DATA.titles.map((t,i)=>({t,i})).filter(({t})=>
+    !q || t.title_description.toLowerCase().includes(q)
+       || (t.occupation_title||"").toLowerCase().includes(q));
+  $("count").textContent=q
+    ? `${hits.length} of ${DATA.titles.length} titles match “${q}”`
+    : `${DATA.titles.length} of the 40 largest NYC payroll titles — the ones with a decided crosswalk`;
+  $("tiles").innerHTML=hits.length?hits.map(({t,i},n)=>
+    `<button class="tile" style="animation-delay:${Math.min(n,10)*55}ms" onclick="openRole(${i})">
        <span class="tile-no">${String(i+1).padStart(2,"0")}</span>
-       <b class="tile-name">${t.title_description}</b>
+       <b class="tile-name">${esc(t.title_description)}</b>
        <span class="tile-stats">
          <span><b>${num(t.headcount_fy2025)}</b>New Yorkers</span>
          <span><b>${money(t.salary.median)}</b>median pay</span>
        </span>
        <span class="tile-arrow">&rarr;</span>
-     </button>`).join("");
+     </button>`).join("")
+    :`<p class="noresult">No title matches “${esc(q)}”. This prototype covers the titles
+      with a decided crosswalk — 23 of the 40 largest are still open.</p>`;
 }
 function show(name){ $("screen-landing").classList.toggle("hide",name!=="landing");
   $("screen-role").classList.toggle("hide",name!=="role"); window.scrollTo(0,0); }
@@ -299,18 +408,22 @@ function openRole(i){
   $("r-occ").textContent=coded?`O*NET occupation: ${t.occupation_title} (${t.soc_code})`:"";
   $("r-tasks-card").classList.toggle("hide",!coded);
   $("r-skip").classList.toggle("hide",coded);
-  if(coded){$("r-tasks").innerHTML=t.tasks.map((x,n)=>
-    `<div class="task" style="animation-delay:${n*45}ms">
-       <span><span class="pill ${x.class}">${x.class.replace("_"," ")}</span>
-       <span class="task-type">${/^(Core|Supplemental)$/.test(x.task_type)?x.task_type:""}</span></span>
-       <span class="task-txt">${x.task}${why(x)}</span></div>`).join("");}
-  else{$("r-skipreason").textContent=t.skip_reason;}
-  $("r-exams").innerHTML=t.open_exams.length?t.open_exams.map(e=>
-    `<div class="exam"><span><b>${e.exam_title}</b>
-       <span class="meta">Apply ${e.application_period_start} to ${e.application_period_end}
-       &middot; ${e.eligibility||"—"}</span></span>
-       <span class="num">EXAM #${e.exam_number}</span></div>`).join("")
-    :`<div class="empty">No open DCAS exams for this title right now.</div>`;
+  if(coded){$("r-tasks").innerHTML=renderCats(t.tasks);}
+  else{
+    $("r-skiptitle").textContent = t.verdict==="NO_SINGLE_CODE"
+      ? "Real work — and we still can't honestly code it"
+      : "This title isn't a job — and that matters";
+    $("r-skipreason").textContent=t.skip_reason;
+  }
+  $("r-exams").innerHTML=(t.open_exams.length?t.open_exams.map(e=>
+    `<div class="exam"><span><b>${esc(e.exam_title)}</b>
+       <span class="meta">Apply ${esc(e.application_period_start)} to ${esc(e.application_period_end)}
+       &middot; ${esc(e.eligibility||"—")}</span></span>
+       <a class="num examlink" href="${DCAS_URL}" target="_blank" rel="noopener"
+          >EXAM #${esc(e.exam_number)} &nearr;</a></div>`).join("")
+    :`<div class="empty">No open DCAS exams for this title right now — which is why the
+        next rung below matters more than this list does.</div>`)
+    + partners(t);
   const rung=t.next_rung;
   $("r-rung-card").classList.toggle("hide",!rung);
   if(rung){
