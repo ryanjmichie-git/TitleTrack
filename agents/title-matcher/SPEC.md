@@ -12,7 +12,7 @@ cases) **without ever forcing a match**.
 
 - Maximizing match rate. A wrong match is silent data corruption; a miss is a
   visible gap. The eval encodes this asymmetry as hard gates.
-- Fuzzy similarity scoring. `baselines.py naive` is the cautionary tale: 37/41
+- Fuzzy similarity scoring. `baselines.py naive` is the cautionary tale: 35/41
   recall, 12 forced matches, FAIL.
 - Semantic/SOC matching. That is the crosswalk's job, not this agent's.
 

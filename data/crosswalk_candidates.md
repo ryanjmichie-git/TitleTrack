@@ -28,7 +28,8 @@ defined at the head of the LOW section; apply the same ones to the remaining 27.
 > That held up under review: of the 13, **five are not occupations** (`SKIP`,
 > 124,911 rows) and **two more are real work that no single SOC code spans**
 > (14,089 rows). Only one of the 13 turned out to be a genuine matching problem
-> awaiting data (L09). Deciding them also surfaced a factual error in this file and
+> awaiting data (L09 — since resolved by its query: a measured 51/49 NYPD/FDNY
+> split). Deciding them also surfaced a factual error in this file and
 > in `CLAUDE.md` — see the correction on flag #8.
 
 ---
@@ -160,9 +161,10 @@ Two rules were applied consistently:
    below exist only because a scorer ranked them; they are marked.
 
 Headcount outcome across the 13 (of 414,667 top-40 rows):
-`SKIP` 124,911 (30.1%) · `NO SINGLE CODE` 14,089 (3.4%) · `BLOCKED` 3,076 (0.7%) ·
-coded 23,021 (5.6%). The 13 low-confidence titles are **165,097 rows, 39.8%** of
-top-40 headcount.
+`SKIP` 124,911 (30.1%) · `NO SINGLE CODE` 14,089 (3.4%) ·
+coded 26,097 (6.3%). The 13 low-confidence titles are **165,097 rows, 39.8%** of
+top-40 headcount. (L09 was `BLOCKED` at first writing; its query ran later the
+same day and it is now coded as a measured two-code split — see the entry.)
 
 ---
 
@@ -355,6 +357,11 @@ shows which ranks DCAS *tests*, not who holds them — and DOC in particular cou
 carry incumbents without a current exam. The `agency_name` join in L09 answers
 this title at the same time; run it and confirm before publishing.
 
+**Confirmed 2026-08-07** by the L09 query run against FY2025: all 4,025
+`SERGEANT-` rows are `POLICE DEPARTMENT` — no FDNY, no DOC (raw:
+`data/raw/k397_sergeant_agencies_2025.json`). The indirect exam evidence is
+now direct. Confidence: high.
+
 ---
 
 ## L08 · P.O. DA DET GR3
@@ -383,6 +390,10 @@ duties would put 3,330 investigators into patrol, and this file's own convention
 (flags #2, #3, #4) is that duties govern over title wording. Candidate 3
 (`33-3021.02`) asserts an identification/records specialty nothing supports —
 rule 1, do not claim unsupported detail.
+Agency check (2026-08-07, run alongside L09): all 3,330 rows are
+`POLICE DEPARTMENT` (raw: `data/raw/k397_po_da_det_gr3_agencies_2025.json`) —
+consistent with an NYPD detective detail and inconsistent with nothing; the
+decision stands unchanged.
 
 ---
 
@@ -400,20 +411,37 @@ DOC variant.
 
 *Why low:* exact 0.571 tie between the police and fire codes. See flag #9.
 
-DECISION: **`BLOCKED`** — split between `33-1012.00` and `33-1021.00`, pending one
-query. Do not assign a single code.
-Unlike L07, the exam file **confirms** the ambiguity rather than resolving it:
-both `Lieutenant (Police) (Prom)` and `Lieutenant (Fire) (Prom)` exist. NYPD
-(55,424) and FDNY (19,333) are both large enough that either could hold a
-substantial share of 3,076 incumbents, and agency headcount does not decompose to
-ranks.
+DECISION: **split by `agency_name`** — `33-1012.00` (NYPD, 1,581) +
+`33-1021.00` (FDNY, 1,495). Do not assign a single code; none is honest.
 
-⚠️ Do **not** use this title's one open exam as a tiebreak. It is
-`Lieutenant (Police) (Prom)`, application window 2027-05-05 → 2027-05-25 — a fact
-about a future promotional schedule, not about who holds the title today.
+**Resolved 2026-08-07.** The blocking query ran from a machine with network
+access (raw responses: `data/raw/k397_lieutenant_agencies_2025.json` and
+siblings). FY2025 `LIEUTENANT` rows group to exactly two agencies:
 
-The query that closes it (blocked in this sandbox: the network policy denies
-`data.cityofnewyork.us`, gateway 403 on CONNECT):
+```
+POLICE DEPARTMENT  1,581   → 33-1012.00
+FIRE DEPARTMENT    1,495   → 33-1021.00
+                   3,076   (matches this title's headcount exactly)
+```
+
+A 51.4/48.6 split — the ambiguity was real, and the earlier provisional
+fallback (`33-1012.00` with FDNY share "unmeasured") would have miscoded
+1,495 people, 48.6% of the title. The FDNY share is now *measured*, not
+unmeasured. Unlike L06, the resolver **is** present in `k397-673e`: any
+row-level crosswalk can code this title exactly by joining `agency_name`.
+Aggregate reporting must carry both codes with their measured shares.
+Candidate 3 (`33-1011.00`, DOC) is dead: zero `LIEUTENANT` rows outside
+NYPD/FDNY.
+
+⚠️ The warning stands: do **not** use this title's one open exam as a
+tiebreak. It is `Lieutenant (Police) (Prom)`, application window 2027-05-05 →
+2027-05-25 — a fact about a future promotional schedule, not about who holds
+the title today. (The measured split vindicates this: the exam pointed
+all-police; reality is 51/49.)
+
+The query, kept for reproducibility (run the same for `SERGEANT-` (L07) and
+`P.O. DA DET GR3` (L08) — one round trip confirms all three; both came back
+100% NYPD):
 
 ```
 https://data.cityofnewyork.us/resource/k397-673e.json
@@ -421,11 +449,6 @@ https://data.cityofnewyork.us/resource/k397-673e.json
   &$where=fiscal_year=2025 AND title_description='LIEUTENANT'
   &$group=agency_name&$order=count_1 DESC
 ```
-
-Run the same query for `SERGEANT-` (L07) and `P.O. DA DET GR3` (L08) while you are
-there — one round trip confirms all three. If a single code is unavoidable before
-then, use `33-1012.00` **marked provisional**, and state that the FDNY share is
-unmeasured rather than zero.
 
 ---
 
@@ -982,25 +1005,25 @@ With the 13 low-confidence decisions applied (2026-08-07):
 |---|---|---|---|
 | `SKIP` — not an occupation | L01, L02, L10, L12, L13 | 124,911 | 30.1% |
 | `NO SINGLE CODE` — real work, no code spans it | L03, L06 | 14,089 | 3.4% |
-| `BLOCKED` — one query resolves it | L09 | 3,076 | 0.7% |
-| coded (family-level or better) | L04, L05, L07, L08, L11 | 23,021 | 5.6% |
+| coded (family-level or better) | L04, L05, L07, L08, L09, L11 | 26,097 | 6.3% |
 | **all 13 low-confidence** | | **165,097** | **39.8%** |
 
-**Report those first three rows separately — they are not the same claim.** The
+(L09 sat in a fourth row, `BLOCKED` 3,076 (0.7%), until its query ran later the
+same day; it is now coded as a measured `agency_name` split — see its entry.)
+
+**Report the first two rows separately — they are not the same claim.** The
 124,911 `SKIP` rows are a finding: the crosswalk is *more* accurate without them.
 The 14,089 `NO SINGLE CODE` rows are a real gap: those are people doing real jobs
 that O*NET cannot resolve at the granularity `k397-673e` records, and folding them
-into the skip total would overstate the finding by 11% and hide the gap. The 3,076
-blocked rows are neither — they are one API call away.
+into the skip total would overstate the finding by 11% and hide the gap.
 
-**Coded today: 23,021 rows, 5.6%** — the 13 low-confidence titles only. The 27
+**Coded today: 26,097 rows, 6.3%** — the 13 low-confidence titles only. The 27
 medium/high `DECISION:` lines are still open, so the crosswalk is not yet usable
-end to end. If those 27 close on their candidate 1, coded coverage reaches 272,591
-of 414,667 (**65.7%**), or 275,667 (**66.5%**) once L09 resolves. The remaining
-138,999 rows (33.5%) split 124,911 deliberately excluded + 14,089 standing gap and
-never become codeable.
+end to end. If those 27 close on their candidate 1, coded coverage reaches 275,667
+of 414,667 (**66.5%**). The remaining 139,000 rows (33.5%) split 124,911
+deliberately excluded + 14,089 standing gap and never become codeable.
 
 Do not quote a coverage figure without its denominator caveat. The honest form is
-**"65.7% of top-40 headcount coded, 30.1% deliberately excluded as
+**"66.5% of top-40 headcount coded, 30.1% deliberately excluded as
 not-an-occupation, 3.4% a standing gap"** — the bare percentage invites the reader
 to treat the exclusions as failure, which inverts the finding.

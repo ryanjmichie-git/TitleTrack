@@ -33,7 +33,7 @@ grade.
 agents/title-matcher$ python3 baselines.py strict | ... evaluate.py
   recall 0/41, all gates PASS            # the current pipeline: safe, blind
 agents/title-matcher$ python3 baselines.py naive | ... evaluate.py
-  recall 37/41, forced-match FAIL (12)   # fuzzy matching: high recall, corrupt
+  recall 35/41, forced-match FAIL (12)   # fuzzy matching: high recall, corrupt
 ```
 
 The naive baseline matches `Dental Assistant (NYC H+H)` to

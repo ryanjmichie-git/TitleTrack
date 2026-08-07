@@ -72,7 +72,10 @@ def main():
         ap.error("--predictions or --emit-inputs required")
 
     preds = {}
-    with open(args.predictions, encoding="utf-8") as fh:
+    # utf-8-sig: PS 5.1's `Out-File -Encoding utf8` prepends a BOM, and a BOM
+    # crash exits 1 exactly like a legitimate gate failure. Tolerate it here;
+    # repo-internal files stay strict utf-8.
+    with open(args.predictions, encoding="utf-8-sig") as fh:
         for line in fh:
             if line.strip():
                 p = json.loads(line)
