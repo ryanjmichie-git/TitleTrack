@@ -1,0 +1,4 @@
+# Raw API snapshots are evidence: they must round-trip byte-identical.
+# Without this, core.autocrlf rewrites LF -> CRLF on checkout and a fresh
+# clone no longer matches the bytes the API actually returned.
+data/raw/** -text

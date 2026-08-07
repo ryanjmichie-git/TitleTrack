@@ -1,0 +1,16 @@
+﻿400
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+X-Error-Message: Unrecognized arguments [burst]
+X-Socrata-RequestId: 2cfa01415f801ebabbb3c07850d84b8b
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Content-Type: application/json; charset=utf-8
+Date: Fri, 07 Aug 2026 18:27:47 GMT
+Server: nginx
+
+{
+  "error" : true,
+  "message" : "Unrecognized arguments [burst]"
+}
+
