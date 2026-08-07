@@ -258,17 +258,16 @@ def build():
             "eligibility": "Normalized from open_competitive_promotion. That column conflates eligibility with schedule status, so rows carrying only a status (Postponed) yield null. Raw value kept in eligibility_source_value.",
             "same_employer": "False when the exam is for an employer absent from the citywide payroll file (NYC H+H, Hospitals, Transit Authority) - those hires can never appear in k397-673e. Verified against FY2025 agency_name list; NYC Housing Authority IS in payroll and is therefore true.",
         },
-        # NOTE: the CUNY caveat below is SUPERSEDED and knowingly left as-is.
-        # CUNY community colleges ARE in the payroll file (19,863 FY2025 rows)
-        # under COMMUNITY COLLEGE (...) agency names; only the senior colleges are
-        # absent. The "217 rows" check keyed on the string CUNY and missed them.
-        # Correcting the text here means correcting it in build_top40.ps1 too and
-        # regenerating, which resets the byte-identity baseline --check compares
-        # against. Do both together or neither. See CLAUDE.md known gaps.
+        # NOTE: the CUNY caveat was corrected 2026-08-07 (the superseded text
+        # keyed the employer check on the string CUNY, hit only CUNY CENTRAL
+        # OFFICE, and missed the community colleges). The correction was made
+        # in build_top40.ps1 in the same change and the artifact regenerated,
+        # resetting the byte-identity baseline --check compares against.
+        # Any future edit must still touch both generators together.
         "caveats": [
             "A null salary.median means the title has zero per Annum rows - it is paid per Day, per Hour, or per Session. It is not missing data.",
             "Title matching is text-based: 4ptz-hmtc title_code is populated on only 367 of 2901 rows (12.7%), so it is unusable as a join key.",
-            "CUNY exams are marked same_employer=true because CUNY CENTRAL OFFICE appears in payroll, but only 217 FY2025 rows do - CUNY college staff are largely absent. Treat CUNY matches as low confidence.",
+            "CUNY community colleges ARE in payroll (19,863 FY2025 rows under COMMUNITY COLLEGE agency names), so their exams are correctly same_employer=true; senior colleges are state-funded and absent, so treat any senior-college CUNY exam as foreign despite the flag. An earlier version of this caveat keyed the check on CUNY CENTRAL OFFICE (217 rows) and wrongly called CUNY staff largely absent.",
             "work_location_borough is the agency location, not the employee location.",
         ],
         "titles": titles,

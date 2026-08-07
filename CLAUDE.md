@@ -118,10 +118,11 @@ There is **no shared key**. Payroll has `title_description` (UPPERCASE); exams h
   not marginal.
 - No agency matches `HOSPITAL`, `H+H`, or `TRANSIT` → those are foreign employers
 
-⚠️ `data/raw/top40_titles.json` still carries the **superseded** CUNY caveat
-("CUNY college staff are largely absent"). It is left in place deliberately so the
-artifact stays byte-identical to what the generator produces; fixing it means
-editing the caveat in both generators and regenerating. See known gaps.
+The CUNY caveat in `data/raw/top40_titles.json` was **corrected 2026-08-07**:
+both generators were edited together and the artifact regenerated, resetting
+the `--check` baseline to 47,524 bytes. The corrected caveat states the
+community-college finding above and flags senior-college exams as the ones to
+treat as foreign.
 
 196 of 2,901 exams carry a foreign-employer marker; **none** of them match a top-40
 payroll title, which is consistent with the above.
@@ -241,7 +242,8 @@ agents/                          two custom agents: spec + goldens + gated eval 
 `build_top40.py` reproduces the PowerShell output **byte for byte** — BOM, CRLF,
 and PS 5.1's column-aligned `ConvertTo-Json` layout — so a Linux rebuild does not
 churn the committed artifact. `python3 scripts/build_top40.py --check` is the
-regression test; it currently passes at 47,331 bytes. Keep the two generators in
+regression test; it currently passes at 47,524 bytes (was 47,331 before the
+CUNY-caveat correction of 2026-08-07). Keep the two generators in
 step: any change to one must be mirrored, or `--check` fails by design.
 
 Useful raw files: `join_unmatched_after_normalization.txt` (the 73 residuals — read
@@ -266,16 +268,18 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
 - `data/crosswalk_candidates.md`: **13 of 40 `DECISION:` lines are filled** (the
   `low` set, L01–L13). The 27 `medium`/`high` lines are still open. Use the verdict
   vocabulary and the two rules defined at the head of that file's LOW section.
-- **One API call closes three decisions.** L09 (`LIEUTENANT`) is `BLOCKED` and
-  L07/L08 are decided but unconfirmed, all on the same `agency_name` group-by. It
-  is blocked in the cloud sandbox — the network policy denies
-  `data.cityofnewyork.us` with a gateway 403 on CONNECT. Run it from a machine
-  with access; the exact query is in the L09 entry.
-- **Superseded caveat in `top40_titles.json`.** The `caveats` array says CUNY
-  college staff are largely absent; that is wrong (see employer checks). Fixing it
-  means editing the string in *both* `build_top40.ps1` and `build_top40.py` and
-  regenerating — which resets the byte-identity baseline `--check` compares
-  against. Deliberately not done as a drive-by.
+- ~~One API call closes three decisions.~~ **Done 2026-08-07**, run from a
+  local machine (the cloud sandbox still 403s `data.cityofnewyork.us`). L09
+  (`LIEUTENANT`) resolved: NYPD 1,581 / FDNY 1,495 — a 51/49 split, so it is
+  coded as `33-1012.00` + `33-1021.00` decomposed by `agency_name`, never a
+  single code. L07 (`SERGEANT-`) confirmed 100% NYPD → confidence high. L08
+  unchanged, now agency-corroborated. Raw responses in
+  `data/raw/k397_{lieutenant,sergeant,po_da_det_gr3}_agencies_2025.json`;
+  details in each entry of `data/crosswalk_candidates.md`.
+- ~~Superseded caveat in `top40_titles.json`.~~ **Done 2026-08-07**: the string
+  was corrected in *both* `build_top40.ps1` and `build_top40.py`, the artifact
+  regenerated, and both generators confirmed byte-identical (same SHA-256).
+  New `--check` baseline: 47,524 bytes.
 - `scoring/rubric.md` is v0.1. Two of the four ambiguities found in round 1 are
   unresolved and both distort scoring at volume: statement-level classes must not
   be aggregated to occupations (no clause weights exist in O*NET), and context-free
@@ -286,7 +290,8 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
   fuzzy-similarity threshold, which would force the true negatives above. The
   `title-matcher` agent (`agents/title-matcher/`) exists for exactly this: its
   eval hard-fails forced matches, and its naive baseline demonstrates why
-  (37/41 recall, 12 corrupt matches).
+  (35/41 recall, 12 corrupt matches — an earlier version of this line said
+  37/41; 35/41 is what `evaluate.py` actually reports).
 - The 27 open `DECISION:` lines are the `crosswalk-decider` agent's job
   (`agents/crosswalk-decider/`); it is golden-tested against the 13 decided ones.
 - Grade level is unrecoverable for `TEACHER` / `TEACHER-GENERAL ED` /

@@ -27,7 +27,7 @@
     "caveats":  [
                     "A null salary.median means the title has zero per Annum rows - it is paid per Day, per Hour, or per Session. It is not missing data.",
                     "Title matching is text-based: 4ptz-hmtc title_code is populated on only 367 of 2901 rows (12.7%), so it is unusable as a join key.",
-                    "CUNY exams are marked same_employer=true because CUNY CENTRAL OFFICE appears in payroll, but only 217 FY2025 rows do - CUNY college staff are largely absent. Treat CUNY matches as low confidence.",
+                    "CUNY community colleges ARE in payroll (19,863 FY2025 rows under COMMUNITY COLLEGE agency names), so their exams are correctly same_employer=true; senior colleges are state-funded and absent, so treat any senior-college CUNY exam as foreign despite the flag. An earlier version of this caveat keyed the check on CUNY CENTRAL OFFICE (217 rows) and wrongly called CUNY staff largely absent.",
                     "work_location_borough is the agency location, not the employee location."
                 ],
     "titles":  [
