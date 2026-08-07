@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Title Track ---
+data/raw/
+scoring/cache/
+.claude/
+node_modules/
+*.csv
+!data/crosswalk*.csv
+!data/*_verified.csv
