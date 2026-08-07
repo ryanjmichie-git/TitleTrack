@@ -19,11 +19,60 @@ DECISIONS = {
     "SCHOOL SAFETY AGENT":                {"verdict": "CODE", "soc": "33-9032.00", "skip_reason": None},
     "EMERGENCY MEDICAL SPECIALIST-EMT":   {"verdict": "CODE", "soc": "29-2042.00", "skip_reason": None},
     "CARETAKER":                          {"verdict": "CODE", "soc": "37-2011.00", "skip_reason": None},
+    # NOTE: COMMUNITY COORDINATOR (21-1099.00) and ADJUNCT LECTURER (25-1199.00) are
+    # decided in crosswalk_candidates.md but are deliberately NOT in this demo: O*NET
+    # publishes zero task statements for "All Other" residual codes, so there is no
+    # task-level analysis to show. Having a code is not the same as having data.
+    "SERGEANT-":                          {"verdict": "CODE", "soc": "33-1012.00", "skip_reason": None},
     "CITY SEASONAL AIDE": {
         "verdict": "SKIP", "soc": None,
         "skip_reason": ("Hiring category, not an occupation — 17 salaried rows "
                         "out of 2,414. Coding it as a job would corrupt the "
                         "analysis. (L13, data/crosswalk_candidates.md)"),
+    },
+    "TEACHER- PER SESSION": {
+        "verdict": "SKIP", "soc": None,
+        "skip_reason": ("A pay code, not a job — and the largest title in the city. "
+                        "It is how DOE pays existing teachers hourly for after-school "
+                        "and summer work, so these are overwhelmingly the same people "
+                        "already counted under TEACHER. The payroll file even carries a "
+                        "separate agency named DEPT OF ED PER SESSION TEACHER (81,516 "
+                        "rows). The null median is the tell. (L01)"),
+    },
+    "ELECTION WORKER": {
+        "verdict": "SKIP", "soc": None,
+        "skip_reason": ("A civic stipend role, not an occupation. Zero salaried rows, "
+                        "and the city keeps BOARD OF ELECTION POLL WORKERS (36,732 rows) "
+                        "separate from its actual year-round staff (1,027). Coding it "
+                        "would launder a stipend into a job. (L02)"),
+    },
+    "STUDENT AIDE": {
+        "verdict": "SKIP", "soc": None,
+        "skip_reason": ("A hiring category, not an occupation — students placed across "
+                        "many different agencies doing many different things. There is "
+                        "no single job here to describe. (L10)"),
+    },
+    "JOB TRAINING PARTICIPANT": {
+        "verdict": "SKIP", "soc": None,
+        "skip_reason": ("A hiring category, not an occupation — 18 salaried rows out of "
+                        "4,021. The title names the program someone is enrolled in, not "
+                        "the work they do. (L12)"),
+    },
+    "F/T SCHOOL AIDE": {
+        "verdict": "NO_SINGLE_CODE", "soc": None,
+        "skip_reason": ("These are 9,217 real workers doing real jobs — this is NOT a "
+                        "skip. The blocker is that the plausible occupations sit in "
+                        "three different SOC major groups: education (25), office (43), "
+                        "and food service (35). No residual code spans them, so any "
+                        "single pick misclassifies the majority. Resolving it needs DOE "
+                        "school-assignment data, which is not in the payroll file. (L03)"),
+    },
+    "COLLEGE ASSISTANT": {
+        "verdict": "NO_SINGLE_CODE", "soc": None,
+        "skip_reason": ("Real work, but the title spans clerical, tutoring, lab, and "
+                        "library assignments across CUNY's community colleges — "
+                        "different occupations under one payroll label. Picking one "
+                        "would be a guess dressed as a finding. (L06)"),
     },
 }
 MAX_TASKS = 8

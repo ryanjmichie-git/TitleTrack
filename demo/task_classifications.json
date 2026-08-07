@@ -31,6 +31,16 @@
     "22858": "human_anchored",
     "22859": "human_anchored"
   },
+  "33-1012.00": {
+    "564": "augmentable",
+    "565": "augmentable",
+    "566": "human_anchored",
+    "567": "human_anchored",
+    "568": "augmentable",
+    "569": "augmentable",
+    "570": "human_anchored",
+    "571": "human_anchored"
+  },
   "37-2011.00": {
     "9538": "human_anchored",
     "9539": "human_anchored",
@@ -72,6 +82,17 @@
       "22857": "n/a - P2 coordination messaging; D1, multi-agency scene coordination.",
       "22858": "capability - compound. Decontamination is P0; the mandated case report alone would be augmentable.",
       "22859": "capability - P0, driving. The single most likely item in this whole demo to erode with technology - and note that it erodes for the EMT and not for task 2138."
+    },
+    "33-1012.00": {
+      "564": "n/a - P2 briefing material, D2 internal and correctable.",
+      "565": "n/a - P2. Summarising amended law and its operational implications is draftable, but a knowledgeable human edits it; D2.",
+      "566": "authority - D0 test 3. A supervisor's sign-off on a criminal investigation is the reasoned basis the agency must produce; the procedural-compliance clause carries the statement.",
+      "567": "authority - D0 test 3. Misconduct findings against staff are appealable disciplinary determinations.",
+      "568": "n/a - P1, field training is the material human portion; D2.",
+      "569": "n/a - P2/D1. The round-1 case-3 evidentiary-records family again; departmental records are discoverable.",
+      "570": "authority - D0 test 1. Authorising promotions and transfers is a vested personnel action, not an output a system can adopt.",
+      "571": "authority - D0 test 3 and 4. Chain of custody over evidence and over prisoners' property is the canonical case where the artifact's value is that a person is answerable for it.",
+      "_note": "Every human_anchored task in this occupation is AUTHORITY-anchored - none of them erode with better models. Compare CARETAKER and EMT, where every one is capability-anchored. Same label, opposite futures. This contrast is the clearest argument in the whole demo against a single job-level score."
     },
     "37-2011.00": {
       "9538": "capability - P0.",

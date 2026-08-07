@@ -413,6 +413,81 @@
    ]
   },
   {
+   "title_description": "SERGEANT-",
+   "headcount_fy2025": 4025,
+   "salary": {
+    "basis": "per Annum",
+    "median": 118056,
+    "n_included": 4025,
+    "n_excluded": 0
+   },
+   "open_exams": [],
+   "verdict": "CODE",
+   "soc_code": "33-1012.00",
+   "skip_reason": null,
+   "next_rung": null,
+   "occupation_title": "First-Line Supervisors of Police and Detectives",
+   "occupation_description": "Directly supervise and coordinate activities of members of police force.",
+   "tasks": [
+    {
+     "task_id": "564",
+     "task": "Explain police operations to subordinates to assist them in performing their job duties.",
+     "task_type": "Core",
+     "class": "augmentable",
+     "anchor": "n/a - P2 briefing material, D2 internal and correctable."
+    },
+    {
+     "task_id": "565",
+     "task": "Inform personnel of changes in regulations and policies, implications of new or amended laws, and new techniques of police work.",
+     "task_type": "Core",
+     "class": "augmentable",
+     "anchor": "n/a - P2. Summarising amended law and its operational implications is draftable, but a knowledgeable human edits it; D2."
+    },
+    {
+     "task_id": "566",
+     "task": "Supervise and coordinate the investigation of criminal cases, offering guidance and expertise to investigators, and ensuring that procedures are conducted in accordance with laws and regulations.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 3. A supervisor's sign-off on a criminal investigation is the reasoned basis the agency must produce; the procedural-compliance clause carries the statement."
+    },
+    {
+     "task_id": "567",
+     "task": "Investigate and resolve personnel problems within organization and charges of misconduct against staff.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 3. Misconduct findings against staff are appealable disciplinary determinations."
+    },
+    {
+     "task_id": "568",
+     "task": "Train staff in proper police work procedures.",
+     "task_type": "Core",
+     "class": "augmentable",
+     "anchor": "n/a - P1, field training is the material human portion; D2."
+    },
+    {
+     "task_id": "569",
+     "task": "Maintain logs, prepare reports, and direct the preparation, handling, and maintenance of departmental records.",
+     "task_type": "Core",
+     "class": "augmentable",
+     "anchor": "n/a - P2/D1. The round-1 case-3 evidentiary-records family again; departmental records are discoverable."
+    },
+    {
+     "task_id": "570",
+     "task": "Monitor and evaluate the job performance of subordinates, and authorize promotions and transfers.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 1. Authorising promotions and transfers is a vested personnel action, not an output a system can adopt."
+    },
+    {
+     "task_id": "571",
+     "task": "Direct collection, preparation, and handling of evidence and personal property of prisoners.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "authority - D0 test 3 and 4. Chain of custody over evidence and over prisoners' property is the canonical case where the artifact's value is that a person is answerable for it."
+    }
+   ]
+  },
+  {
    "title_description": "CITY SEASONAL AIDE",
    "headcount_fy2025": 2414,
    "salary": {
@@ -425,6 +500,96 @@
    "verdict": "SKIP",
    "soc_code": null,
    "skip_reason": "Hiring category, not an occupation — 17 salaried rows out of 2,414. Coding it as a job would corrupt the analysis. (L13, data/crosswalk_candidates.md)",
+   "next_rung": null
+  },
+  {
+   "title_description": "TEACHER- PER SESSION",
+   "headcount_fy2025": 78618,
+   "salary": {
+    "basis": "per Annum",
+    "median": null,
+    "n_included": 0,
+    "n_excluded": 78618
+   },
+   "open_exams": [],
+   "verdict": "SKIP",
+   "soc_code": null,
+   "skip_reason": "A pay code, not a job — and the largest title in the city. It is how DOE pays existing teachers hourly for after-school and summer work, so these are overwhelmingly the same people already counted under TEACHER. The payroll file even carries a separate agency named DEPT OF ED PER SESSION TEACHER (81,516 rows). The null median is the tell. (L01)",
+   "next_rung": null
+  },
+  {
+   "title_description": "ELECTION WORKER",
+   "headcount_fy2025": 36517,
+   "salary": {
+    "basis": "per Annum",
+    "median": null,
+    "n_included": 0,
+    "n_excluded": 36517
+   },
+   "open_exams": [],
+   "verdict": "SKIP",
+   "soc_code": null,
+   "skip_reason": "A civic stipend role, not an occupation. Zero salaried rows, and the city keeps BOARD OF ELECTION POLL WORKERS (36,732 rows) separate from its actual year-round staff (1,027). Coding it would launder a stipend into a job. (L02)",
+   "next_rung": null
+  },
+  {
+   "title_description": "STUDENT AIDE",
+   "headcount_fy2025": 3341,
+   "salary": {
+    "basis": "per Annum",
+    "median": null,
+    "n_included": 0,
+    "n_excluded": 3341
+   },
+   "open_exams": [],
+   "verdict": "SKIP",
+   "soc_code": null,
+   "skip_reason": "A hiring category, not an occupation — students placed across many different agencies doing many different things. There is no single job here to describe. (L10)",
+   "next_rung": null
+  },
+  {
+   "title_description": "JOB TRAINING PARTICIPANT",
+   "headcount_fy2025": 4021,
+   "salary": {
+    "basis": "per Annum",
+    "median": 39926,
+    "n_included": 18,
+    "n_excluded": 4003
+   },
+   "open_exams": [],
+   "verdict": "SKIP",
+   "soc_code": null,
+   "skip_reason": "A hiring category, not an occupation — 18 salaried rows out of 4,021. The title names the program someone is enrolled in, not the work they do. (L12)",
+   "next_rung": null
+  },
+  {
+   "title_description": "F/T SCHOOL AIDE",
+   "headcount_fy2025": 9217,
+   "salary": {
+    "basis": "per Annum",
+    "median": null,
+    "n_included": 0,
+    "n_excluded": 9217
+   },
+   "open_exams": [],
+   "verdict": "NO_SINGLE_CODE",
+   "soc_code": null,
+   "skip_reason": "These are 9,217 real workers doing real jobs — this is NOT a skip. The blocker is that the plausible occupations sit in three different SOC major groups: education (25), office (43), and food service (35). No residual code spans them, so any single pick misclassifies the majority. Resolving it needs DOE school-assignment data, which is not in the payroll file. (L03)",
+   "next_rung": null
+  },
+  {
+   "title_description": "COLLEGE ASSISTANT",
+   "headcount_fy2025": 4872,
+   "salary": {
+    "basis": "per Annum",
+    "median": null,
+    "n_included": 0,
+    "n_excluded": 4872
+   },
+   "open_exams": [],
+   "verdict": "NO_SINGLE_CODE",
+   "soc_code": null,
+   "skip_reason": "Real work, but the title spans clerical, tutoring, lab, and library assignments across CUNY's community colleges — different occupations under one payroll label. Picking one would be a guess dressed as a finding. (L06)",
    "next_rung": null
   }
  ]
