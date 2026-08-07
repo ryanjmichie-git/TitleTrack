@@ -50,6 +50,10 @@ def main():
     # Anchors are why a task is human_anchored: "capability" (P0) erodes as models
     # and robotics improve; "authority" (D0) does not move until a rule changes.
     anchors = cls.get("_anchors", {})
+    # EXTERNAL research, deliberately kept in its own file and its own UI block.
+    # Everything else on the page is re-derived from data/raw/ by evaluate.py;
+    # this is not, and the seam must stay visible from across the room.
+    rungs = json.loads((ROOT / "demo/next_rung.json").read_text(encoding="utf-8"))
 
     titles = []
     for name, d in DECISIONS.items():
@@ -62,6 +66,7 @@ def main():
             "verdict": d["verdict"],
             "soc_code": d["soc"],
             "skip_reason": d["skip_reason"],
+            "next_rung": rungs.get(name),
         }
         if d["soc"]:
             occ_title, occ_desc = occ[d["soc"]]
@@ -84,6 +89,11 @@ def main():
                            "data/raw/onet_Occupation_Data.txt",
                            "data/crosswalk_candidates.md DECISION lines",
                            "demo/task_classifications.json"],
+        "external_sources": {
+            "next_rung": "demo/next_rung.json — DCAS Notices of Examination and union "
+                         "publications, compiled 2026-08-07. NOT re-derived from the "
+                         "committed API snapshots the way every other figure here is.",
+        },
         "classification_status": "prototype — rubric v0.1, needs worker validation",
         "titles": titles,
     }

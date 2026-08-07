@@ -6,6 +6,9 @@
   "data/crosswalk_candidates.md DECISION lines",
   "demo/task_classifications.json"
  ],
+ "external_sources": {
+  "next_rung": "demo/next_rung.json — DCAS Notices of Examination and union publications, compiled 2026-08-07. NOT re-derived from the committed API snapshots the way every other figure here is."
+ },
  "classification_status": "prototype — rubric v0.1, needs worker validation",
  "titles": [
   {
@@ -58,6 +61,16 @@
    "verdict": "CODE",
    "soc_code": "33-3041.00",
    "skip_reason": null,
+   "next_rung": {
+    "rung_title": "Associate Traffic Enforcement Agent",
+    "pathway_type": "Formal promotional ladder",
+    "exam_number": "5516",
+    "last_known_cycle": "filed Nov 6-26, 2024",
+    "gates": "Permanent (not provisional) competitive appointment as TEA, at least one year served in title. Score is 85% multiple-choice + 15% seniority. NYS driver license required by promotion.",
+    "salary_note": "Base minimum $50,276 (Associate TEA) against $38,333 at TEA Level I.",
+    "also": "Promotion to Police Officer, Exam 6539, admits TEAs on a collateral basis under Civil Service Law section 52(1). Honest caveat: that is the same instrument offered to the public - incumbency lets you sit a restricted list, it adds no points to your score.",
+    "source": "DCAS Notice of Examination 5516; nyc.gov/assets/dcas/downloads/pdf/noes/20255516000.pdf"
+   },
    "occupation_title": "Parking Enforcement Workers",
    "occupation_description": "Patrol assigned area, such as public parking lot or city streets to issue tickets to overtime parking violators and illegally parked vehicles.",
    "tasks": [
@@ -160,6 +173,16 @@
    "verdict": "CODE",
    "soc_code": "33-9032.00",
    "skip_reason": null,
+   "next_rung": {
+    "rung_title": "Supervisor of School Security",
+    "pathway_type": "Formal promotional ladder",
+    "exam_number": "2547",
+    "last_known_cycle": "filed Dec 1-21, 2021",
+    "gates": "Permanent (not provisional) competitive appointment as School Safety Agent. Application fee was $85.00.",
+    "salary_note": "Base minimum $74,344 (Supervisor of School Security) against $39,206 starting as an SSA.",
+    "also": "Promotion to Police Officer, Exam 6539, also admits SSAs on a collateral section 52(1) basis. Honest caveat: there is no SSA-specific score, age, or education preference - this is a real pipeline, not a formal bridge.",
+    "source": "DCAS Notice of Examination 2547; nyc.gov/assets/dcas/downloads/pdf/noes/20222547000.pdf"
+   },
    "occupation_title": "Security Guards",
    "occupation_description": "Guard, patrol, or monitor premises to prevent theft, violence, or infractions of rules. May operate x-ray and metal detector equipment.",
    "tasks": [
@@ -234,6 +257,16 @@
    "verdict": "CODE",
    "soc_code": "29-2042.00",
    "skip_reason": null,
+   "next_rung": {
+    "rung_title": "Emergency Medical Specialist - Paramedic",
+    "pathway_type": "Formal promotional ladder (restricted to FDNY incumbents)",
+    "exam_number": "4527",
+    "last_known_cycle": "filed Nov 1-21, 2023",
+    "gates": "Permanent (not provisional) competitive appointment as Emergency Medical Specialist-EMT. Requires EMT-Paramedic plus REMAC certification; FDNY sponsors the Medic Upgrade Program, which carries a three-year service commitment.",
+    "salary_note": "Base minimum $53,891 (Paramedic) against $39,386 starting as an EMT.",
+    "also": "Promotion to Firefighter, Exam 4528, is the larger jump but is gated on four years served in title, not one.",
+    "source": "DCAS Notice of Examination 4527; nyc.gov/assets/dcas/downloads/pdf/noes/20244527000.pdf"
+   },
    "occupation_title": "Emergency Medical Technicians",
    "occupation_description": "Assess injuries and illnesses and administer basic emergency medical care. May transport injured or sick persons to medical facilities.",
    "tasks": [
@@ -308,6 +341,16 @@
    "verdict": "CODE",
    "soc_code": "37-2011.00",
    "skip_reason": null,
+   "next_rung": {
+    "rung_title": "Supervisor of Housing Caretakers",
+    "pathway_type": "Formal promotional ladder",
+    "exam_number": "6558",
+    "last_known_cycle": "filed Jan 7-27, 2026",
+    "gates": "Permanent competitive appointment as Caretaker; NYCHA promotions require one year in current title and location. Score is 85% test + 15% seniority. Application fee was $68.00, and fee waivers widened substantially under Local Law 57 of 2025 effective July 1, 2026.",
+    "salary_note": "Base minimums from the NOE; the FY2025 payroll median for CARETAKER on this page is $52,086.",
+    "also": "Teamsters Local 237 runs free exam-prep for this ladder through its Education Department - in practice the most reliable early warning a caretaker gets.",
+    "source": "DCAS Notice of Examination 6558"
+   },
    "occupation_title": "Janitors and Cleaners, Except Maids and Housekeeping Cleaners",
    "occupation_description": "Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.",
    "tasks": [
@@ -381,7 +424,8 @@
    "open_exams": [],
    "verdict": "SKIP",
    "soc_code": null,
-   "skip_reason": "Hiring category, not an occupation — 17 salaried rows out of 2,414. Coding it as a job would corrupt the analysis. (L13, data/crosswalk_candidates.md)"
+   "skip_reason": "Hiring category, not an occupation — 17 salaried rows out of 2,414. Coding it as a job would corrupt the analysis. (L13, data/crosswalk_candidates.md)",
+   "next_rung": null
   }
  ]
 }

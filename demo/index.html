@@ -19,9 +19,11 @@
 *{box-sizing:border-box;margin:0}
 html{-webkit-font-smoothing:antialiased}
 body{
-  font:400 17.5px/1.62 var(--body); background:var(--paper); color:var(--ink);
+  font:400 18.5px/1.62 var(--body); background:var(--paper); color:var(--ink);
   padding:0 1.25rem 5rem; position:relative;
 }
+/* visible focus everywhere — a live demo with no focus ring reads as a bug */
+:focus-visible{outline:3px solid var(--flag);outline-offset:2px}
 /* paper grain — self-contained, no network */
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.28;mix-blend-mode:multiply;
@@ -131,6 +133,21 @@ h1 em{font-style:italic;color:var(--flag);font-weight:300}
 .exam .num{font:700 .72rem/1 var(--meta);letter-spacing:.1em;color:var(--flag);white-space:nowrap}
 .empty{color:var(--ink-2);font-style:italic;padding:.9rem 0;border-top:1px solid var(--rule)}
 
+/* ── next rung (EXTERNAL data — the seam is deliberate) ───── */
+.rung{border-top:3px dashed var(--ink-2)}
+.ext{font:500 .82rem/1.55 var(--meta);color:var(--auto);background:#fdf6ec;
+     border:1px dashed #d9bb86;padding:.75rem .95rem;margin-bottom:1.2rem;max-width:66ch}
+.rung-name{font:600 1.35rem/1.2 var(--display);letter-spacing:-.015em;margin-bottom:.2rem}
+.rung-type{font:700 .66rem/1.7 var(--meta);letter-spacing:.13em;text-transform:uppercase;
+           color:#fff;background:var(--human);padding:0 .55rem;border-radius:2px;display:inline-block}
+.rung-row{border-top:1px solid var(--rule);padding:.7rem 0;display:grid;
+          grid-template-columns:8.5rem 1fr;gap:1rem;font-size:.96rem}
+.rung-row dt{font:700 .68rem/1.9 var(--meta);letter-spacing:.11em;text-transform:uppercase;
+             color:var(--ink-2)}
+.rung-row dd{margin:0}
+.rung-src{font:500 .74rem/1.5 var(--meta);color:var(--ink-2);margin-top:.9rem;
+          border-top:1px solid var(--rule);padding-top:.7rem;word-break:break-word}
+
 /* ── explain ──────────────────────────────────────────────── */
 .btn{background:var(--ink);color:var(--paper);border:none;padding:.72rem 1.5rem;cursor:pointer;
      font:700 .72rem/1 var(--meta);letter-spacing:.16em;text-transform:uppercase;
@@ -200,6 +217,15 @@ footer{color:var(--ink-2);font:400 .78rem/1.6 var(--meta);margin-top:4rem;
        real application windows.</p>
     <div id="r-exams"></div>
   </div>
+  <div class="card rung hide" id="r-rung-card">
+    <h2>The next rung</h2>
+    <p class="ext"><b>Researched separately</b> — DCAS Notices of Examination and union
+      sources, <b>not</b> re-derived from our committed data snapshots the way every
+      other figure on this page is. These are the <b>most recent known cycles, not open
+      filing windows</b>: promotional exams run on irregular cycles, filing windows are
+      about three weeks, and DCAS sends no notice when you become eligible.</p>
+    <div id="r-rung"></div>
+  </div>
   <div class="card">
     <h2>Explain this for me</h2>
     <p class="lede">A plain-language read of what the labels above mean for someone in this job —
@@ -214,8 +240,15 @@ footer{color:var(--ink-2);font:400 .78rem/1.6 var(--meta);margin-top:4rem;
   Employment and Training Administration (USDOL/ETA). Used under the CC BY 4.0 license.
   O*NET&reg; is a trademark of USDOL/ETA.<br>
   TitleTrack has modified all or some of this information. USDOL/ETA has not approved, endorsed,
-  or tested these modifications.<br>
-  Payroll: NYC Office of Payroll Administration (k397-673e), FY2025. Exams: DCAS (4ptz-hmtc).
+  or tested these modifications.<br><br>
+  <b>Payroll</b> — NYC Citywide Payroll Data, Socrata <code>k397-673e</code>, Office of Payroll
+  Administration. Covers FY2025 (550,219 rows); dataset last updated 2026-04-16, annually.<br>
+  <b>Exams</b> — DCAS Annual Examination Schedule, Socrata <code>4ptz-hmtc</code> (2,901 rows);
+  dataset last updated 2026-07-22, annually.<br>
+  <b>Occupations</b> — O*NET 30.3, 1,016 occupations. Task text shown verbatim.<br>
+  <b>Coverage gap, stated up front:</b> 17 of the 40 largest payroll titles have a decided
+  SOC crosswalk; 23 are still open. Five of the largest titles are not occupations at all and
+  are excluded by design — 124,911 rows, 30.1% of top-40 headcount.
 </footer>
 </div>
 <script>
@@ -278,6 +311,21 @@ function openRole(i){
        &middot; ${e.eligibility||"—"}</span></span>
        <span class="num">EXAM #${e.exam_number}</span></div>`).join("")
     :`<div class="empty">No open DCAS exams for this title right now.</div>`;
+  const rung=t.next_rung;
+  $("r-rung-card").classList.toggle("hide",!rung);
+  if(rung){
+    $("r-rung").innerHTML=
+      `<div class="rung-name">${esc(rung.rung_title)}</div>
+       <span class="rung-type">${esc(rung.pathway_type)}</span>
+       <dl>
+         <div class="rung-row"><dt>Exam</dt><dd>#${esc(rung.exam_number)} &middot;
+           most recent cycle ${esc(rung.last_known_cycle)}</dd></div>
+         <div class="rung-row"><dt>What it takes</dt><dd>${esc(rung.gates)}</dd></div>
+         <div class="rung-row"><dt>Pay</dt><dd>${esc(rung.salary_note)}</dd></div>
+         <div class="rung-row"><dt>Also worth knowing</dt><dd>${esc(rung.also)}</dd></div>
+       </dl>
+       <p class="rung-src">Source: ${esc(rung.source)}</p>`;
+  }
   $("explain-out").textContent=""; $("explain-out").className=""; show("role");
 }
 async function explain(){
