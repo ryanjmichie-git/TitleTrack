@@ -109,6 +109,22 @@ h1 em{font-style:normal;color:var(--ink-3)}
 }
 .note b{color:var(--ink);font-weight:600}
 
+/* ── the one-line read (counts, never a score) ────────────── */
+.tally{background:var(--raise);border-radius:16px;padding:1.15rem 1.35rem;margin-bottom:1.5rem}
+.tally .line{font-size:1.06rem;line-height:1.5;color:var(--ink);letter-spacing:-.014em}
+.tally .line b{font-weight:600}
+.tally .n-auto{color:var(--auto);font-weight:600}
+.tally .n-aug{color:var(--aug);font-weight:600}
+.tally .n-hum{color:var(--human);font-weight:600}
+.tally .caveat{font-size:.82rem;color:var(--ink-3);margin-top:.6rem;line-height:1.45}
+
+/* ── explain, formatted into sections ─────────────────────── */
+.xs{border-top:1px solid var(--line-2);padding:1.05rem 0 .2rem}
+.xs:first-child{border-top:none;padding-top:.4rem}
+.xs h3{font-size:.78rem;font-weight:600;color:var(--ink-3);letter-spacing:.02em;
+       text-transform:uppercase;margin-bottom:.5rem}
+.xs p{font-size:1.04rem;line-height:1.55;color:var(--ink);max-width:62ch}
+
 /* ── task categories (collapsible) ────────────────────────── */
 details.cat{border-top:1px solid var(--line-2)}
 details.cat:first-of-type{border-top:none}
@@ -217,12 +233,11 @@ details.cat[open]{padding-bottom:.9rem}
 .btn:hover{background:#0077ed}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.4;cursor:default;background:var(--accent)}
-#explain-out{
-  white-space:pre-wrap;font-size:1.06rem;line-height:1.6;margin-top:1.5rem;max-width:64ch;
-  color:var(--ink);
-}
+#explain-out{margin-top:1.5rem;max-width:66ch;color:var(--ink);font-size:1.06rem;line-height:1.6}
 #explain-out:empty{display:none}
 #explain-out.thinking{color:var(--ink-3)}
+#explain-note{font-size:.82rem;color:var(--ink-3);margin-top:1rem}
+#explain-note:empty{display:none}
 
 footer{
   color:var(--ink-3);font-size:.78rem;line-height:1.65;margin-top:5rem;
@@ -276,6 +291,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fon
     <h2>The actual work, task by task</h2>
     <p class="lede">Every statement below is published O*NET task text for this occupation,
        shown verbatim. The label is ours; the work is theirs.</p>
+    <div class="tally" id="r-tally"></div>
     <div id="r-tasks"></div>
     <div class="legend">
       <span class="k"><span class="pill automatable">automatable</span>AI could do much of this</span>
@@ -305,7 +321,8 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fon
     <p class="lede">A plain-language read of what the labels above mean for someone in this job —
        written live by Claude, grounded only in the verified data on this page.</p>
     <button class="btn" id="explain-btn" onclick="explain()">Explain</button>
-    <p id="explain-out"></p>
+    <div id="explain-out"></div>
+    <p class="caveat" id="explain-note"></p>
   </div>
 </section>
 
@@ -349,6 +366,36 @@ const CATS=[
   {k:"augmentable",   label:"AI assists — a person still decides"},
   {k:"human_anchored",label:"Stays with people"}
 ];
+/* The one-line read. COUNTS OF STATEMENTS SHOWN — deliberately never a percentage
+   and never a score. O*NET publishes no clause weights, so "4 of 8" is not "half
+   this job", and the caveat under the line says exactly that. */
+function tally(t){
+  const n=k=>t.tasks.filter(x=>x.class===k).length;
+  const a=n("automatable"), g=n("augmentable"), h=n("human_anchored");
+  const anchors=t.tasks.filter(x=>x.class==="human_anchored")
+                       .map(x=>String(x.anchor||"").split(" - ")[0]);
+  const auth=anchors.filter(k=>k==="authority").length;
+  const cap=anchors.filter(k=>k==="capability").length;
+  let why="";
+  if(h){
+    if(auth&&!cap) why=` All ${h} stay because <b>the law vests them in a person</b> —
+      none of them move as models improve.`;
+    else if(cap&&!auth) why=` All ${h} stay because <b>they need a body present</b> —
+      these are the ones technology could actually change.`;
+    else why=` Of those, <b>${auth} because the law vests them in a person</b> and
+      ${cap} because they need a body present — different futures.`;
+  }
+  const part=[];
+  if(a) part.push(`<span class="n-auto">${a} AI could do</span>`);
+  if(g) part.push(`<span class="n-aug">${g} AI can assist with</span>`);
+  if(h) part.push(`<span class="n-hum">${h} stay with people</span>`);
+  return `<div class="line">Of the <b>${t.tasks.length}</b> tasks shown:
+      ${part.join(" &middot; ")}.${why}</div>
+    <p class="caveat">These are counts of task statements, not shares of a working day —
+      O*NET publishes ${t.tasks_total} statements for this occupation and no weights for
+      them, so this is deliberately not a percentage and never a job-level score.</p>`;
+}
+
 function renderCats(tasks){
   let first=true;
   return CATS.map(c=>{
@@ -434,7 +481,7 @@ function openRole(i){
   $("r-occ").textContent=coded?`O*NET occupation: ${t.occupation_title} (${t.soc_code})`:"";
   $("r-tasks-card").classList.toggle("hide",!coded);
   $("r-skip").classList.toggle("hide",coded);
-  if(coded){$("r-tasks").innerHTML=renderCats(t.tasks);}
+  if(coded){$("r-tally").innerHTML=tally(t); $("r-tasks").innerHTML=renderCats(t.tasks);}
   else{
     $("r-skiptitle").textContent = t.verdict==="NO_SINGLE_CODE"
       ? "Real work — and we still can't honestly code it"
@@ -465,19 +512,41 @@ function openRole(i){
        </dl>
        <p class="rung-src">Source: ${esc(rung.source)}</p>`;
   }
-  $("explain-out").textContent=""; $("explain-out").className=""; show("role");
+  $("explain-out").textContent=""; $("explain-out").className="";
+  $("explain-note").textContent=""; show("role");
+}
+/* The model is asked for exactly these three sections so the answer arrives as
+   something a worker can scan, not a block of prose. If it deviates, we render the
+   text as-is rather than losing it. */
+const HEADS=["What AI can help with","What stays with you","Your move"];
+function renderExplain(txt){
+  const re=new RegExp("^[\\s*#>-]*(" + HEADS.join("|") + ")\\*{0,2}\\s*:\\s*","gim");
+  const parts=[]; let m, head=null, from=0;
+  while((m=re.exec(txt))!==null){
+    if(head!==null) parts.push([head, txt.slice(from,m.index)]);
+    head=m[1]; from=re.lastIndex;
+  }
+  if(head!==null) parts.push([head, txt.slice(from)]);
+  if(!parts.length) return `<div class="xs"><p>${esc(txt.trim())}</p></div>`;
+  return parts.map(([h,b])=>
+    `<div class="xs"><h3>${esc(h)}</h3><p>${esc(b.trim())}</p></div>`).join("");
 }
 async function explain(){
-  const btn=$("explain-btn"), out=$("explain-out"); btn.disabled=true;
+  const btn=$("explain-btn"), out=$("explain-out"), note=$("explain-note");
+  btn.disabled=true; note.textContent="";
   out.className="thinking"; out.textContent="Thinking…";
   try{
     const r=await fetch("/api/explain",{method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({title:CURRENT.title_description})});
     const j=await r.json();
-    out.className="";
-    out.textContent=j.explanation+(j.live?"":"\n\n(precomputed — live API unavailable)");
-  }catch(e){out.className="";out.textContent="Could not reach the local server — run demo/serve.py.";}
+    out.className=""; out.innerHTML=renderExplain(j.explanation);
+    note.textContent=j.live
+      ? "Written live by Claude just now, grounded only in the verified data on this page."
+      : "Precomputed — the live API was unavailable, so this is the stored answer.";
+  }catch(e){
+    out.className=""; out.textContent="Could not reach the local server — run demo/serve.py.";
+  }
   btn.disabled=false;
 }
 </script></body></html>

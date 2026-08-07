@@ -24,6 +24,7 @@ DECISIONS = {
     # publishes zero task statements for "All Other" residual codes, so there is no
     # task-level analysis to show. Having a code is not the same as having data.
     "SERGEANT-":                          {"verdict": "CODE", "soc": "33-1012.00", "skip_reason": None},
+    "SCHOOL SECRETARY":                   {"verdict": "CODE", "soc": "43-6014.00", "skip_reason": None},
     "CITY SEASONAL AIDE": {
         "verdict": "SKIP", "soc": None,
         "skip_reason": ("Hiring category, not an occupation — 17 salaried rows "
@@ -123,6 +124,10 @@ def main():
             entry["occupation_description"] = occ_desc
             rows = [r for r in task_rows if r["O*NET-SOC Code"] == d["soc"]]
             rows.sort(key=lambda r: (r.get("Task Type") != "Core", int(r["Task ID"])))
+            # How many O*NET publishes vs how many we show. Stated on the page so the
+            # summary line can never be read as "half this job" — it is a count of
+            # statements shown, not a share of anyone's working day.
+            entry["tasks_total"] = len(rows)
             entry["tasks"] = [
                 {"task_id": r["Task ID"], "task": r["Task"],
                  "task_type": r.get("Task Type", ""),

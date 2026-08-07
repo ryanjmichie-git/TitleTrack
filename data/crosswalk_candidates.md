@@ -976,7 +976,33 @@ DECISION: ___
 *Why high:* candidate 1 is the natural home. The scorer's top hits
 (`43-4161`, `43-3051`) are HR/payroll codes and are wrong.
 
-DECISION: ___
+DECISION: **`43-6014.00`** Secretaries and Administrative Assistants, Except Legal,
+Medical, and Executive — confidence **high**.
+Rule 1 grants specificity rather than a residual: all three candidates agree on the
+nature of the work (school-office secretarial) and differ only on *tier* — and the
+tiers they name are carried by **separate payroll titles**, so specificity is earned
+rather than assumed. Candidate 3 is rejected payroll-internally: the executive tier
+exists as its own titles (`SECRETARY TO THE CHANCELLOR` 12,
+`SECRETARY TO THE DEPUTY CHANCELLOR` 59, `SECRETARY TO COMMUNITY SCHOOL BOARD` 183,
+`EXECUTIVE SECRETARY` 27). Candidate 2 is unavailable by its own definition —
+`43-9061.00` covers duties "too varied and diverse to be classified in any specific
+office clerical occupation," and a specific one exists here.
+A salaried occupation, not an L01-style pay code: 3,305 FY2025 rows, **all** per
+Annum (n_included 3,305, n_excluded 0), median $70,784. The per-session double-count
+is already outside this headcount — `k397_all_titles.json` files
+`SCHOOL SECRETARY PER SESSION` (14,914) and `SCHOOL SECRETARY-REG SUB` (2,630) as
+their own titles.
+Zero open exams is **not** a SKIP signal here: `4ptz-hmtc_full.json` contains no
+`School Secretary` row in any of its 2,901, and its `Secretary` exams belong to the
+separate citywide payroll title `SECRETARY` (12,355) — consistent with M10's finding
+that DOE-payroll titles are DCAS-untested.
+Lexical evidence is corroborating only: `onet_Job_Titles.txt` carries
+`43-6014.00	School Secretary`, but `43-3051.00	Payroll Secretary` sits in the same
+file and is precisely the trap behind the scorer's wrong hits.
+Verified against `onet_Occupation_Data.txt`: `43-6014.00	Secretaries and
+Administrative Assistants, Except Legal, Medical, and Executive`.
+`onet_Task_Statements.txt` carries **31** task rows for it — not a zero-task
+residual, unlike the "All Other" codes at `21-1099.00` and `25-1199.00`.
 
 ---
 
