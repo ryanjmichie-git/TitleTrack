@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TitleTrack — What AI means for your city job</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600&family=Archivo:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1e8; --paper-2:#fbfaf5; --ink:#181712; --ink-2:#4a4740; --rule:#d6d0bf;
+  --auto:#a8570e;      /* ochre  — AI could do much of this        */
+  --aug:#0f5c4a;       /* green  — AI assists, a person decides     */
+  --human:#26406e;     /* indigo — stays with people                */
+  --flag:#b3350f;      /* vermilion, used sparingly                 */
+  --display:'Fraunces','Bodoni MT','Didot','Big Caslon',Georgia,serif;
+  --body:'Newsreader','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --meta:'Archivo','Century Gothic','Trebuchet MS',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-font-smoothing:antialiased}
+body{
+  font:400 17.5px/1.62 var(--body); background:var(--paper); color:var(--ink);
+  padding:0 1.25rem 5rem; position:relative;
+}
+/* paper grain — self-contained, no network */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+.wrap{max-width:940px;margin:0 auto}
+
+/* ── masthead ─────────────────────────────────────────────── */
+.mast{padding:2.6rem 0 0}
+.kicker{
+  font:700 .68rem/1 var(--meta);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--flag);display:flex;align-items:center;gap:.75rem;
+}
+.kicker::after{content:"";flex:1;height:1px;background:var(--rule)}
+h1{
+  font:900 clamp(2.4rem,6vw,4.1rem)/0.98 var(--display);letter-spacing:-.028em;
+  margin:1.1rem 0 0;text-wrap:balance;
+}
+h1 em{font-style:italic;color:var(--flag);font-weight:300}
+.sub{
+  color:var(--ink-2);max-width:52ch;margin:1rem 0 0;font-size:1.06rem;
+}
+.rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);
+      padding-bottom:3px;margin:2.1rem 0 1.4rem}
+.eyebrow{font:700 .66rem/1 var(--meta);letter-spacing:.19em;text-transform:uppercase;
+         color:var(--ink-2);margin-bottom:.9rem}
+
+/* ── tiles ────────────────────────────────────────────────── */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:0;
+       border-top:1px solid var(--rule)}
+.tile{
+  background:none;border:none;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
+  padding:1.25rem 1.35rem 1.35rem;cursor:pointer;text-align:left;font:inherit;color:inherit;
+  display:block;width:100%;position:relative;transition:background .18s ease,transform .18s ease;
+  opacity:0;animation:rise .55s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.tile:hover{background:var(--paper-2);transform:translateY(-2px)}
+.tile:hover .tile-name{color:var(--flag)}
+.tile:focus-visible{outline:2px solid var(--flag);outline-offset:-2px}
+.tile-no{font:700 .66rem/1 var(--meta);letter-spacing:.16em;color:var(--rule)}
+.tile-name{font:600 1.32rem/1.14 var(--display);letter-spacing:-.015em;margin:.5rem 0 .7rem;
+           display:block;transition:color .18s}
+.tile-stats{display:flex;gap:1.4rem;font:500 .78rem/1.3 var(--meta);color:var(--ink-2)}
+.tile-stats b{display:block;font:700 1.02rem/1.2 var(--meta);color:var(--ink)}
+.tile-arrow{position:absolute;right:1.2rem;bottom:1.2rem;color:var(--rule);font-size:1.1rem;
+            transition:transform .2s,color .2s}
+.tile:hover .tile-arrow{transform:translateX(4px);color:var(--flag)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ── role view ────────────────────────────────────────────── */
+.back{background:none;border:none;color:var(--flag);cursor:pointer;padding:.4rem 0;
+      font:700 .7rem/1 var(--meta);letter-spacing:.16em;text-transform:uppercase;margin:2.4rem 0 1.2rem}
+.back:hover{text-decoration:underline;text-underline-offset:4px}
+#r-title{font-size:clamp(2rem,4.6vw,3.1rem)}
+#r-occ{font:500 .82rem/1.4 var(--meta);letter-spacing:.06em;color:var(--ink-2);margin:.85rem 0 0}
+.facts{display:flex;gap:3.2rem;flex-wrap:wrap;margin:1.6rem 0 0;
+       border-top:1px solid var(--rule);padding-top:1.2rem}
+.facts div b{font:600 2.5rem/1 var(--display);display:block;letter-spacing:-.02em}
+.facts div span{font:500 .74rem/1.35 var(--meta);letter-spacing:.05em;color:var(--ink-2);
+                display:block;margin-top:.4rem;max-width:26ch}
+.card{border-top:3px solid var(--ink);padding:1.5rem 0 1.9rem;margin-top:2.4rem}
+.card h2{font:600 1.5rem/1.15 var(--display);letter-spacing:-.018em;margin-bottom:.35rem}
+.card .lede{color:var(--ink-2);font-size:.98rem;max-width:60ch;margin-bottom:1.1rem}
+
+/* ── the honesty banner ───────────────────────────────────── */
+.note{
+  border-left:4px solid var(--flag);background:var(--paper-2);padding:.95rem 1.15rem;
+  font-size:.93rem;color:var(--ink-2);margin-top:2.2rem;line-height:1.5;
+}
+.note b{color:var(--ink)}
+
+/* ── tasks ────────────────────────────────────────────────── */
+.task{display:grid;grid-template-columns:9.6rem 1fr;gap:1.1rem;padding:.85rem 0;
+      border-top:1px solid var(--rule);align-items:baseline;
+      opacity:0;animation:rise .4s ease forwards}
+.task:last-child{border-bottom:1px solid var(--rule)}
+.task-txt{font-size:1rem}
+.task-type{font:500 .66rem/1 var(--meta);letter-spacing:.14em;text-transform:uppercase;
+           color:var(--rule);display:block;margin-top:.45rem}
+.task-why{font:500 .78rem/1.45 var(--meta);color:var(--ink-2);display:block;margin-top:.3rem}
+.task-why::before{content:"↳ ";color:var(--rule)}
+.task-why.authority{color:var(--human)}
+.task-why.capability{color:var(--ink-2)}
+.pill{
+  display:inline-block;font:700 .63rem/1.9 var(--meta);letter-spacing:.11em;text-transform:uppercase;
+  padding:0 .6rem;color:#fff;white-space:nowrap;border-radius:2px;
+}
+.pill.automatable{background:var(--auto)}
+.pill.augmentable{background:var(--aug)}
+.pill.human_anchored{background:var(--human)}
+.pill.unclassified{background:var(--ink-2)}
+.legend{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:1.3rem;
+        font:500 .8rem/1.5 var(--meta);color:var(--ink-2)}
+.legend span.k{display:block}
+.legend .pill{margin-bottom:.35rem}
+
+/* ── skip panel ───────────────────────────────────────────── */
+.skipbox{border-top-color:var(--flag)}
+.skipbox h2{color:var(--flag)}
+
+/* ── exams ────────────────────────────────────────────────── */
+.exam{border-top:1px solid var(--rule);padding:.9rem 0;display:grid;
+      grid-template-columns:1fr auto;gap:1rem;align-items:baseline}
+.exam:last-child{border-bottom:1px solid var(--rule)}
+.exam b{font:600 1.1rem/1.25 var(--display);letter-spacing:-.01em;display:block}
+.exam .meta{font:500 .76rem/1.45 var(--meta);color:var(--ink-2);margin-top:.3rem}
+.exam .num{font:700 .72rem/1 var(--meta);letter-spacing:.1em;color:var(--flag);white-space:nowrap}
+.empty{color:var(--ink-2);font-style:italic;padding:.9rem 0;border-top:1px solid var(--rule)}
+
+/* ── explain ──────────────────────────────────────────────── */
+.btn{background:var(--ink);color:var(--paper);border:none;padding:.72rem 1.5rem;cursor:pointer;
+     font:700 .72rem/1 var(--meta);letter-spacing:.16em;text-transform:uppercase;
+     transition:background .18s,transform .1s}
+.btn:hover{background:var(--flag)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:default;background:var(--ink)}
+#explain-out{white-space:pre-wrap;font-size:1.04rem;line-height:1.62;margin-top:1.2rem;
+             max-width:64ch;border-left:2px solid var(--rule);padding-left:1.1rem;color:var(--ink)}
+#explain-out:empty{display:none}
+#explain-out.thinking{color:var(--ink-2);font-style:italic}
+
+footer{color:var(--ink-2);font:400 .78rem/1.6 var(--meta);margin-top:4rem;
+       border-top:1px solid var(--ink);padding-top:1.1rem;max-width:70ch}
+.hide{display:none}
+@media (max-width:620px){
+  .task{grid-template-columns:1fr;gap:.35rem}
+  .facts{gap:1.8rem}
+}
+</style></head><body><div class="wrap">
+
+<section id="screen-landing">
+  <header class="mast">
+    <p class="kicker">TitleTrack · the New York City workforce, title by title</p>
+    <h1>How might AI change <em>your</em> work?</h1>
+    <p class="sub">For the people who run New York City — not just the 9-to-5ers.
+       Built on the city's own payroll and exam data, task by task. No scores, no guesses.</p>
+  </header>
+  <div class="rule"></div>
+  <p class="eyebrow">Pick a title</p>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<section id="screen-role" class="hide">
+  <button class="back" onclick="show('landing')">&larr; All titles</button>
+  <div>
+    <h1 id="r-title"></h1>
+    <p class="sub" id="r-occ"></p>
+    <div class="facts">
+      <div><b id="r-head"></b><span>people in FY2025</span></div>
+      <div><b id="r-pay"></b><span id="r-paynote"></span></div>
+    </div>
+  </div>
+  <div class="note">Task labels are a <b>prototype</b> classification (rubric v0.1) —
+    they describe how AI could touch each task, and they need worker validation.
+    They are never rolled up into a job-level score, because no honest one exists.</div>
+  <div class="card" id="r-tasks-card">
+    <h2>The actual work, task by task</h2>
+    <p class="lede">Every statement below is published O*NET task text for this occupation,
+       shown verbatim. The label is ours; the work is theirs.</p>
+    <div id="r-tasks"></div>
+    <div class="legend">
+      <span class="k"><span class="pill automatable">automatable</span>AI could do much of this</span>
+      <span class="k"><span class="pill augmentable">augmentable</span>AI assists, a person decides</span>
+      <span class="k"><span class="pill human_anchored">human anchored</span>stays with people</span>
+    </div>
+  </div>
+  <div class="card skipbox hide" id="r-skip">
+    <h2>This title isn't a job — and that matters</h2>
+    <p id="r-skipreason"></p>
+    <p class="lede" style="margin-top:1rem">A generic "AI risk score" for this title would be wrong for every
+       person under it. Making the work visible has to come first.</p>
+  </div>
+  <div class="card" id="r-exams-card">
+    <h2>Your next move: open civil-service exams</h2>
+    <p class="lede">Filed with the Department of Citywide Administrative Services. Real numbers,
+       real application windows.</p>
+    <div id="r-exams"></div>
+  </div>
+  <div class="card">
+    <h2>Explain this for me</h2>
+    <p class="lede">A plain-language read of what the labels above mean for someone in this job —
+       written live by Claude, grounded only in the verified data on this page.</p>
+    <button class="btn" id="explain-btn" onclick="explain()">Explain</button>
+    <p id="explain-out"></p>
+  </div>
+</section>
+
+<footer>
+  This page includes information from the O*NET 30.3 Database by the U.S. Department of Labor,
+  Employment and Training Administration (USDOL/ETA). Used under the CC BY 4.0 license.
+  O*NET&reg; is a trademark of USDOL/ETA.<br>
+  TitleTrack has modified all or some of this information. USDOL/ETA has not approved, endorsed,
+  or tested these modifications.<br>
+  Payroll: NYC Office of Payroll Administration (k397-673e), FY2025. Exams: DCAS (4ptz-hmtc).
+</footer>
+</div>
+<script>
+let DATA=null, CURRENT=null;
+const $=id=>document.getElementById(id);
+const money=n=>n==null?"—":"$"+Math.round(n).toLocaleString();
+const num=n=>Number(n).toLocaleString();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Why a task stays with a person. The rubric records two different causes and they
+   behave in opposite ways over time: capability erodes as models and robotics
+   improve; authority does not move until a statute or rule changes. */
+const ANCHOR_LABEL={
+  capability:"stays human because of the body, not the law — this one erodes as technology improves",
+  authority:"stays human because the law vests it in a person — no model release changes this"
+};
+function why(x){
+  const kind=String(x.anchor||"").split(" - ")[0];
+  if(!ANCHOR_LABEL[kind]) return "";
+  return `<span class="task-why ${kind}" title="${esc(x.anchor)}">${ANCHOR_LABEL[kind]}</span>`;
+}
+
+fetch("demo_data.json").then(r=>r.json()).then(d=>{DATA=d;renderTiles();});
+
+function renderTiles(){
+  $("tiles").innerHTML=DATA.titles.map((t,i)=>
+    `<button class="tile" style="animation-delay:${i*70}ms" onclick="openRole(${i})">
+       <span class="tile-no">${String(i+1).padStart(2,"0")}</span>
+       <b class="tile-name">${t.title_description}</b>
+       <span class="tile-stats">
+         <span><b>${num(t.headcount_fy2025)}</b>New Yorkers</span>
+         <span><b>${money(t.salary.median)}</b>median pay</span>
+       </span>
+       <span class="tile-arrow">&rarr;</span>
+     </button>`).join("");
+}
+function show(name){ $("screen-landing").classList.toggle("hide",name!=="landing");
+  $("screen-role").classList.toggle("hide",name!=="role"); window.scrollTo(0,0); }
+function openRole(i){
+  const t=CURRENT=DATA.titles[i];
+  $("r-title").textContent=t.title_description;
+  $("r-head").textContent=num(t.headcount_fy2025);
+  $("r-pay").textContent=money(t.salary.median);
+  $("r-paynote").textContent=t.salary.median==null
+    ? "no annual-salary rows — a fact, not a gap"
+    : `median, ${t.salary.basis} (${num(t.salary.n_excluded)} non-annual rows excluded)`;
+  const coded=!!t.soc_code;
+  $("r-occ").textContent=coded?`O*NET occupation: ${t.occupation_title} (${t.soc_code})`:"";
+  $("r-tasks-card").classList.toggle("hide",!coded);
+  $("r-skip").classList.toggle("hide",coded);
+  if(coded){$("r-tasks").innerHTML=t.tasks.map((x,n)=>
+    `<div class="task" style="animation-delay:${n*45}ms">
+       <span><span class="pill ${x.class}">${x.class.replace("_"," ")}</span>
+       <span class="task-type">${/^(Core|Supplemental)$/.test(x.task_type)?x.task_type:""}</span></span>
+       <span class="task-txt">${x.task}${why(x)}</span></div>`).join("");}
+  else{$("r-skipreason").textContent=t.skip_reason;}
+  $("r-exams").innerHTML=t.open_exams.length?t.open_exams.map(e=>
+    `<div class="exam"><span><b>${e.exam_title}</b>
+       <span class="meta">Apply ${e.application_period_start} to ${e.application_period_end}
+       &middot; ${e.eligibility||"—"}</span></span>
+       <span class="num">EXAM #${e.exam_number}</span></div>`).join("")
+    :`<div class="empty">No open DCAS exams for this title right now.</div>`;
+  $("explain-out").textContent=""; $("explain-out").className=""; show("role");
+}
+async function explain(){
+  const btn=$("explain-btn"), out=$("explain-out"); btn.disabled=true;
+  out.className="thinking"; out.textContent="Thinking…";
+  try{
+    const r=await fetch("/api/explain",{method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({title:CURRENT.title_description})});
+    const j=await r.json();
+    out.className="";
+    out.textContent=j.explanation+(j.live?"":"\n\n(precomputed — live API unavailable)");
+  }catch(e){out.className="";out.textContent="Could not reach the local server — run demo/serve.py.";}
+  btn.disabled=false;
+}
+</script></body></html>
