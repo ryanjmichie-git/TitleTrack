@@ -123,9 +123,13 @@ Unreadable without decoding, and not a patrol officer despite the `P.O.` prefix.
 > As", i.e. a police officer detailed as Detective 3rd Grade, an NYPD payroll
 > convention — fits both the headcount and the `GR3` grade notation better.
 >
-> Neither expansion is confirmed from a source in this repo. **It does not matter
-> for the crosswalk:** both land on `33-3021.00`, so L08 is robust to the
-> ambiguity. Flagged so nobody cites the DA-office gloss as established.
+> **RESOLVED later the same day**, from inside `k397_all_titles.json` itself: the
+> payroll universe contains `CAPTAIN D/A DEPUTY CHIEF`, `CAPTAIN D/A INSPECTOR`,
+> etc. in parallel with fully spelled `CAPTAIN DETAILED AS ASSISTANT CHIEF`,
+> `CAPTAIN DETAILED AS CHIEF OF DETECTIVES`, etc. — the same convention in both
+> spellings. `D/A` = **"Detailed As"**. `P.O. DA DET GR3` is a Police Officer
+> detailed as Detective Grade 3. The "District Attorney" gloss is dead; L08's
+> `33-3021.00` stands, now on firmer ground.
 
 ### 11. `ED PARA` — paraprofessional, i.e. a teaching assistant.
 `ANNUAL ED PARA` and `SUBSTITUTE ED PARA` are classroom paraprofessionals. The
@@ -369,10 +373,11 @@ Narrower investigative variant; pick only with DA-office specifics.
 whether to classify by civil-service line or by real duties.
 
 DECISION: **`33-3021.00`** Detectives and Criminal Investigators.
-The decision is **robust to the unresolved abbreviation** (flag #10): whether `DA`
-means "District Attorney" or "Detailed As", the duty is detective-grade
-investigation and the SOC is the same. That is why this closes at medium
-confidence despite the gloss being unverified.
+The decision was made robust to the then-unresolved abbreviation (flag #10):
+whether `DA` meant "District Attorney" or "Detailed As", the duty is
+detective-grade investigation and the SOC is the same. The gloss has since been
+resolved to "Detailed As" from the payroll universe itself (see flag #10),
+which removes the residual doubt.
 Candidate 2 rejected: classifying by the `P.O.` civil-service line over actual
 duties would put 3,330 investigators into patrol, and this file's own convention
 (flags #2, #3, #4) is that duties govern over title wording. Candidate 3
