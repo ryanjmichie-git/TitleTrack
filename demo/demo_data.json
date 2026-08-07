@@ -73,6 +73,7 @@
    },
    "occupation_title": "Parking Enforcement Workers",
    "occupation_description": "Patrol assigned area, such as public parking lot or city streets to issue tickets to overtime parking violators and illegally parked vehicles.",
+   "tasks_total": 22,
    "tasks": [
     {
      "task_id": "7935",
@@ -185,6 +186,7 @@
    },
    "occupation_title": "Security Guards",
    "occupation_description": "Guard, patrol, or monitor premises to prevent theft, violence, or infractions of rules. May operate x-ray and metal detector equipment.",
+   "tasks_total": 14,
    "tasks": [
     {
      "task_id": "2131",
@@ -269,6 +271,7 @@
    },
    "occupation_title": "Emergency Medical Technicians",
    "occupation_description": "Assess injuries and illnesses and administer basic emergency medical care. May transport injured or sick persons to medical facilities.",
+   "tasks_total": 12,
    "tasks": [
     {
      "task_id": "22852",
@@ -353,6 +356,7 @@
    },
    "occupation_title": "Janitors and Cleaners, Except Maids and Housekeeping Cleaners",
    "occupation_description": "Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.",
+   "tasks_total": 21,
    "tasks": [
     {
      "task_id": "9538",
@@ -428,6 +432,7 @@
    "next_rung": null,
    "occupation_title": "First-Line Supervisors of Police and Detectives",
    "occupation_description": "Directly supervise and coordinate activities of members of police force.",
+   "tasks_total": 20,
    "tasks": [
     {
      "task_id": "564",
@@ -484,6 +489,82 @@
      "task_type": "Core",
      "class": "human_anchored",
      "anchor": "authority - D0 test 3 and 4. Chain of custody over evidence and over prisoners' property is the canonical case where the artifact's value is that a person is answerable for it."
+    }
+   ]
+  },
+  {
+   "title_description": "SCHOOL SECRETARY",
+   "headcount_fy2025": 3305,
+   "salary": {
+    "basis": "per Annum",
+    "median": 70784,
+    "n_included": 3305,
+    "n_excluded": 0
+   },
+   "open_exams": [],
+   "verdict": "CODE",
+   "soc_code": "43-6014.00",
+   "skip_reason": null,
+   "next_rung": null,
+   "occupation_title": "Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",
+   "occupation_description": "Perform routine administrative functions such as drafting correspondence, scheduling appointments, organizing and maintaining paper and electronic files, or providing information to callers.",
+   "tasks_total": 31,
+   "tasks": [
+    {
+     "task_id": "2790",
+     "task": "Answer telephones and give information to callers, take messages, or transfer calls to appropriate individuals.",
+     "task_type": "Core",
+     "class": "automatable",
+     "anchor": "n/a - P3/D3. Taking a message and giving routine information names no consequence and no anchored consumer."
+    },
+    {
+     "task_id": "2791",
+     "task": "Greet visitors or callers and handle their inquiries or direct them to the appropriate persons according to their needs.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "capability - compound, and the greeting IS the task. A school front desk is a physical post; handling the inquiry alone would be automatable."
+    },
+    {
+     "task_id": "2793",
+     "task": "Locate and attach appropriate files to incoming correspondence requiring replies.",
+     "task_type": "Core",
+     "class": "automatable",
+     "anchor": "n/a - P3/D3. Retrieval and matching, internal and cheaply corrected."
+    },
+    {
+     "task_id": "2794",
+     "task": "Open, read, route, and distribute incoming mail or other materials and answer routine letters.",
+     "task_type": "Core",
+     "class": "augmentable",
+     "anchor": "n/a - P2/D1. The physical opening is incidental to the task the way record-keeping was incidental in round-1 case 4; routine letters go out over the school's name, so they are read as the agency's position."
+    },
+    {
+     "task_id": "2795",
+     "task": "Complete forms in accordance with company procedures.",
+     "task_type": "Core",
+     "class": "automatable",
+     "anchor": "n/a - P3/D2. Context-free under the inheritance rule, so classified at the lowest-consequence plausible use. NOTE: a form feeding an eligibility or discipline determination would inherit that anchoring - this is exactly ambiguity A2, unresolved in v0.1."
+    },
+    {
+     "task_id": "2796",
+     "task": "Make copies of correspondence or other printed material.",
+     "task_type": "Core",
+     "class": "automatable",
+     "anchor": "n/a - P3/D3. The machine produces the output at standard; the human presses a button."
+    },
+    {
+     "task_id": "2797",
+     "task": "Review work done by others to check for correct spelling and grammar, ensure that company format policies are followed, and recommend revisions.",
+     "task_type": "Core",
+     "class": "automatable",
+     "anchor": "n/a - P3/D2. Proofreading and format compliance is a canonical model strength, and the output is a recommendation someone else adopts."
+    },
+    {
+     "task_id": "2799",
+     "task": "Learn to operate new office technologies as they are developed and implemented.",
+     "task_type": "Core",
+     "class": "human_anchored",
+     "anchor": "capability - the learning attaches to the person; it cannot be delegated to a non-person."
     }
    ]
   },

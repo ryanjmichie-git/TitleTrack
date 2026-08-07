@@ -41,6 +41,16 @@
     "570": "human_anchored",
     "571": "human_anchored"
   },
+  "43-6014.00": {
+    "2790": "automatable",
+    "2791": "human_anchored",
+    "2793": "automatable",
+    "2794": "augmentable",
+    "2795": "automatable",
+    "2796": "automatable",
+    "2797": "automatable",
+    "2799": "human_anchored"
+  },
   "37-2011.00": {
     "9538": "human_anchored",
     "9539": "human_anchored",
@@ -93,6 +103,17 @@
       "570": "authority - D0 test 1. Authorising promotions and transfers is a vested personnel action, not an output a system can adopt.",
       "571": "authority - D0 test 3 and 4. Chain of custody over evidence and over prisoners' property is the canonical case where the artifact's value is that a person is answerable for it.",
       "_note": "Every human_anchored task in this occupation is AUTHORITY-anchored - none of them erode with better models. Compare CARETAKER and EMT, where every one is capability-anchored. Same label, opposite futures. This contrast is the clearest argument in the whole demo against a single job-level score."
+    },
+    "43-6014.00": {
+      "2790": "n/a - P3/D3. Taking a message and giving routine information names no consequence and no anchored consumer.",
+      "2791": "capability - compound, and the greeting IS the task. A school front desk is a physical post; handling the inquiry alone would be automatable.",
+      "2793": "n/a - P3/D3. Retrieval and matching, internal and cheaply corrected.",
+      "2794": "n/a - P2/D1. The physical opening is incidental to the task the way record-keeping was incidental in round-1 case 4; routine letters go out over the school's name, so they are read as the agency's position.",
+      "2795": "n/a - P3/D2. Context-free under the inheritance rule, so classified at the lowest-consequence plausible use. NOTE: a form feeding an eligibility or discipline determination would inherit that anchoring - this is exactly ambiguity A2, unresolved in v0.1.",
+      "2796": "n/a - P3/D3. The machine produces the output at standard; the human presses a button.",
+      "2797": "n/a - P3/D2. Proofreading and format compliance is a canonical model strength, and the output is a recommendation someone else adopts.",
+      "2799": "capability - the learning attaches to the person; it cannot be delegated to a non-person.",
+      "_note": "5 of 8 automatable - the most exposed title in this demo, and it is a school office, not a factory floor. Set it against CARETAKER (6 of 8 human_anchored): the clerical title is more exposed than the janitorial one, which inverts the intuition most people arrive with. Caveat carried openly: three of these five are context-free statements classified by fiat under ambiguity A2, so this is the title whose labels most need worker validation."
     },
     "37-2011.00": {
       "9538": "capability - P0.",
