@@ -128,6 +128,32 @@ def main():
     else:
         check(False, "demo/fallback_explanations.json exists")
 
+    # --- 9. next-rung data is external; the seam must be declared, not blurred ---
+    nr_path = DEMO / "next_rung.json"
+    if nr_path.exists():
+        nr = load_json(nr_path)
+        check("_provenance" in nr and "NOT" in nr["_provenance"],
+              "next_rung.json declares it is NOT from the committed snapshots")
+        check("_caveat" in nr and "MOST RECENT KNOWN CYCLE" in nr["_caveat"],
+              "next_rung.json warns these are past cycles, not open filing windows")
+        for t in titles:
+            check("next_rung" in t,
+                  f"{t['title_description']}: carries a next_rung key (null is a valid answer)")
+        for name, r in nr.items():
+            if name.startswith("_") or r is None:
+                continue
+            for field in ("rung_title", "pathway_type", "exam_number",
+                          "last_known_cycle", "gates", "source"):
+                check(bool(r.get(field)), f"next_rung[{name}]: has '{field}'")
+            # a past cycle must never be dressed up as an open window
+            check(not any(k.startswith("application_period") for k in r),
+                  f"next_rung[{name}]: does not present a past cycle as an open window")
+        if html_path.exists():
+            check("Researched separately" in html,
+                  "index.html labels the next-rung block as externally researched")
+    else:
+        check(False, "demo/next_rung.json exists")
+
     print()
     if FAILURES:
         print(f"GATE FAILED — {len(FAILURES)} failure(s)")
