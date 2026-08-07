@@ -232,29 +232,23 @@ def slide_how(c):
     page(c, "How I built it")
     y = H - M - 0.8 * inch
 
-    c.setFont(BOLD, 30)
+    c.setFont(BOLD, 32)
     c.setFillColor(INK)
-    c.drawString(M, y, "Evals before features. Agents for the judgment calls.")
-    y -= 0.72 * inch
+    c.drawString(M, y, "I built the test first, then let it fail.")
+    y -= 0.82 * inch
 
     bullets(c, [
-        ("Wrote the gate first, and made it fail.", "A hard-fail eval re-derives every "
-         "headcount, salary, exam, occupation code, and task statement from committed "
-         "city snapshots. It exits non-zero on a forced match, an invented number, or any "
-         "job-level aggregate. It existed before the demo did."),
-        ("Agent 1 — title-matcher.", "Joins DCAS exam titles to payroll titles without "
-         "forcing matches. Its own eval hard-fails a forced match, because the naive "
-         "baseline produced 12 corrupt ones."),
-        ("Agent 2 — crosswalk-decider.", "Maps a payroll title to an occupation code "
-         "from repo evidence, golden-tested against 13 hand-decided titles. It returns "
-         "BLOCKED rather than guessing, and it overruled my own assumptions twice."),
-        ("A two-axis rubric, never averaged.", "Can a model produce this output? And can "
-         "that output take effect without a named human accountable for it? The second is "
-         "law and process, not capability — so it is a ceiling, not a factor."),
-        ("Claude on the page, deterministic code underneath.", "Python does all the data "
-         "work; Claude only explains it in plain language, grounded in the verified page "
-         "— with a precomputed fallback so the demo never depends on the network."),
-    ], M, y, W - 2 * M - 0.3 * inch, 12.5, gap=0.24 * inch)
+        ("Wrote the test before the app.", "It rebuilds every number on the page from "
+         "the city's own files. If anything doesn't match, the build fails."),
+        ("Agent 1 — title-matcher.", "Matches exam names to payroll names. It is not "
+         "allowed to force a match. Guessing produced 12 wrong ones."),
+        ("Agent 2 — crosswalk-decider.", "Picks the job code for a title using evidence "
+         "in the files. It says BLOCKED instead of guessing. It corrected me twice."),
+        ("Two questions, never mixed.", "Can AI do this task? And is a person legally "
+         "required to be the one who does it? The second is about law, not technology."),
+        ("Claude explains; code does the math.", "Python handles the data. Claude only "
+         "puts it in plain English — with a saved answer ready if the internet drops."),
+    ], M, y, W - 2 * M - 0.3 * inch, 15.5, gap=0.30 * inch)
     c.showPage()
 
 
@@ -262,28 +256,23 @@ def slide_forward(c):
     page(c, "What this gives New York")
     y = H - M - 0.8 * inch
 
-    c.setFont(BOLD, 30)
+    c.setFont(BOLD, 32)
     c.setFillColor(INK)
-    c.drawString(M, y, "AI lifting workers, in the four ways the brief asked for.")
-    y -= 0.7 * inch
+    c.drawString(M, y, "Helping AI lift workers, not leave them behind.")
+    y -= 0.82 * inch
 
     bullets(c, [
-        ("Navigate what AI means for their jobs.", "Not a verdict — a task-level, "
-         "title-specific answer for the frontline workers generic career tools ignore: "
-         "traffic and school safety agents, EMTs, NYCHA caretakers, sergeants."),
-        ("Find new opportunities.", "Civil service already has the ladder. The gap is "
-         "that it is pull, not push: DCAS sends no notice when you become eligible, "
-         "filing windows are three weeks, and exam-to-hire runs 14–15 months. "
-         "Wiring the exam feed to a notification closes that."),
-        ("Reskill and upskill where it actually pays.", "Target the augmentable tasks. "
-         "The authority-anchored ones are a policy question, and no training changes them."),
-        ("Augment the work people already do.", "The result is not the intuitive one: "
-         "the “low-skill” titles are the least exposed in this dataset, and the "
-         "office-shaped edges are the exposed part."),
-        ("Next: validate with the people in the titles.", "Finish the remaining 23 "
-         "crosswalk decisions, test the labels with DC 37 and Local 237 members, and "
-         "pilot the eligibility notice with DCAS."),
-    ], M, y, W - 2 * M - 0.3 * inch, 12.5, gap=0.22 * inch)
+        ("Workers can see what AI means for their job.", "Task by task, for their real "
+         "title — traffic agents, school safety agents, EMTs, caretakers."),
+        ("They get a real next step.", "The city already has a promotion ladder. But "
+         "nobody tells you when your exam opens, and the window is only three weeks."),
+        ("Training goes where it pays off.", "Learn the tasks AI will help with. Skip "
+         "the ones the law says only a person can do."),
+        ("The results surprise people.", "The so-called low-skill jobs are the least "
+         "exposed. A school secretary is more exposed than a NYCHA caretaker."),
+        ("Next: ask the workers if we got it right.", "Test the labels with union "
+         "members, and pilot exam alerts with the city."),
+    ], M, y, W - 2 * M - 0.3 * inch, 15.5, gap=0.30 * inch)
 
     foot(c, "This page includes information from the O*NET 30.3 Database by the U.S. Department of Labor, "
             "Employment and Training Administration (USDOL/ETA). Used under the CC BY 4.0 license. "
