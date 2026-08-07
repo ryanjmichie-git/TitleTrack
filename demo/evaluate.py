@@ -149,8 +149,12 @@ def main():
             check(not any(k.startswith("application_period") for k in r),
                   f"next_rung[{name}]: does not present a past cycle as an open window")
         if html_path.exists():
-            check("Researched separately" in html,
-                  "index.html labels the next-rung block as externally researched")
+            # The seam stayed, the shouting went. A worker does not need a provenance
+            # lecture; they do need to know these windows are closed.
+            check("not open filing windows" in html,
+                  "index.html says next-rung cycles are not open filing windows")
+            check("mock partner handoff" in html,
+                  "index.html labels the partner cards as a mock handoff")
     else:
         check(False, "demo/next_rung.json exists")
 
