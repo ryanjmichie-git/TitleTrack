@@ -265,9 +265,17 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
 - ~~`build_top40.ps1` is PowerShell and assumes Windows.~~ **Done** —
   `scripts/build_top40.py` is byte-identical and portable. The `.ps1` is kept as
   the reference implementation; neither is authoritative over the other.
-- `data/crosswalk_candidates.md`: **13 of 40 `DECISION:` lines are filled** (the
-  `low` set, L01–L13). The 27 `medium`/`high` lines are still open. Use the verdict
-  vocabulary and the two rules defined at the head of that file's LOW section.
+- `data/crosswalk_candidates.md`: **17 of 40 `DECISION:` lines are filled** — the
+  `low` set (L01–L13) plus the four demo titles decided 2026-08-07 by the
+  `crosswalk-decider` agent: M08 `CARETAKER` → `37-2011.00`, M10
+  `SCHOOL SAFETY AGENT` → `33-9032.00`, M11 `TRAFFIC ENFORCEMENT AGENT` →
+  `33-3041.00`, H10 `EMERGENCY MEDICAL SPECIALIST-EMT` → `29-2042.00`. All four
+  codes were verified against `onet_Occupation_Data.txt` before writing. Two carry
+  a flagged caveat: the employer is **unverified in-repo** for M10 and M11 (the
+  per-Annum CSVs carry no `agency_name`), and it is recorded as unverified rather
+  than asserted — in both cases the employer does not select the code. The 23
+  remaining `medium`/`high` lines are still open. Use the verdict vocabulary and
+  the two rules defined at the head of that file's LOW section.
 - ~~One API call closes three decisions.~~ **Done 2026-08-07**, run from a
   local machine (the cloud sandbox still 403s `data.cityofnewyork.us`). L09
   (`LIEUTENANT`) resolved: NYPD 1,581 / FDNY 1,495 — a 51/49 split, so it is
@@ -292,7 +300,7 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
   eval hard-fails forced matches, and its naive baseline demonstrates why
   (35/41 recall, 12 corrupt matches — an earlier version of this line said
   37/41; 35/41 is what `evaluate.py` actually reports).
-- The 27 open `DECISION:` lines are the `crosswalk-decider` agent's job
+- The 23 open `DECISION:` lines are the `crosswalk-decider` agent's job
   (`agents/crosswalk-decider/`); it is golden-tested against the 13 decided ones.
 - Grade level is unrecoverable for `TEACHER` / `TEACHER-GENERAL ED` /
   `TEACHER SPECIAL EDUCATION` (101,630 people). O*NET has no grade-agnostic K-12 code.
