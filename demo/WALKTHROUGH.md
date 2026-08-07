@@ -133,7 +133,22 @@ If you have 10 more seconds, search **`teacher`**:
 > somewhere else. Skipping the five titles like this removes 30% of top-40 headcount.
 > That's a finding, not a gap."
 
-### The inversion, if time allows (20s)
+### The inversion (25s) — do this one if you do nothing else
+
+Search **`secretary`** → **SCHOOL SECRETARY**. Read the grey summary line at the top
+of the task section out loud.
+
+> "Five of the eight tasks shown: AI could do. This is the most exposed title in
+> everything we analyzed — and it's a school office, not a factory floor."
+
+Now search **`caretaker`**.
+
+> "Six of eight stay with people. The NYCHA janitor is *less* exposed than the school
+> secretary. Everyone walks in assuming the opposite. And notice what the line does
+> **not** say — it never says 60% of this job, because O*NET publishes no weights for
+> these statements and a percentage would be a number we made up."
+
+### The other inversion, if time allows (20s)
 
 Search **`sergeant`**, then **`caretaker`** or **`EMT`**.
 
