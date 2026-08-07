@@ -237,7 +237,28 @@ scoring/rubric.md                automatable / augmentable / human_anchored, v0.
 scoring/classifications_round1.md  5 hand-scored tasks + 4 rubric ambiguities
 agents/                          two custom agents: spec + goldens + gated eval each
 .claude/agents/                  the runnable agent definitions (Claude Code subagents)
+demo/                            the worker-facing prototype (see below)
 ```
+
+### `demo/` — the worker-facing prototype
+
+Run it: `python demo/serve.py` → `http://localhost:8765`. Five titles; pick one,
+see verified facts, O*NET task statements labeled by rubric v0.1, and open DCAS
+exams. `python demo/evaluate.py` is a **hard-fail gate written before any demo
+data existed** — it re-derives every headcount, salary block, exam, SOC code, and
+task statement from the committed sources and exits 1 on any mismatch. It also
+bans occupation-level aggregate keys outright (`risk_score`, `ai_score`, …),
+enforcing rubric ambiguity A1: statement-level classes must never be aggregated.
+
+- `demo/demo_data.json` is **generated** — never hand-edit it; change
+  `build_demo_data.py` or `task_classifications.json` and rebuild.
+- `task_classifications.json` carries an `_anchors` block recording *why* each
+  `human_anchored` task is anchored. `capability` (P0) erodes as models and
+  robotics improve; `authority` (D0) does not move until a statute or rule
+  changes. The front-end surfaces this distinction, and it is the demo's argument.
+- The live explain panel needs `ANTHROPIC_API_KEY` and the `anthropic` package.
+  Without either it silently serves `fallback_explanations.json` and labels the
+  answer as precomputed on screen. **The fallback path is the tested one.**
 
 `build_top40.py` reproduces the PowerShell output **byte for byte** — BOM, CRLF,
 and PS 5.1's column-aligned `ConvertTo-Json` layout — so a Linux rebuild does not
