@@ -218,7 +218,12 @@ __marimo__/
 .streamlit/secrets.toml
 
 # --- Title Track ---
-data/raw/
+# Raw API dumps stay out of the repo. Note the glob: excluding the directory
+# itself (data/raw/) would stop git descending into it, making the negation
+# below a no-op.
+data/raw/*
+# ...except derived artifacts, which are small and are real deliverables.
+!data/raw/top40_titles.json
 scoring/cache/
 .claude/
 node_modules/
