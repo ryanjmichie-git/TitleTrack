@@ -1,0 +1,1405 @@
+{
+  "id" : "k397-673e",
+  "name" : "Citywide Payroll Data (Fiscal Year)",
+  "assetType" : "dataset",
+  "attribution" : "Office of Payroll Administration (OPA)",
+  "averageRating" : 0,
+  "category" : "City Government",
+  "createdAt" : 1446308121,
+  "description" : "Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. Data is input into the City's Personnel Management System (“PMS”) by the respective user Agencies. Each record represents the following statistics for every city employee: Agency, Last Name, First Name, Middle Initial, Agency Start Date, Work Location Borough, Job Title Description, Leave Status as of the close of the FY (June 30th), Base Salary, Pay Basis, Regular Hours Paid, Regular Gross Paid, Overtime Hours worked, Total Overtime Paid, and Total Other Compensation (i.e. lump sum and/or retro payments). This data can be used to analyze how the City's financial resources are allocated and how much of the City's budget is being devoted to overtime. The reader of this data should be aware that increments of salary increases received over the course of any one fiscal year will not be reflected. All that is captured, is the employee's final base and gross salary at the end of the fiscal year.  In very limited cases, a check replacement and subsequent refund may reflect both the original check as well as the re-issued check in employee pay totals.  \r\n<br>\r\n<b>NOTE 1: </b>To further improve the visibility into the number of employee OT hours worked, beginning with the FY 2023 report, an updated methodology will be used which will eliminate redundant reporting of OT hours in some specific instances.  In the previous calculation, hours associated with both overtime pay as well as an accompanying overtime “companion code” pay were included in the employee total even though they represented pay for the same period of time.  With the updated methodology, the dollars shown on the Open Data site will continue to be inclusive of both types of overtime, but the OT hours will now reflect a singular block of time, which will result in a more representative total of employee OT hours worked.   The updated methodology will primarily impact the OT hours associated with City employees in uniformed civil service titles.  The updated methodology will be applied to the Open Data posting for Fiscal Year 2023 and cannot be applied to prior postings and, as a result, the reader of this data should not compare OT <b>hours</b>  prior to the 2023 report against OT hours published starting Fiscal Year 2023.  The reader of this data may continue to compare OT <b>dollars</b> across all published Fiscal Years on Open Data. \r\n<br>\r\n<b>NOTE 2: </b>As a part of FISA-OPA’s routine process for reviewing and releasing Citywide Payroll Data, data for some agencies (specifically NYC Police Department (NYPD) and the District Attorneys’ Offices (Manhattan, Kings, Queens, Richmond, Bronx, and Special Narcotics)) have been redacted since they are exempt from disclosure pursuant to the Freedom of Information Law, POL § 87(2)(f), on the ground that disclosure of the information could endanger the life and safety of the public servants listed thereon. They are further exempt from disclosure pursuant to POL § 87(2)(e)(iii), on the ground that any release of the information would identify confidential sources or disclose confidential information relating to a criminal investigation, and POL § 87(2)(e)(iv), on the ground that disclosure would reveal non-routine criminal investigative techniques or procedures. Some of these redactions will appear as XXX in the name columns.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 68432,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 40213403,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1701193937,
+  "publicationGroup" : 5224251,
+  "publicationStage" : "published",
+  "rowClass" : "",
+  "rowsUpdatedAt" : 1776371134,
+  "rowsUpdatedBy" : "d5dp-fses",
+  "tableId" : 19378586,
+  "totalTimesRated" : 0,
+  "viewCount" : 1012667,
+  "viewLastModified" : 1776370405,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1501609968,
+    "reviewedAutomatically" : true,
+    "state" : "approved",
+    "submissionId" : 5951561,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1501609968,
+    "targetAudience" : "public",
+    "workflowId" : 2285,
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "failureCount" : 0,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "5fuc-pqz2",
+      "displayName" : "NYC OpenData"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 585499886,
+    "name" : "Fiscal Year",
+    "dataTypeName" : "number",
+    "description" : "Fiscal Year",
+    "fieldName" : "fiscal_year",
+    "position" : 1,
+    "renderTypeName" : "number",
+    "tableColumnId" : 37771976,
+    "width" : 123,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "2025",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2022",
+        "count" : "613008"
+      }, {
+        "item" : "2019",
+        "count" : "592431"
+      }, {
+        "item" : "2020",
+        "count" : "590210"
+      }, {
+        "item" : "2015",
+        "count" : "577880"
+      }, {
+        "item" : "2021",
+        "count" : "573477"
+      }, {
+        "item" : "2024",
+        "count" : "562898"
+      }, {
+        "item" : "2017",
+        "count" : "562266"
+      }, {
+        "item" : "2023",
+        "count" : "552938"
+      }, {
+        "item" : "2025",
+        "count" : "550219"
+      }, {
+        "item" : "2018",
+        "count" : "546161"
+      }, {
+        "item" : "2016",
+        "count" : "544817"
+      }, {
+        "item" : "2014",
+        "count" : "509525"
+      } ],
+      "smallest" : "2014",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "true",
+      "align" : "right"
+    }
+  }, {
+    "id" : 585499887,
+    "name" : "Payroll Number",
+    "dataTypeName" : "number",
+    "description" : "Payroll Number",
+    "fieldName" : "payroll_number",
+    "position" : 2,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354456,
+    "width" : 131,
+    "cachedContents" : {
+      "non_null" : "5030390",
+      "largest" : "996",
+      "null" : "1745440",
+      "top" : [ {
+        "item" : "742",
+        "count" : "992432"
+      }, {
+        "item" : "747",
+        "count" : "835132"
+      }, {
+        "item" : "56",
+        "count" : "479852"
+      }, {
+        "item" : "744",
+        "count" : "356297"
+      }, {
+        "item" : "300",
+        "count" : "310674"
+      }, {
+        "item" : "745",
+        "count" : "204517"
+      }, {
+        "item" : "57",
+        "count" : "172604"
+      }, {
+        "item" : "740",
+        "count" : "151281"
+      }, {
+        "item" : "846",
+        "count" : "128227"
+      }, {
+        "item" : "996",
+        "count" : "127772"
+      }, {
+        "item" : "746",
+        "count" : "126264"
+      }, {
+        "item" : "69",
+        "count" : "123897"
+      }, {
+        "item" : "827",
+        "count" : "109374"
+      }, {
+        "item" : "72",
+        "count" : "107151"
+      }, {
+        "item" : "67",
+        "count" : "73230"
+      }, {
+        "item" : "816",
+        "count" : "71258"
+      }, {
+        "item" : "826",
+        "count" : "62258"
+      }, {
+        "item" : "841",
+        "count" : "58130"
+      }, {
+        "item" : "466",
+        "count" : "45817"
+      }, {
+        "item" : "469",
+        "count" : "34713"
+      } ],
+      "smallest" : "2",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499888,
+    "name" : "Agency Name",
+    "dataTypeName" : "text",
+    "description" : "The Payroll agency that the employee works for",
+    "fieldName" : "agency_name",
+    "position" : 3,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354457,
+    "width" : 232,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "TECHNOLOGY & INNOVATION",
+      "null" : "0",
+      "top" : [ {
+        "item" : "DEPT OF ED PEDAGOGICAL",
+        "count" : "1315181"
+      }, {
+        "item" : "DEPT OF ED PER SESSION TEACHER",
+        "count" : "1079499"
+      }, {
+        "item" : "POLICE DEPARTMENT",
+        "count" : "667500"
+      }, {
+        "item" : "DEPT OF ED PARA PROFESSIONALS",
+        "count" : "455550"
+      }, {
+        "item" : "BOARD OF ELECTION POLL WORKERS",
+        "count" : "411733"
+      }, {
+        "item" : "DEPT OF ED HRLY SUPPORT STAFF",
+        "count" : "278563"
+      }, {
+        "item" : "FIRE DEPARTMENT",
+        "count" : "228605"
+      }, {
+        "item" : "DEPARTMENT OF EDUCATION ADMIN",
+        "count" : "198050"
+      }, {
+        "item" : "DEPT OF PARKS & RECREATION",
+        "count" : "183750"
+      }, {
+        "item" : "HRA/DEPT OF SOCIAL SERVICES",
+        "count" : "170177"
+      }, {
+        "item" : "NYC HOUSING AUTHORITY",
+        "count" : "169327"
+      }, {
+        "item" : "DEPT OF ED PER DIEM TEACHERS",
+        "count" : "167747"
+      }, {
+        "item" : "DEPARTMENT OF SANITATION",
+        "count" : "152064"
+      }, {
+        "item" : "DEPARTMENT OF CORRECTION",
+        "count" : "146934"
+      }, {
+        "item" : "ADMIN FOR CHILDREN'S SVCS",
+        "count" : "95179"
+      }, {
+        "item" : "DEPT OF HEALTH/MENTAL HYGIENE",
+        "count" : "93932"
+      }, {
+        "item" : "DEPT OF ENVIRONMENT PROTECTION",
+        "count" : "82608"
+      }, {
+        "item" : "DEPARTMENT OF TRANSPORTATION",
+        "count" : "76104"
+      }, {
+        "item" : "COMMUNITY COLLEGE (MANHATTAN)",
+        "count" : "64818"
+      }, {
+        "item" : "Police Department",
+        "count" : "55619"
+      } ],
+      "smallest" : "ADMIN FOR CHILDREN'S SVCS",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499889,
+    "name" : "Last Name",
+    "dataTypeName" : "text",
+    "description" : "Last name of employee",
+    "fieldName" : "last_name",
+    "position" : 4,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354458,
+    "width" : 208,
+    "cachedContents" : {
+      "non_null" : "6761863",
+      "largest" : "ZZAMAN",
+      "null" : "13967",
+      "top" : [ {
+        "item" : "RODRIGUEZ",
+        "count" : "43866"
+      }, {
+        "item" : "WILLIAMS",
+        "count" : "41163"
+      }, {
+        "item" : "SMITH",
+        "count" : "32397"
+      }, {
+        "item" : "BROWN",
+        "count" : "30932"
+      }, {
+        "item" : "JOHNSON",
+        "count" : "30584"
+      }, {
+        "item" : "RIVERA",
+        "count" : "26115"
+      }, {
+        "item" : "GONZALEZ",
+        "count" : "23372"
+      }, {
+        "item" : "JONES",
+        "count" : "22484"
+      }, {
+        "item" : "MARTINEZ",
+        "count" : "21740"
+      }, {
+        "item" : "PEREZ",
+        "count" : "21126"
+      }, {
+        "item" : "GARCIA",
+        "count" : "20166"
+      }, {
+        "item" : "DAVIS",
+        "count" : "18532"
+      }, {
+        "item" : "LOPEZ",
+        "count" : "18214"
+      }, {
+        "item" : "THOMAS",
+        "count" : "18203"
+      }, {
+        "item" : "HERNANDEZ",
+        "count" : "17525"
+      }, {
+        "item" : "LEE",
+        "count" : "17398"
+      }, {
+        "item" : "TORRES",
+        "count" : "17367"
+      }, {
+        "item" : "DIAZ",
+        "count" : "15713"
+      }, {
+        "item" : "CRUZ",
+        "count" : "15516"
+      }, {
+        "item" : "JACKSON",
+        "count" : "13755"
+      } ],
+      "smallest" : "1",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499890,
+    "name" : "First Name",
+    "dataTypeName" : "text",
+    "description" : "First name of employee",
+    "fieldName" : "first_name",
+    "position" : 5,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354459,
+    "width" : 220,
+    "cachedContents" : {
+      "non_null" : "6761861",
+      "largest" : "ZZZY",
+      "null" : "13969",
+      "top" : [ {
+        "item" : "MICHAEL",
+        "count" : "100741"
+      }, {
+        "item" : "JOHN",
+        "count" : "63327"
+      }, {
+        "item" : "JOSEPH",
+        "count" : "55597"
+      }, {
+        "item" : "MARIA",
+        "count" : "52032"
+      }, {
+        "item" : "ROBERT",
+        "count" : "51189"
+      }, {
+        "item" : "JENNIFER",
+        "count" : "49774"
+      }, {
+        "item" : "JAMES",
+        "count" : "44153"
+      }, {
+        "item" : "DAVID",
+        "count" : "43100"
+      }, {
+        "item" : "ANTHONY",
+        "count" : "42988"
+      }, {
+        "item" : "CHRISTOPHER",
+        "count" : "42320"
+      }, {
+        "item" : "DANIEL",
+        "count" : "37268"
+      }, {
+        "item" : "ELIZABETH",
+        "count" : "35247"
+      }, {
+        "item" : "LISA",
+        "count" : "34368"
+      }, {
+        "item" : "THOMAS",
+        "count" : "34317"
+      }, {
+        "item" : "JESSICA",
+        "count" : "34236"
+      }, {
+        "item" : "NICOLE",
+        "count" : "32908"
+      }, {
+        "item" : "WILLIAM",
+        "count" : "32648"
+      }, {
+        "item" : "MICHELLE",
+        "count" : "32367"
+      }, {
+        "item" : "PATRICIA",
+        "count" : "29512"
+      }, {
+        "item" : "RICHARD",
+        "count" : "29243"
+      } ],
+      "smallest" : "-",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499891,
+    "name" : "Mid Init",
+    "dataTypeName" : "text",
+    "description" : "Middle initial of employee",
+    "fieldName" : "mid_init",
+    "position" : 6,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354460,
+    "width" : 196,
+    "cachedContents" : {
+      "non_null" : "3980606",
+      "largest" : "Z",
+      "null" : "2795224",
+      "top" : [ {
+        "item" : "A",
+        "count" : "598183"
+      }, {
+        "item" : "M",
+        "count" : "566222"
+      }, {
+        "item" : "J",
+        "count" : "357473"
+      }, {
+        "item" : "L",
+        "count" : "290150"
+      }, {
+        "item" : "E",
+        "count" : "240618"
+      }, {
+        "item" : "R",
+        "count" : "221424"
+      }, {
+        "item" : "C",
+        "count" : "205760"
+      }, {
+        "item" : "S",
+        "count" : "202831"
+      }, {
+        "item" : "D",
+        "count" : "193609"
+      }, {
+        "item" : "P",
+        "count" : "131158"
+      }, {
+        "item" : "T",
+        "count" : "121760"
+      }, {
+        "item" : "N",
+        "count" : "112068"
+      }, {
+        "item" : "B",
+        "count" : "101108"
+      }, {
+        "item" : "G",
+        "count" : "94957"
+      }, {
+        "item" : "K",
+        "count" : "93856"
+      }, {
+        "item" : "F",
+        "count" : "93409"
+      }, {
+        "item" : "H",
+        "count" : "67188"
+      }, {
+        "item" : "V",
+        "count" : "62930"
+      }, {
+        "item" : "I",
+        "count" : "60866"
+      }, {
+        "item" : "W",
+        "count" : "57031"
+      } ],
+      "smallest" : "`",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499892,
+    "name" : "Agency Start Date",
+    "dataTypeName" : "calendar_date",
+    "description" : "Date which employee began working for their current agency",
+    "fieldName" : "agency_start_date",
+    "position" : 7,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 32354461,
+    "width" : 131,
+    "cachedContents" : {
+      "non_null" : "6775689",
+      "largest" : "9999-12-31T00:00:00.000",
+      "null" : "141",
+      "top" : [ {
+        "item" : "2010-01-01T00:00:00.000",
+        "count" : "117901"
+      }, {
+        "item" : "2007-08-30T00:00:00.000",
+        "count" : "71051"
+      }, {
+        "item" : "2013-09-03T00:00:00.000",
+        "count" : "67821"
+      }, {
+        "item" : "2015-09-08T00:00:00.000",
+        "count" : "64011"
+      }, {
+        "item" : "2006-08-31T00:00:00.000",
+        "count" : "62993"
+      }, {
+        "item" : "2014-09-02T00:00:00.000",
+        "count" : "62279"
+      }, {
+        "item" : "2012-09-04T00:00:00.000",
+        "count" : "60152"
+      }, {
+        "item" : "2005-09-06T00:00:00.000",
+        "count" : "58862"
+      }, {
+        "item" : "2003-09-02T00:00:00.000",
+        "count" : "57745"
+      }, {
+        "item" : "2016-09-06T00:00:00.000",
+        "count" : "57144"
+      }, {
+        "item" : "2004-09-07T00:00:00.000",
+        "count" : "56669"
+      }, {
+        "item" : "2001-09-04T00:00:00.000",
+        "count" : "56510"
+      }, {
+        "item" : "2008-08-28T00:00:00.000",
+        "count" : "54908"
+      }, {
+        "item" : "2002-09-03T00:00:00.000",
+        "count" : "50025"
+      }, {
+        "item" : "1999-09-07T00:00:00.000",
+        "count" : "47445"
+      }, {
+        "item" : "2017-09-05T00:00:00.000",
+        "count" : "45812"
+      }, {
+        "item" : "2000-09-05T00:00:00.000",
+        "count" : "45768"
+      }, {
+        "item" : "1999-12-31T00:00:00.000",
+        "count" : "44448"
+      }, {
+        "item" : "1997-09-02T00:00:00.000",
+        "count" : "43924"
+      }, {
+        "item" : "2016-01-01T00:00:00.000",
+        "count" : "42205"
+      } ],
+      "smallest" : "1901-01-01T00:00:00.000",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "view" : "date",
+      "align" : "left"
+    }
+  }, {
+    "id" : 585499893,
+    "name" : "Work Location Borough",
+    "dataTypeName" : "text",
+    "description" : "Borough of employee's primary work location ",
+    "fieldName" : "work_location_borough",
+    "position" : 8,
+    "renderTypeName" : "text",
+    "tableColumnId" : 37775582,
+    "width" : 100,
+    "cachedContents" : {
+      "non_null" : "6269595",
+      "largest" : "WESTCHESTER",
+      "null" : "506235",
+      "top" : [ {
+        "item" : "MANHATTAN",
+        "count" : "4480697"
+      }, {
+        "item" : "QUEENS",
+        "count" : "683487"
+      }, {
+        "item" : "BROOKLYN",
+        "count" : "570420"
+      }, {
+        "item" : "BRONX",
+        "count" : "312799"
+      }, {
+        "item" : "OTHER",
+        "count" : "120152"
+      }, {
+        "item" : "RICHMOND",
+        "count" : "84659"
+      }, {
+        "item" : "WESTCHESTER",
+        "count" : "6221"
+      }, {
+        "item" : "ULSTER",
+        "count" : "3544"
+      }, {
+        "item" : "Manhattan",
+        "count" : "1622"
+      }, {
+        "item" : "SULLIVAN",
+        "count" : "1467"
+      }, {
+        "item" : "DELAWARE",
+        "count" : "950"
+      }, {
+        "item" : "Bronx",
+        "count" : "935"
+      }, {
+        "item" : "Queens",
+        "count" : "660"
+      }, {
+        "item" : "NASSAU",
+        "count" : "440"
+      }, {
+        "item" : "PUTNAM",
+        "count" : "435"
+      }, {
+        "item" : "SCHOHARIE",
+        "count" : "315"
+      }, {
+        "item" : "DUTCHESS",
+        "count" : "302"
+      }, {
+        "item" : "ALBANY",
+        "count" : "179"
+      }, {
+        "item" : "Richmond",
+        "count" : "112"
+      }, {
+        "item" : "GREENE",
+        "count" : "103"
+      } ],
+      "smallest" : "ALBANY",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499894,
+    "name" : "Title Description",
+    "dataTypeName" : "text",
+    "description" : "Civil service title description of the employee",
+    "fieldName" : "title_description",
+    "position" : 9,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354462,
+    "width" : 304,
+    "cachedContents" : {
+      "non_null" : "6775666",
+      "largest" : "YOUTH DEVELOPMENT SPECIALIST",
+      "null" : "164",
+      "top" : [ {
+        "item" : "TEACHER- PER SESSION",
+        "count" : "1050846"
+      }, {
+        "item" : "TEACHER",
+        "count" : "731230"
+      }, {
+        "item" : "ELECTION WORKER",
+        "count" : "407479"
+      }, {
+        "item" : "ANNUAL ED PARA",
+        "count" : "342174"
+      }, {
+        "item" : "TEACHER SPECIAL EDUCATION",
+        "count" : "331288"
+      }, {
+        "item" : "POLICE OFFICER",
+        "count" : "311542"
+      }, {
+        "item" : "TEACHER-GENERAL ED",
+        "count" : "157534"
+      }, {
+        "item" : "CORRECTION OFFICER",
+        "count" : "110284"
+      }, {
+        "item" : "SUBSTITUTE ED PARA",
+        "count" : "110129"
+      }, {
+        "item" : "FIREFIGHTER",
+        "count" : "107990"
+      }, {
+        "item" : "F/T SCHOOL AIDE",
+        "count" : "104076"
+      }, {
+        "item" : "SANITATION WORKER",
+        "count" : "83609"
+      }, {
+        "item" : "JOB TRAINING PARTICIPANT",
+        "count" : "74955"
+      }, {
+        "item" : "COMMUNITY ASSOCIATE",
+        "count" : "73027"
+      }, {
+        "item" : "SCHOOL SAFETY AGENT",
+        "count" : "64163"
+      }, {
+        "item" : "COMMUNITY COORDINATOR",
+        "count" : "56477"
+      }, {
+        "item" : "COLLEGE ASSISTANT",
+        "count" : "53758"
+      }, {
+        "item" : "F/T SCHOOL LUNCH HELPER",
+        "count" : "48560"
+      }, {
+        "item" : "CARETAKER",
+        "count" : "48340"
+      }, {
+        "item" : "ASSISTANT PRINCIPAL",
+        "count" : "46734"
+      } ],
+      "smallest" : "12 MONTH SPECIAL EDUCATION ASST. PRINCIPAL",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499895,
+    "name" : "Leave Status as of June 30",
+    "dataTypeName" : "text",
+    "description" : "Status of employee as of the close of the relevant fiscal year: Active, Ceased, or On Leave",
+    "fieldName" : "leave_status_as_of_june_30",
+    "position" : 10,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354463,
+    "width" : 295,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "SEASONAL",
+      "null" : "0",
+      "top" : [ {
+        "item" : "ACTIVE",
+        "count" : "5744206"
+      }, {
+        "item" : "CEASED",
+        "count" : "884213"
+      }, {
+        "item" : "ON LEAVE",
+        "count" : "78479"
+      }, {
+        "item" : "SEASONAL",
+        "count" : "56681"
+      }, {
+        "item" : "ON SEPARATION LEAVE",
+        "count" : "12251"
+      } ],
+      "smallest" : "ACTIVE",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "displayStyle" : "plain",
+      "align" : "left"
+    }
+  }, {
+    "id" : 585499896,
+    "name" : "Base Salary",
+    "dataTypeName" : "number",
+    "description" : " Base Salary assigned to the employee",
+    "fieldName" : "base_salary",
+    "position" : 11,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354464,
+    "width" : 182,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "428280.00",
+      "null" : "0",
+      "top" : [ {
+        "item" : "33.18",
+        "count" : "1046894"
+      }, {
+        "item" : "1.00",
+        "count" : "420749"
+      }, {
+        "item" : "110.29",
+        "count" : "146333"
+      }, {
+        "item" : "85292.00",
+        "count" : "131024"
+      }, {
+        "item" : "76488.00",
+        "count" : "56066"
+      }, {
+        "item" : "15.00",
+        "count" : "41554"
+      }, {
+        "item" : "92073.00",
+        "count" : "31295"
+      }, {
+        "item" : "166.67",
+        "count" : "31238"
+      }, {
+        "item" : "16.52",
+        "count" : "30858"
+      }, {
+        "item" : "128657.00",
+        "count" : "29558"
+      }, {
+        "item" : "105146.00",
+        "count" : "24693"
+      }, {
+        "item" : "15.45",
+        "count" : "20897"
+      }, {
+        "item" : "101590.00",
+        "count" : "20710"
+      }, {
+        "item" : "97469.00",
+        "count" : "18944"
+      }, {
+        "item" : "109360.00",
+        "count" : "18465"
+      }, {
+        "item" : "109352.00",
+        "count" : "18400"
+      }, {
+        "item" : "13.50",
+        "count" : "17994"
+      }, {
+        "item" : "109852.00",
+        "count" : "17965"
+      }, {
+        "item" : "100049.00",
+        "count" : "17734"
+      }, {
+        "item" : "78026.00",
+        "count" : "17590"
+      } ],
+      "smallest" : "0.01",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "precisionStyle" : "currency",
+      "currencyStyle" : "USD",
+      "precision" : "2"
+    }
+  }, {
+    "id" : 585499897,
+    "name" : "Pay Basis",
+    "dataTypeName" : "text",
+    "description" : "Lists whether the employee is paid on an hourly, per diem or annual basis",
+    "fieldName" : "pay_basis",
+    "position" : 12,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32354465,
+    "width" : 171,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "Prorated Annual",
+      "null" : "0",
+      "top" : [ {
+        "item" : "per Annum",
+        "count" : "4060360"
+      }, {
+        "item" : "per Day",
+        "count" : "1549827"
+      }, {
+        "item" : "per Hour",
+        "count" : "1136177"
+      }, {
+        "item" : "Prorated Annual",
+        "count" : "29466"
+      } ],
+      "smallest" : "per Annum",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499898,
+    "name" : "Regular Hours",
+    "dataTypeName" : "number",
+    "description" : "Number of regular hours employee worked in the fiscal year ",
+    "fieldName" : "regular_hours",
+    "position" : 13,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354466,
+    "width" : 177,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "6666",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "3927597"
+      }, {
+        "item" : "2080",
+        "count" : "459318"
+      }, {
+        "item" : "1820",
+        "count" : "411408"
+      }, {
+        "item" : "1825",
+        "count" : "229427"
+      }, {
+        "item" : "2085.72",
+        "count" : "218254"
+      }, {
+        "item" : "2091.42",
+        "count" : "72037"
+      }, {
+        "item" : "2045.72",
+        "count" : "69905"
+      }, {
+        "item" : "1830",
+        "count" : "59253"
+      }, {
+        "item" : "1790",
+        "count" : "57461"
+      }, {
+        "item" : "2040",
+        "count" : "43261"
+      }, {
+        "item" : "2051.43",
+        "count" : "40822"
+      }, {
+        "item" : "1664",
+        "count" : "29032"
+      }, {
+        "item" : "160",
+        "count" : "20095"
+      }, {
+        "item" : "260",
+        "count" : "12544"
+      }, {
+        "item" : "260.72",
+        "count" : "9828"
+      }, {
+        "item" : "80",
+        "count" : "9764"
+      }, {
+        "item" : "1785",
+        "count" : "9358"
+      }, {
+        "item" : "1795",
+        "count" : "7550"
+      }, {
+        "item" : "2120",
+        "count" : "7236"
+      }, {
+        "item" : "1950",
+        "count" : "5930"
+      } ],
+      "smallest" : "-2240",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499899,
+    "name" : "Regular Gross Paid",
+    "dataTypeName" : "number",
+    "description" : "The amount paid to the employee for base salary during the fiscal year ",
+    "fieldName" : "regular_gross_paid",
+    "position" : 14,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354467,
+    "width" : 234,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "684970.17",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0.00",
+        "count" : "249603"
+      }, {
+        "item" : "350.00",
+        "count" : "56050"
+      }, {
+        "item" : "85058.22",
+        "count" : "38697"
+      }, {
+        "item" : "300.00",
+        "count" : "35816"
+      }, {
+        "item" : "575.00",
+        "count" : "29575"
+      }, {
+        "item" : "76278.53",
+        "count" : "23418"
+      }, {
+        "item" : "76278.54",
+        "count" : "22867"
+      }, {
+        "item" : "85058.23",
+        "count" : "19526"
+      }, {
+        "item" : "84831.14",
+        "count" : "19345"
+      }, {
+        "item" : "775.00",
+        "count" : "16951"
+      }, {
+        "item" : "85051.84",
+        "count" : "16432"
+      }, {
+        "item" : "108510.46",
+        "count" : "15132"
+      }, {
+        "item" : "128657.04",
+        "count" : "12392"
+      }, {
+        "item" : "275.00",
+        "count" : "11225"
+      }, {
+        "item" : "675.00",
+        "count" : "10622"
+      }, {
+        "item" : "600.00",
+        "count" : "9882"
+      }, {
+        "item" : "578.00",
+        "count" : "9167"
+      }, {
+        "item" : "138198.68",
+        "count" : "7815"
+      }, {
+        "item" : "97215.76",
+        "count" : "7799"
+      }, {
+        "item" : "91820.82",
+        "count" : "7342"
+      } ],
+      "smallest" : "-205451.85",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "precisionStyle" : "currency",
+      "currencyStyle" : "USD",
+      "precision" : "2"
+    }
+  }, {
+    "id" : 585499900,
+    "name" : "OT Hours",
+    "dataTypeName" : "number",
+    "description" : "Overtime Hours worked by employee in the fiscal year",
+    "fieldName" : "ot_hours",
+    "position" : 15,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354468,
+    "width" : 196,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "3692.9",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "5089854"
+      }, {
+        "item" : "1",
+        "count" : "13564"
+      }, {
+        "item" : "2",
+        "count" : "10891"
+      }, {
+        "item" : "8",
+        "count" : "10847"
+      }, {
+        "item" : "4",
+        "count" : "8750"
+      }, {
+        "item" : "3",
+        "count" : "7794"
+      }, {
+        "item" : "5",
+        "count" : "6753"
+      }, {
+        "item" : "7",
+        "count" : "6400"
+      }, {
+        "item" : "6",
+        "count" : "5733"
+      }, {
+        "item" : "16",
+        "count" : "5143"
+      }, {
+        "item" : "0.5",
+        "count" : "4936"
+      }, {
+        "item" : "10",
+        "count" : "4857"
+      }, {
+        "item" : "1.5",
+        "count" : "4823"
+      }, {
+        "item" : "12",
+        "count" : "4531"
+      }, {
+        "item" : "2.5",
+        "count" : "4456"
+      }, {
+        "item" : "9",
+        "count" : "4313"
+      }, {
+        "item" : "3.5",
+        "count" : "3996"
+      }, {
+        "item" : "8.5",
+        "count" : "3740"
+      }, {
+        "item" : "14",
+        "count" : "3691"
+      }, {
+        "item" : "7.5",
+        "count" : "3623"
+      } ],
+      "smallest" : "-1425.42",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : { }
+  }, {
+    "id" : 585499901,
+    "name" : "Total OT Paid",
+    "dataTypeName" : "number",
+    "description" : "Total overtime pay paid to the employee in the fiscal year",
+    "fieldName" : "total_ot_paid",
+    "position" : 16,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354469,
+    "width" : 256,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "527532.01",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0.00",
+        "count" : "4922201"
+      }, {
+        "item" : "6.94",
+        "count" : "321"
+      }, {
+        "item" : "1.08",
+        "count" : "280"
+      }, {
+        "item" : "110.52",
+        "count" : "272"
+      }, {
+        "item" : "2.16",
+        "count" : "268"
+      }, {
+        "item" : "45.00",
+        "count" : "236"
+      }, {
+        "item" : "144.00",
+        "count" : "217"
+      }, {
+        "item" : "505.58",
+        "count" : "214"
+      }, {
+        "item" : "0.72",
+        "count" : "209"
+      }, {
+        "item" : "185.40",
+        "count" : "186"
+      }, {
+        "item" : "54.00",
+        "count" : "176"
+      }, {
+        "item" : "0.84",
+        "count" : "174"
+      }, {
+        "item" : "162.00",
+        "count" : "172"
+      }, {
+        "item" : "81.00",
+        "count" : "167"
+      }, {
+        "item" : "0.54",
+        "count" : "162"
+      }, {
+        "item" : "1380.24",
+        "count" : "153"
+      }, {
+        "item" : "180.00",
+        "count" : "153"
+      }, {
+        "item" : "141.75",
+        "count" : "152"
+      }, {
+        "item" : "0.94",
+        "count" : "151"
+      }, {
+        "item" : "141.48",
+        "count" : "148"
+      } ],
+      "smallest" : "-176662.28",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "precisionStyle" : "currency",
+      "currencyStyle" : "USD",
+      "precision" : "2"
+    }
+  }, {
+    "id" : 585499902,
+    "name" : "Total Other Pay",
+    "dataTypeName" : "number",
+    "description" : "Includes any compensation in addition to gross salary and overtime pay, ie Differentials, lump sums, uniform allowance, meal allowance, retroactive pay increases, settlement amounts, and bonus pay, if applicable.",
+    "fieldName" : "total_other_pay",
+    "position" : 17,
+    "renderTypeName" : "number",
+    "tableColumnId" : 32354470,
+    "width" : 280,
+    "cachedContents" : {
+      "non_null" : "6775830",
+      "largest" : "714664.29",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0.00",
+        "count" : "2458982"
+      }, {
+        "item" : "1000.00",
+        "count" : "132952"
+      }, {
+        "item" : "475.00",
+        "count" : "23352"
+      }, {
+        "item" : "3000.00",
+        "count" : "19253"
+      }, {
+        "item" : "8.25",
+        "count" : "13137"
+      }, {
+        "item" : "500.00",
+        "count" : "10011"
+      }, {
+        "item" : "16.50",
+        "count" : "7389"
+      }, {
+        "item" : "2000.00",
+        "count" : "6424"
+      }, {
+        "item" : "213.00",
+        "count" : "5302"
+      }, {
+        "item" : "0.04",
+        "count" : "5152"
+      }, {
+        "item" : "24.75",
+        "count" : "4842"
+      }, {
+        "item" : "0.06",
+        "count" : "4542"
+      }, {
+        "item" : "0.03",
+        "count" : "4434"
+      }, {
+        "item" : "1500.00",
+        "count" : "4337"
+      }, {
+        "item" : "0.08",
+        "count" : "4115"
+      }, {
+        "item" : "0.02",
+        "count" : "4044"
+      }, {
+        "item" : "1307.91",
+        "count" : "3993"
+      }, {
+        "item" : "0.12",
+        "count" : "3971"
+      }, {
+        "item" : "33.00",
+        "count" : "3746"
+      }, {
+        "item" : "250.00",
+        "count" : "3629"
+      } ],
+      "smallest" : "-281595.04",
+      "count" : "6775830",
+      "cardinality" : "6775830"
+    },
+    "format" : {
+      "precisionStyle" : "currency",
+      "currencyStyle" : "USD",
+      "precision" : "2"
+    }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "metadata" : {
+    "rdfSubject" : "0",
+    "rdfClass" : "",
+    "jsonQuery" : {
+      "order" : [ {
+        "columnFieldName" : "agency_name",
+        "ascending" : true
+      }, {
+        "columnFieldName" : "fiscal_year",
+        "ascending" : false
+      } ]
+    },
+    "attachments" : [ {
+      "filename" : "Citywide Payroll Data (Fiscal Year) Data Dictionary.xlsx",
+      "assetId" : "03587dca-c6b9-4bb5-a85c-27795f100b52",
+      "name" : "Citywide Payroll Data (Fiscal Year) Data Dictionary.xlsx"
+    } ],
+    "custom_fields" : {
+      "Update" : {
+        "Automation" : "No",
+        "Date Made Public" : "10/31/2015",
+        "Update Frequency" : "Annually"
+      },
+      "Dataset Information" : {
+        "Agency" : "Office of Payroll Administration (OPA)"
+      }
+    },
+    "rowLabel" : "City Employee Salary per Fiscal Year",
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ],
+    "renderTypeConfig" : {
+      "visible" : {
+        "table" : true
+      }
+    }
+  },
+  "owner" : {
+    "id" : "5fuc-pqz2",
+    "displayName" : "NYC OpenData",
+    "profileImageUrlLarge" : "/api/users/5fuc-pqz2/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/5fuc-pqz2/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/5fuc-pqz2/profile_images/TINY",
+    "screenName" : "NYC OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : {
+    "orderBys" : [ {
+      "ascending" : true,
+      "expression" : {
+        "columnId" : 585499888,
+        "type" : "column"
+      }
+    }, {
+      "ascending" : false,
+      "expression" : {
+        "columnId" : 585499886,
+        "type" : "column"
+      }
+    } ]
+  },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "5fuc-pqz2",
+    "displayName" : "NYC OpenData",
+    "profileImageUrlLarge" : "/api/users/5fuc-pqz2/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/5fuc-pqz2/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/5fuc-pqz2/profile_images/TINY",
+    "screenName" : "NYC OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

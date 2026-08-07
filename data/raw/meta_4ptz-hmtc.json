@@ -1,0 +1,610 @@
+{
+  "id" : "4ptz-hmtc",
+  "name" : "Annual Examination Schedule of Each Fiscal Year",
+  "assetType" : "dataset",
+  "attribution" : "Department of Citywide Administrative Services (DCAS)",
+  "attributionLink" : "https://www.nyc.gov/site/dcas/employment/how-can-you-find-upcoming-exams.page",
+  "averageRating" : 0,
+  "category" : "City Government",
+  "createdAt" : 1608160053,
+  "description" : "An annual list of civil service exams. The exam schedule is posted every July, lists all upcoming exams for the fiscal year, and is updated every month. Civil service exams may be available only for a limited time and it may be a few years before a certain exam is offered again.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 2399,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 42089537,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1776887598,
+  "publicationGroup" : 17866873,
+  "publicationStage" : "published",
+  "rowClass" : "",
+  "rowsUpdatedAt" : 1784746672,
+  "rowsUpdatedBy" : "d5dp-fses",
+  "tableId" : 20354318,
+  "totalTimesRated" : 0,
+  "viewCount" : 11888,
+  "viewLastModified" : 1784746671,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1612372305,
+    "reviewedAutomatically" : true,
+    "state" : "approved",
+    "submissionId" : 7442380,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1612372305,
+    "targetAudience" : "public",
+    "workflowId" : 2285,
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1612372305,
+      "failureCount" : 0,
+      "startedAt" : 1612372305,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "d5dp-fses",
+      "displayName" : "afinkel"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 631238444,
+    "name" : "Title Code",
+    "dataTypeName" : "number",
+    "description" : "The code representing specific civil service job titles.\n",
+    "fieldName" : "title_code",
+    "position" : 1,
+    "renderTypeName" : "number",
+    "tableColumnId" : 167156311,
+    "cachedContents" : {
+      "non_null" : "367",
+      "largest" : "961310",
+      "null" : "2534",
+      "top" : [ {
+        "item" : "70210",
+        "count" : "28"
+      }, {
+        "item" : "71651",
+        "count" : "7"
+      }, {
+        "item" : "60817",
+        "count" : "7"
+      }, {
+        "item" : "70410",
+        "count" : "6"
+      }, {
+        "item" : "71012",
+        "count" : "6"
+      }, {
+        "item" : "92510",
+        "count" : "6"
+      }, {
+        "item" : "70316",
+        "count" : "5"
+      }, {
+        "item" : "91644",
+        "count" : "4"
+      }, {
+        "item" : "91619",
+        "count" : "4"
+      }, {
+        "item" : "91638",
+        "count" : "4"
+      }, {
+        "item" : "70811",
+        "count" : "4"
+      }, {
+        "item" : "92511",
+        "count" : "4"
+      }, {
+        "item" : "10260",
+        "count" : "4"
+      }, {
+        "item" : "91717",
+        "count" : "4"
+      }, {
+        "item" : "51221",
+        "count" : "4"
+      }, {
+        "item" : "92235",
+        "count" : "3"
+      }, {
+        "item" : "90710",
+        "count" : "3"
+      }, {
+        "item" : "92508",
+        "count" : "3"
+      }, {
+        "item" : "70810",
+        "count" : "3"
+      }, {
+        "item" : "51222",
+        "count" : "3"
+      } ],
+      "smallest" : "500",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : {
+      "noCommas" : "true"
+    }
+  }, {
+    "id" : 631238438,
+    "name" : "Examination Title",
+    "dataTypeName" : "text",
+    "description" : "Civil Service title of the exam being offered",
+    "fieldName" : "exam_title",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 125452535,
+    "cachedContents" : {
+      "non_null" : "2901",
+      "largest" : "YOUTH DEVELOPMENT SPECIALIST",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Police Officer",
+        "count" : "66"
+      }, {
+        "item" : "MARINE ENGINEER (UNIFORMED-FIRE DEPARTMENT) (PRO)",
+        "count" : "30"
+      }, {
+        "item" : "Traffic Enforcement Agent",
+        "count" : "30"
+      }, {
+        "item" : "School Safety Agent",
+        "count" : "28"
+      }, {
+        "item" : "Correction Officer",
+        "count" : "23"
+      }, {
+        "item" : "Police Communications Technician",
+        "count" : "21"
+      }, {
+        "item" : "CALL CENTER REPRESENTATIVE",
+        "count" : "20"
+      }, {
+        "item" : "Marine Engineer (Uniformed-Fire Department) (Prom)",
+        "count" : "20"
+      }, {
+        "item" : "Call Center Representative",
+        "count" : "18"
+      }, {
+        "item" : "CORRECTION OFFICER",
+        "count" : "15"
+      }, {
+        "item" : "POLICE OFFICER",
+        "count" : "15"
+      }, {
+        "item" : "SCHOOL SAFETY AGENT",
+        "count" : "15"
+      }, {
+        "item" : "TRAFFIC ENFORCEMENT AGENT",
+        "count" : "15"
+      }, {
+        "item" : "SPECIAL OFFICER (NYC H+H)",
+        "count" : "15"
+      }, {
+        "item" : "SPECIAL OFFICER",
+        "count" : "15"
+      }, {
+        "item" : "POLICE COMMUNICATIONS TECHNICIAN",
+        "count" : "15"
+      }, {
+        "item" : "Occupational Therapist (DOE)",
+        "count" : "14"
+      }, {
+        "item" : "Police Officer (Prom)",
+        "count" : "14"
+      }, {
+        "item" : "Physical Therapist (DOE)",
+        "count" : "13"
+      }, {
+        "item" : "Environmental Police Officer",
+        "count" : "13"
+      } ],
+      "smallest" : "Accountant",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : { }
+  }, {
+    "id" : 631238439,
+    "name" : "Examination Number",
+    "dataTypeName" : "number",
+    "description" : "Four-digit number assigned to each exam offered by DCAS in each Fiscal Year.  Exam numbers are recycled every 10 years.",
+    "fieldName" : "exam_number",
+    "position" : 3,
+    "renderTypeName" : "number",
+    "tableColumnId" : 125452533,
+    "cachedContents" : {
+      "non_null" : "2901",
+      "largest" : "7541",
+      "null" : "0",
+      "top" : [ {
+        "item" : "4520",
+        "count" : "8"
+      }, {
+        "item" : "4057",
+        "count" : "5"
+      }, {
+        "item" : "4523",
+        "count" : "5"
+      }, {
+        "item" : "4223",
+        "count" : "5"
+      }, {
+        "item" : "4537",
+        "count" : "5"
+      }, {
+        "item" : "4009",
+        "count" : "5"
+      }, {
+        "item" : "4007",
+        "count" : "5"
+      }, {
+        "item" : "4060",
+        "count" : "5"
+      }, {
+        "item" : "4525",
+        "count" : "5"
+      }, {
+        "item" : "4560",
+        "count" : "5"
+      }, {
+        "item" : "4553",
+        "count" : "5"
+      }, {
+        "item" : "4072",
+        "count" : "5"
+      }, {
+        "item" : "4042",
+        "count" : "5"
+      }, {
+        "item" : "4120",
+        "count" : "5"
+      }, {
+        "item" : "4527",
+        "count" : "5"
+      }, {
+        "item" : "4054",
+        "count" : "5"
+      }, {
+        "item" : "4305",
+        "count" : "5"
+      }, {
+        "item" : "4049",
+        "count" : "5"
+      }, {
+        "item" : "4318",
+        "count" : "5"
+      }, {
+        "item" : "4508",
+        "count" : "5"
+      } ],
+      "smallest" : "100",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : {
+      "noCommas" : "true"
+    }
+  }, {
+    "id" : 631238440,
+    "name" : "Application Period Start Date",
+    "dataTypeName" : "calendar_date",
+    "description" : "The date on which candidates can begin to submit applications to take an exam.  Applications are only accepted when an application period has begun.",
+    "fieldName" : "application_period_start",
+    "position" : 4,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 125452530,
+    "cachedContents" : {
+      "non_null" : "2645",
+      "largest" : "2027-06-02T00:00:00.000",
+      "null" : "256",
+      "top" : [ {
+        "item" : "2023-12-07T00:00:00.000",
+        "count" : "104"
+      }, {
+        "item" : "2024-03-06T00:00:00.000",
+        "count" : "94"
+      }, {
+        "item" : "2024-02-07T00:00:00.000",
+        "count" : "90"
+      }, {
+        "item" : "2024-05-01T00:00:00.000",
+        "count" : "80"
+      }, {
+        "item" : "2023-10-04T00:00:00.000",
+        "count" : "80"
+      }, {
+        "item" : "2023-11-01T00:00:00.000",
+        "count" : "76"
+      }, {
+        "item" : "2026-05-07T00:00:00.000",
+        "count" : "76"
+      }, {
+        "item" : "2024-04-03T00:00:00.000",
+        "count" : "76"
+      }, {
+        "item" : "2024-01-03T00:00:00.000",
+        "count" : "75"
+      }, {
+        "item" : "2026-03-04T00:00:00.000",
+        "count" : "75"
+      }, {
+        "item" : "2026-02-04T00:00:00.000",
+        "count" : "75"
+      }, {
+        "item" : "2024-06-05T00:00:00.000",
+        "count" : "74"
+      }, {
+        "item" : "2025-10-01T00:00:00.000",
+        "count" : "73"
+      }, {
+        "item" : "2026-04-01T00:00:00.000",
+        "count" : "72"
+      }, {
+        "item" : "2023-09-06T00:00:00.000",
+        "count" : "71"
+      }, {
+        "item" : "2026-01-07T00:00:00.000",
+        "count" : "67"
+      }, {
+        "item" : "2025-09-03T00:00:00.000",
+        "count" : "63"
+      }, {
+        "item" : "2020-06-17T00:00:00.000",
+        "count" : "63"
+      }, {
+        "item" : "2025-11-05T00:00:00.000",
+        "count" : "56"
+      }, {
+        "item" : "2025-08-06T00:00:00.000",
+        "count" : "56"
+      } ],
+      "smallest" : "2019-06-27T00:00:00.000",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : {
+      "view" : "date"
+    }
+  }, {
+    "id" : 631238441,
+    "name" : "Application Period End Date",
+    "dataTypeName" : "calendar_date",
+    "description" : "The date on which the application period for an exam will end.  Applications for exams are not accepted after the Application Period End Date",
+    "fieldName" : "application_period_end_date",
+    "position" : 5,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 125452531,
+    "cachedContents" : {
+      "non_null" : "2645",
+      "largest" : "2027-06-22T00:00:00.000",
+      "null" : "256",
+      "top" : [ {
+        "item" : "2023-09-26T00:00:00.000",
+        "count" : "111"
+      }, {
+        "item" : "2024-03-26T00:00:00.000",
+        "count" : "97"
+      }, {
+        "item" : "2024-02-27T00:00:00.000",
+        "count" : "90"
+      }, {
+        "item" : "2023-11-21T00:00:00.000",
+        "count" : "87"
+      }, {
+        "item" : "2023-08-22T00:00:00.000",
+        "count" : "85"
+      }, {
+        "item" : "2023-12-27T00:00:00.000",
+        "count" : "83"
+      }, {
+        "item" : "2026-05-27T00:00:00.000",
+        "count" : "76"
+      }, {
+        "item" : "2026-04-21T00:00:00.000",
+        "count" : "74"
+      }, {
+        "item" : "2024-05-21T00:00:00.000",
+        "count" : "73"
+      }, {
+        "item" : "2026-03-24T00:00:00.000",
+        "count" : "71"
+      }, {
+        "item" : "2024-06-25T00:00:00.000",
+        "count" : "66"
+      }, {
+        "item" : "2025-10-21T00:00:00.000",
+        "count" : "63"
+      }, {
+        "item" : "2024-01-23T00:00:00.000",
+        "count" : "60"
+      }, {
+        "item" : "2023-10-24T00:00:00.000",
+        "count" : "60"
+      }, {
+        "item" : "2025-08-26T00:00:00.000",
+        "count" : "60"
+      }, {
+        "item" : "2025-11-25T00:00:00.000",
+        "count" : "58"
+      }, {
+        "item" : "2026-01-27T00:00:00.000",
+        "count" : "57"
+      }, {
+        "item" : "2026-02-24T00:00:00.000",
+        "count" : "57"
+      }, {
+        "item" : "2025-09-23T00:00:00.000",
+        "count" : "55"
+      }, {
+        "item" : "2024-04-23T00:00:00.000",
+        "count" : "48"
+      } ],
+      "smallest" : "2019-07-23T00:00:00.000",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : {
+      "view" : "date"
+    }
+  }, {
+    "id" : 631238442,
+    "name" : "Open Competitive/Promotion/\nQualified Incumbent Exam (QIE)",
+    "dataTypeName" : "text",
+    "description" : "Open Competitive exams are open to any person who meets the minimum qualifications listed in the Notice of Examination. Promotion exams are only open to current permanent and 55-a employees in an eligible title and who meet minimum qualification requirements listed in the Notice of Examination.  Qualified Incumbent Exams are open only to employees serving in the exam title and meet the eligibility requirements for the exam listed in the Notice of Examination",
+    "fieldName" : "open_competitive_promotion",
+    "position" : 6,
+    "renderTypeName" : "text",
+    "tableColumnId" : 125452536,
+    "cachedContents" : {
+      "non_null" : "2896",
+      "largest" : "Qualified Incumbent Exam",
+      "null" : "5",
+      "top" : [ {
+        "item" : "Open Competitive",
+        "count" : "1598"
+      }, {
+        "item" : "Promotion",
+        "count" : "796"
+      }, {
+        "item" : "Canceled",
+        "count" : "191"
+      }, {
+        "item" : "QIE",
+        "count" : "166"
+      }, {
+        "item" : "Postponed",
+        "count" : "55"
+      }, {
+        "item" : "Qualified Incumbent Exam",
+        "count" : "34"
+      }, {
+        "item" : "CANCELED",
+        "count" : "33"
+      }, {
+        "item" : "POSTPONED",
+        "count" : "23"
+      } ],
+      "smallest" : "Canceled",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : { }
+  }, {
+    "id" : 631238443,
+    "name" : "Data Current As Of",
+    "dataTypeName" : "calendar_date",
+    "description" : "This date the data are current as of",
+    "fieldName" : "data_current_as_of",
+    "position" : 7,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 145380426,
+    "cachedContents" : {
+      "non_null" : "2472",
+      "largest" : "2026-07-22T00:00:00.000",
+      "null" : "429",
+      "top" : [ {
+        "item" : "2024-06-30T00:00:00.000",
+        "count" : "601"
+      }, {
+        "item" : "2024-03-06T00:00:00.000",
+        "count" : "248"
+      }, {
+        "item" : "2023-09-30T00:00:00.000",
+        "count" : "240"
+      }, {
+        "item" : "2023-01-04T00:00:00.000",
+        "count" : "227"
+      }, {
+        "item" : "2026-02-04T00:00:00.000",
+        "count" : "218"
+      }, {
+        "item" : "2026-01-07T00:00:00.000",
+        "count" : "216"
+      }, {
+        "item" : "2025-08-06T00:00:00.000",
+        "count" : "212"
+      }, {
+        "item" : "2025-07-01T00:00:00.000",
+        "count" : "212"
+      }, {
+        "item" : "2024-06-05T00:00:00.000",
+        "count" : "149"
+      }, {
+        "item" : "2026-07-22T00:00:00.000",
+        "count" : "149"
+      } ],
+      "smallest" : "2023-01-04T00:00:00.000",
+      "count" : "2901",
+      "cardinality" : "2901"
+    },
+    "format" : {
+      "view" : "date"
+    }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "metadata" : {
+    "rdfSubject" : "0",
+    "rdfClass" : "",
+    "attachments" : [ {
+      "filename" : "Annual_Examination_Schedule_of_Each_Fiscal_Year_Data_Dictionary.xlsx",
+      "assetId" : "b05c4f9e-4181-4d3c-8680-1dac2e8cc8f6",
+      "name" : "Annual_Examination_Schedule_of_Each_Fiscal_Year_Data_Dictionary.xlsx"
+    } ],
+    "custom_fields" : {
+      "Update" : {
+        "Automation" : "No",
+        "Date Made Public" : "2/3/2021",
+        "Update Frequency" : "Annually",
+        "Data Change Frequency" : "Quarterly"
+      },
+      "Dataset Information" : {
+        "Agency" : "Department of Citywide Administrative Services (DCAS)"
+      }
+    },
+    "rowLabel" : "Examination title",
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ]
+  },
+  "owner" : {
+    "id" : "5fuc-pqz2",
+    "displayName" : "NYC OpenData",
+    "profileImageUrlLarge" : "/api/users/5fuc-pqz2/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/5fuc-pqz2/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/5fuc-pqz2/profile_images/TINY",
+    "screenName" : "NYC OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "5fuc-pqz2",
+    "displayName" : "NYC OpenData",
+    "profileImageUrlLarge" : "/api/users/5fuc-pqz2/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/5fuc-pqz2/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/5fuc-pqz2/profile_images/TINY",
+    "screenName" : "NYC OpenData",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "tags" : [ "dcas", "department of citywide administrative services", "civil service", "examinations", "exams", "human capital" ],
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}
