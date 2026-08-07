@@ -106,8 +106,22 @@ There is **no shared key**. Payroll has `title_description` (UPPERCASE); exams h
 
 **Employer checks (data-driven, not assumed):**
 - `NYC HOUSING AUTHORITY` **IS** in payroll (14,297 rows) → NYCHA exams are same-employer
-- `CUNY CENTRAL OFFICE` is in payroll but only **217 rows** → CUNY matches are low confidence
+- **CUNY: community colleges are in payroll (19,863 rows), senior colleges are not.**
+  Do not use `CUNY CENTRAL OFFICE` (217 rows) as the CUNY check — that was the
+  error. The colleges appear under their own agency names and a substring search
+  for `CUNY` misses all of them: `COMMUNITY COLLEGE (MANHATTAN)` 4,897,
+  `(LAGUARDIA)` 4,201, `(KINGSBORO)` 3,232, `(QUEENSBORO)` 2,783, `(BRONX)` 2,275,
+  `(HOSTOS)` 1,907, `GUTTMAN COMMUNITY COLLEGE` 568. No senior college (Hunter,
+  Baruch, City, Brooklyn, Queens, John Jay…) appears in the 158-agency list —
+  consistent with community colleges being city-funded and senior colleges
+  state-funded. So `COLLEGE ASSISTANT` and `ADJUNCT LECTURER` are well represented,
+  not marginal.
 - No agency matches `HOSPITAL`, `H+H`, or `TRANSIT` → those are foreign employers
+
+⚠️ `data/raw/top40_titles.json` still carries the **superseded** CUNY caveat
+("CUNY college staff are largely absent"). It is left in place deliberately so the
+artifact stays byte-identical to what the generator produces; fixing it means
+editing the caveat in both generators and regenerating. See known gaps.
 
 196 of 2,901 exams carry a foreign-employer marker; **none** of them match a top-40
 payroll title, which is consistent with the above.
@@ -216,8 +230,17 @@ CLAUDE.md                        this file
 data/crosswalk_candidates.md     40 titles × 3 SOC candidates, confidence, DECISION lines
 data/raw/top40_titles.json       derived artifact: headcount, per-Annum median, open exams
 data/raw/*                       44 raw API/O*NET snapshots (byte-exact, ~18 MB)
-scripts/build_top40.ps1          rebuilds top40_titles.json offline from data/raw/
+scripts/build_top40.ps1          rebuilds top40_titles.json offline (Windows only)
+scripts/build_top40.py           same, portable. `--check` diffs instead of writing
+scoring/rubric.md                automatable / augmentable / human_anchored, v0.1
+scoring/classifications_round1.md  5 hand-scored tasks + 4 rubric ambiguities
 ```
+
+`build_top40.py` reproduces the PowerShell output **byte for byte** — BOM, CRLF,
+and PS 5.1's column-aligned `ConvertTo-Json` layout — so a Linux rebuild does not
+churn the committed artifact. `python3 scripts/build_top40.py --check` is the
+regression test; it currently passes at 47,331 bytes. Keep the two generators in
+step: any change to one must be mirrored, or `--check` fails by design.
 
 Useful raw files: `join_unmatched_after_normalization.txt` (the 73 residuals — read
 before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
@@ -235,9 +258,27 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
 
 ## Known gaps / next steps
 
-- `scripts/build_top40.ps1` is **PowerShell** and assumes Windows. It will likely not
-  run on a Linux cloud sandbox — port to Python if remote rebuilds are needed.
-- `data/crosswalk_candidates.md` has 40 unfilled `DECISION:` lines awaiting review.
+- ~~`build_top40.ps1` is PowerShell and assumes Windows.~~ **Done** —
+  `scripts/build_top40.py` is byte-identical and portable. The `.ps1` is kept as
+  the reference implementation; neither is authoritative over the other.
+- `data/crosswalk_candidates.md`: **13 of 40 `DECISION:` lines are filled** (the
+  `low` set, L01–L13). The 27 `medium`/`high` lines are still open. Use the verdict
+  vocabulary and the two rules defined at the head of that file's LOW section.
+- **One API call closes three decisions.** L09 (`LIEUTENANT`) is `BLOCKED` and
+  L07/L08 are decided but unconfirmed, all on the same `agency_name` group-by. It
+  is blocked in the cloud sandbox — the network policy denies
+  `data.cityofnewyork.us` with a gateway 403 on CONNECT. Run it from a machine
+  with access; the exact query is in the L09 entry.
+- **Superseded caveat in `top40_titles.json`.** The `caveats` array says CUNY
+  college staff are largely absent; that is wrong (see employer checks). Fixing it
+  means editing the string in *both* `build_top40.ps1` and `build_top40.py` and
+  regenerating — which resets the byte-identity baseline `--check` compares
+  against. Deliberately not done as a drive-by.
+- `scoring/rubric.md` is v0.1. Two of the four ambiguities found in round 1 are
+  unresolved and both distort scoring at volume: statement-level classes must not
+  be aggregated to occupations (no clause weights exist in O*NET), and context-free
+  task statements are currently classified by fiat. See
+  `scoring/classifications_round1.md` before scoring anything in bulk.
 - No O*NET→NYC mapping is committed yet; exact matching tops out at 32.3% by
   headcount. Suffix stripping and abbreviation expansion are the next lever — not a
   fuzzy-similarity threshold, which would force the true negatives above.

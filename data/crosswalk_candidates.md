@@ -17,9 +17,19 @@ an occupation, or is too ambiguous to resolve without agency context.
 
 Fill in `DECISION:` with a SOC code, `SKIP`, or a note.
 
+**Status 2026-08-07: the 13 `low` items are decided (L01–L13). The 27 `medium` and
+`high` items are still open.** The verdict vocabulary and the two rules used are
+defined at the head of the LOW section; apply the same ones to the remaining 27.
+
 > **13 of 40 are `low`.** That is the real finding here. See the euphemism section
 > immediately below — most low-confidence cases are not hard matching problems,
 > they are titles that do not describe an occupation at all.
+>
+> That held up under review: of the 13, **five are not occupations** (`SKIP`,
+> 124,911 rows) and **two more are real work that no single SOC code spans**
+> (14,089 rows). Only one of the 13 turned out to be a genuine matching problem
+> awaiting data (L09). Deciding them also surfaced a factual error in this file and
+> in `CLAUDE.md` — see the correction on flag #8.
 
 ---
 
@@ -66,17 +76,56 @@ PARTICIPANT` has 18 salaried rows out of 4,021, and `CITY SEASONAL AIDE` 17 of 2
 stipend. O*NET has no corresponding occupation because it is not a career.
 
 ### 8. `COLLEGE ASSISTANT` — CUNY catch-all.
-One hourly title covering tutors, lab techs, office staff, and IT help. Also note
-this is CUNY, which is barely present in the payroll file (217 rows citywide).
+One hourly title covering tutors, lab techs, office staff, and IT help.
+
+> **CORRECTED 2026-08-07.** This flag used to add "CUNY is barely present in the
+> payroll file (217 rows citywide)." **That is wrong.** The 217 figure is
+> `CUNY CENTRAL OFFICE` alone. CUNY's community colleges are in `k397_agencies_2025.json`
+> under their own names and were missed because the check keyed on the string `CUNY`:
+> `COMMUNITY COLLEGE (MANHATTAN)` 4,897 · `(LAGUARDIA)` 4,201 · `(KINGSBORO)` 3,232 ·
+> `(QUEENSBORO)` 2,783 · `(BRONX)` 2,275 · `(HOSTOS)` 1,907 · `GUTTMAN COMMUNITY COLLEGE`
+> 568 — **19,863 FY2025 rows**, 20,080 with Central Office.
+>
+> The real split is community vs senior: no senior college (Hunter, Baruch, City,
+> Brooklyn, Queens, John Jay…) appears anywhere in the 158-agency list, consistent
+> with community colleges being city-funded and senior colleges state-funded. So
+> CUNY *community college* staff are well represented and CUNY *senior college*
+> staff are absent entirely. "CUNY matches are low confidence" is not supportable
+> as stated — it depends which CUNY.
+>
+> Affects L06 and L11 (both upgraded), the `caveats` string in `top40_titles.json`,
+> and the employer-check bullet in `CLAUDE.md`.
 
 ### 9. `SERGEANT-` / `LIEUTENANT` — which uniformed service?
-Both ranks exist in NYPD, FDNY, and DOC, and they map to *different* SOC codes
-(`33-1012` vs `33-1021`). The payroll title alone cannot tell you. The trailing
-hyphen on `SERGEANT-` is a data artifact, not part of the name.
+These map to *different* SOC codes (`33-1012` vs `33-1021`) and the payroll title
+alone cannot tell you. The trailing hyphen on `SERGEANT-` is a data artifact, not
+part of the name.
 
-### 10. `P.O. DA DET GR3` — Police Officer / District Attorney / Detective Grade 3.
-A detective-grade investigator assigned to a District Attorney's office. Unreadable
-without decoding, and not a patrol officer despite the `P.O.` prefix.
+> **NARROWED 2026-08-07.** This flag treated both ranks as equally ambiguous. The
+> DCAS exam file does not: across all 2,901 rows the only Sergeant exams are
+> `Sergeant (Police) (Prom)` and `Sergeant (Police) (Pro)` — **zero** fire or
+> correction Sergeant exams — while Lieutenant appears as *both*
+> `Lieutenant (Police) (Prom)` and `Lieutenant (Fire) (Prom)`. Consistent with the
+> FDNY ladder going Firefighter → Lieutenant with no Sergeant rank.
+>
+> So the ambiguity is real for `LIEUTENANT` and largely not real for `SERGEANT-`.
+> Exam evidence is indirect — it shows which ranks DCAS tests, not who holds them —
+> so it narrows L07 rather than closing it.
+
+### 10. `P.O. DA DET GR3` — a detective-grade investigator, not a patrol officer.
+Unreadable without decoding, and not a patrol officer despite the `P.O.` prefix.
+
+> **GLOSS UNVERIFIED 2026-08-07.** This flag expanded `DA` as "District Attorney"
+> with no source. The headcount makes that strained: the title has 3,330 FY2025
+> rows and *all six* DA offices together have 6,993 rows, so the reading requires
+> 48% of every DA-office employee to be a detective investigator, in offices
+> staffed mainly by ADAs and support. The competing expansion — `D/A` = "Detailed
+> As", i.e. a police officer detailed as Detective 3rd Grade, an NYPD payroll
+> convention — fits both the headcount and the `GR3` grade notation better.
+>
+> Neither expansion is confirmed from a source in this repo. **It does not matter
+> for the crosswalk:** both land on `33-3021.00`, so L08 is robust to the
+> ambiguity. Flagged so nobody cites the DA-office gloss as established.
 
 ### 11. `ED PARA` — paraprofessional, i.e. a teaching assistant.
 `ANNUAL ED PARA` and `SUBSTITUTE ED PARA` are classroom paraprofessionals. The
@@ -86,6 +135,30 @@ than a noun.
 ---
 
 # LOW confidence
+
+**All 13 decided 2026-08-07.** Four verdicts are used, and the distinction between
+the first two is the one that matters:
+
+| verdict | meaning | effect |
+|---|---|---|
+| `SKIP` | the title is **not an occupation** — a pay code, hiring category, or civic role | dropping it **improves** the analysis |
+| `NO SINGLE CODE` | real workers doing real jobs that split across SOC **major groups**, with no residual spanning them | dropping it **loses** people; keep the bucket visible |
+| a SOC code | assigned, with the precision it actually supports | family-level unless stated |
+| `BLOCKED` | one specific query resolves it; the query is given | do not guess in the meantime |
+
+Two rules were applied consistently:
+
+1. **Prefer the family residual (`… , All Other`) when the candidate codes disagree
+   about the *nature* of the work; prefer a specific code when they agree on the
+   work and differ only on detail.** Assigning a specific code asserts detail the
+   payroll file does not carry.
+2. **Never let a lexical match outrank an evidentiary one.** Several candidates
+   below exist only because a scorer ranked them; they are marked.
+
+Headcount outcome across the 13 (of 414,667 top-40 rows):
+`SKIP` 124,911 (30.1%) · `NO SINGLE CODE` 14,089 (3.4%) · `BLOCKED` 3,076 (0.7%) ·
+coded 23,021 (5.6%). The 13 low-confidence titles are **165,097 rows, 39.8%** of
+top-40 headcount.
 
 ---
 
@@ -104,7 +177,14 @@ Fallback if you decide to fold these rows into the parent teaching title.
 *Why low:* the largest title in the city is a payroll artifact. Coding it at all
 risks double-counting ~78k people already present under `TEACHER`.
 
-DECISION: ___
+DECISION: **`SKIP`** — pay code, not an occupation.
+New corroboration: `k397_agencies_2025.json` carries a payroll *agency* literally
+named `DEPT OF ED PER SESSION TEACHER` with **81,516** FY2025 rows, alongside
+`DEPT OF ED PEDAGOGICAL` (107,754) and `DEPT OF ED PER DIEM TEACHERS` (16,358).
+Per-session is an accounting bucket at the agency level, not a job — that plus the
+null median settles it. Report the 78,618 as a documented exclusion, never as
+headcount. Do **not** take candidate 3; folding these rows into a teaching SOC is
+the double-count the flag warns about.
 
 ---
 
@@ -123,7 +203,13 @@ Also carries "Election Clerk" as an alternate. Generic, but defensible.
 *Why low:* both non-skip options are residual "All Other" codes. Third-largest
 title in the city and O*NET simply has no home for it.
 
-DECISION: ___
+DECISION: **`SKIP`** — civic stipend role, not an occupation.
+Corroborated the same way as L01: there is a dedicated payroll agency
+`BOARD OF ELECTION POLL WORKERS` with **36,732** rows — within 215 of this title's
+36,517 — kept separate from `BOARD OF ELECTION` (1,027), which is the actual
+year-round staff. The city's own payroll structure treats poll workers as a
+distinct non-staff population. Zero salaried rows. Both alternatives are "All
+Other" residuals that would launder a stipend into an occupation.
 
 ---
 
@@ -142,7 +228,16 @@ Correct if cafeteria/lunchroom-assigned, also common.
 *Why low:* one title, three genuinely different jobs, split by school assignment
 that payroll does not record. Zero salaried rows.
 
-DECISION: ___
+DECISION: **`NO SINGLE CODE`** — retain as a visible unresolved bucket (9,217).
+This is **not** a `SKIP`. These are real workers doing real jobs; the blocker is
+that the three candidates sit in three different SOC *major groups* — 25
+(education), 43 (office), 35 (food service) — so no "All Other" residual spans
+them and rule 1 has nothing to fall back on. Any single pick misclassifies the
+majority.
+Resolver: DOE school-assignment data. It is **not** in `k397-673e` and no other
+field proxies it, so this cannot be closed from the current sources — treat it as
+a standing gap, not a to-do. Report the 9,217 separately from the L01/L02 skips;
+the reasons are different and merging them misstates both.
 
 ---
 
@@ -161,7 +256,18 @@ Honest option for the substantial share doing pure back-office work.
 
 *Why low:* broadband title, see flag #5. The $74k median spans very different jobs.
 
-DECISION: ___
+DECISION: **`21-1099.00`** Community and Social Service Specialists, All Other —
+**family-level only**, not a sub-code claim.
+Rule 1 applies: the three candidates disagree about the nature of the work
+(manager / specialist / clerical), so the residual is the honest assignment.
+Candidate 1 (`11-9151.00`, managers) is affirmatively argued against by this file's
+own numbers: the $74,363 median sits far below the $128,296 median of
+`ADMINISTRATIVE STAFF ANALYST` (M09), which flag #4 identifies as the M-level
+manager benchmark. Most incumbents are not managers.
+Known contamination: a material share do pure back-office work and belong in
+43-xxxx. That share is not recoverable from `title_description`; a join on
+`agency_name` would bound it. Record precision as family-level and do not report
+this code without that caveat.
 
 ---
 
@@ -180,7 +286,15 @@ Only where the assignment is health outreach specifically.
 
 *Why low:* same broadband problem as L04, one grade lower. See flag #5.
 
-DECISION: ___
+DECISION: **`21-1099.00`** Community and Social Service Specialists, All Other —
+**family-level only**. Same verdict and same reasoning as L04.
+Rule 1 again: the candidates disagree about the nature of the work (human-service
+assistant / office clerk / community health worker), so the residual wins over
+candidate 1 despite `21-1093.00` being the stronger *lexical* match — that is
+exactly the trap rule 2 exists to block.
+Note the grade difference from L04 ($54,272 vs $74,363) is a civil-service grade
+distinction, and SOC does not encode grade. Two titles sharing one code here is
+correct, not a collision to fix.
 
 ---
 
@@ -199,7 +313,15 @@ See flag #8. Also note CUNY is barely in this payroll file at all.
 *Why low:* one hourly title spanning unrelated work, at an employer only
 partially represented in the dataset.
 
-DECISION: ___
+DECISION: **`NO SINGLE CODE`** — retain as a visible unresolved bucket (4,872).
+**Candidate 3 (`SKIP`) is withdrawn.** Its stated reason — CUNY is barely in the
+payroll file — is wrong; see the correction on flag #8. CUNY community colleges
+contribute 19,863 FY2025 rows, so these 4,872 people are genuinely in the dataset
+and dropping them would lose real workers.
+What remains is the L03 problem: tutors, lab techs, office staff and IT help span
+SOC major groups 25, 43 and 15, and no residual spans them.
+Resolver: a CUNY assignment/department field. Not present in `k397-673e`. Until
+then this is a standing gap. Do **not** merge it into the L01/L02 skip total.
 
 ---
 
@@ -218,7 +340,16 @@ DOC also uses it.
 *Why low:* the service is not recoverable from the title. See flag #9.
 `agency_name` would resolve this — worth joining before deciding.
 
-DECISION: ___
+DECISION: **`33-1012.00`** First-Line Supervisors of Police and Detectives.
+Evidence, not assumption: across all 2,901 DCAS exam rows the only Sergeant exams
+are `Sergeant (Police) (Prom)` and `Sergeant (Police) (Pro)`. There is **no** fire
+or correction Sergeant exam anywhere in the file, consistent with the FDNY ladder
+running Firefighter → Lieutenant with no Sergeant rank. Candidates 2 and 3 have no
+support in this repo's data. See the narrowing note on flag #9.
+Confidence: medium, upgraded from low. The evidence is indirect — the exam file
+shows which ranks DCAS *tests*, not who holds them — and DOC in particular could
+carry incumbents without a current exam. The `agency_name` join in L09 answers
+this title at the same time; run it and confirm before publishing.
 
 ---
 
@@ -237,7 +368,16 @@ Narrower investigative variant; pick only with DA-office specifics.
 *Why low:* the title is an unreadable code, and candidates 1 and 2 disagree on
 whether to classify by civil-service line or by real duties.
 
-DECISION: ___
+DECISION: **`33-3021.00`** Detectives and Criminal Investigators.
+The decision is **robust to the unresolved abbreviation** (flag #10): whether `DA`
+means "District Attorney" or "Detailed As", the duty is detective-grade
+investigation and the SOC is the same. That is why this closes at medium
+confidence despite the gloss being unverified.
+Candidate 2 rejected: classifying by the `P.O.` civil-service line over actual
+duties would put 3,330 investigators into patrol, and this file's own convention
+(flags #2, #3, #4) is that duties govern over title wording. Candidate 3
+(`33-3021.02`) asserts an identification/records specialty nothing supports —
+rule 1, do not claim unsupported detail.
 
 ---
 
@@ -255,7 +395,32 @@ DOC variant.
 
 *Why low:* exact 0.571 tie between the police and fire codes. See flag #9.
 
-DECISION: ___
+DECISION: **`BLOCKED`** — split between `33-1012.00` and `33-1021.00`, pending one
+query. Do not assign a single code.
+Unlike L07, the exam file **confirms** the ambiguity rather than resolving it:
+both `Lieutenant (Police) (Prom)` and `Lieutenant (Fire) (Prom)` exist. NYPD
+(55,424) and FDNY (19,333) are both large enough that either could hold a
+substantial share of 3,076 incumbents, and agency headcount does not decompose to
+ranks.
+
+⚠️ Do **not** use this title's one open exam as a tiebreak. It is
+`Lieutenant (Police) (Prom)`, application window 2027-05-05 → 2027-05-25 — a fact
+about a future promotional schedule, not about who holds the title today.
+
+The query that closes it (blocked in this sandbox: the network policy denies
+`data.cityofnewyork.us`, gateway 403 on CONNECT):
+
+```
+https://data.cityofnewyork.us/resource/k397-673e.json
+  ?$select=agency_name,count(1)
+  &$where=fiscal_year=2025 AND title_description='LIEUTENANT'
+  &$group=agency_name&$order=count_1 DESC
+```
+
+Run the same query for `SERGEANT-` (L07) and `P.O. DA DET GR3` (L08) while you are
+there — one round trip confirms all three. If a single code is unavoidable before
+then, use `33-1012.00` **marked provisional**, and state that the FDNY share is
+unmeasured rather than zero.
 
 ---
 
@@ -273,7 +438,14 @@ Where the placement is instructional.
 
 *Why low:* describes who the worker is (a student), not what they do.
 
-DECISION: ___
+DECISION: **`SKIP`** — employment category, not an occupation.
+Candidates 2 and 3 sit in different SOC major groups (43 and 25), which is the
+L03/L06 signature. The difference is that L03 and L06 name *work* ambiguously
+while this title names a *worker attribute* — being a student — and never names
+work at all. A title that describes who was hired rather than what they do cannot
+take a SOC code at any confidence.
+Zero salaried rows, consistent with the reading. Report 3,341 as a documented
+exclusion.
 
 ---
 
@@ -293,7 +465,16 @@ Defer until a department field is available.
 *Why low:* O*NET splits postsecondary teaching into ~35 discipline codes. Without
 a subject you are forced into a residual bucket.
 
-DECISION: ___
+DECISION: **`25-1199.00`** Postsecondary Teachers, All Other.
+The textbook case for rule 1: the occupation is certain, only the discipline is
+missing, and O*NET publishes a purpose-built residual for exactly that. A forced
+discipline pick would be fabrication.
+Candidate 3 (`SKIP`) is withdrawn for the same reason as L06 — it rested on CUNY
+being absent from the payroll file, which the flag #8 correction disproves. These
+2,698 adjuncts sit in the community colleges, which carry 19,863 FY2025 rows.
+Confidence: medium, upgraded from low. Note this is a *complete* answer at the
+precision the data supports, not a placeholder — do not "improve" it later with a
+discipline guess.
 
 ---
 
@@ -313,7 +494,15 @@ Rough proxy if placements are known to be manual.
 *Why low:* not an occupation, and the obvious lexical match inverts the
 relationship. The median rests on 18 of 4,021 rows — treat it as noise.
 
-DECISION: ___
+DECISION: **`SKIP`** — program enrollment, not an occupation.
+
+⚠️ **Never take candidate 2.** `13-1151.00` is the person who *delivers* training;
+this title is the person *receiving* it. It is the highest-scoring lexical match in
+the entire top 40 and it is exactly backwards — the single best argument in this
+file against a fuzzy-similarity matcher. If any automated pass proposes it,
+that pass is broken.
+Candidate 3 rests on placements being manual, which nothing here establishes.
+The $39,926 median rests on 18 of 4,021 rows (0.4%); do not report it.
 
 ---
 
@@ -331,7 +520,12 @@ Generic manual fallback.
 
 *Why low:* "seasonal" is a hiring mechanism. Median rests on 17 of 2,414 rows.
 
-DECISION: ___
+DECISION: **`SKIP`** — hiring category, not an occupation.
+Same reasoning as L10: "seasonal" describes the terms of hire, not the work.
+Candidate 2 (`37-3011.00`) is plausible for Parks summer placements but nothing in
+`k397-673e` establishes the placement mix, and `CITY SEASONAL AIDE` is used beyond
+Parks — assigning it would assert a distribution never measured.
+The $41,527 median rests on 17 of 2,414 rows (0.7%); do not report it.
 
 ---
 
@@ -775,7 +969,33 @@ DECISION: ___
 
 ## Coverage note
 
-These 40 titles are 414,667 of 550,219 FY2025 payroll rows (75.4%). If you accept
-the `SKIP` recommendations for L01, L02, L10, L12, and L13, you remove 124,911 rows
-(30% of the top-40 headcount) from the crosswalk as not-an-occupation — which is a
-finding to report, not a gap to fill.
+These 40 titles are 414,667 of 550,219 FY2025 payroll rows (75.4%).
+
+With the 13 low-confidence decisions applied (2026-08-07):
+
+| outcome | titles | rows | % of top-40 |
+|---|---|---|---|
+| `SKIP` — not an occupation | L01, L02, L10, L12, L13 | 124,911 | 30.1% |
+| `NO SINGLE CODE` — real work, no code spans it | L03, L06 | 14,089 | 3.4% |
+| `BLOCKED` — one query resolves it | L09 | 3,076 | 0.7% |
+| coded (family-level or better) | L04, L05, L07, L08, L11 | 23,021 | 5.6% |
+| **all 13 low-confidence** | | **165,097** | **39.8%** |
+
+**Report those first three rows separately — they are not the same claim.** The
+124,911 `SKIP` rows are a finding: the crosswalk is *more* accurate without them.
+The 14,089 `NO SINGLE CODE` rows are a real gap: those are people doing real jobs
+that O*NET cannot resolve at the granularity `k397-673e` records, and folding them
+into the skip total would overstate the finding by 11% and hide the gap. The 3,076
+blocked rows are neither — they are one API call away.
+
+**Coded today: 23,021 rows, 5.6%** — the 13 low-confidence titles only. The 27
+medium/high `DECISION:` lines are still open, so the crosswalk is not yet usable
+end to end. If those 27 close on their candidate 1, coded coverage reaches 272,591
+of 414,667 (**65.7%**), or 275,667 (**66.5%**) once L09 resolves. The remaining
+138,999 rows (33.5%) split 124,911 deliberately excluded + 14,089 standing gap and
+never become codeable.
+
+Do not quote a coverage figure without its denominator caveat. The honest form is
+**"65.7% of top-40 headcount coded, 30.1% deliberately excluded as
+not-an-occupation, 3.4% a standing gap"** — the bare percentage invites the reader
+to treat the exclusions as failure, which inverts the finding.
