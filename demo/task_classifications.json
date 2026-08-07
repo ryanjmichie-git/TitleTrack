@@ -1,0 +1,87 @@
+{
+  "_note": "Prototype classifications, rubric v0.1 (scoring/rubric.md). One O*NET task statement at a time, P and D scored independently, D as a ceiling. STATEMENT-LEVEL ONLY - these must never be aggregated to an occupation score (ambiguity A1, scoring/classifications_round1.md). Anchors recorded in _anchors below: 'capability' erodes as models and robotics improve; 'authority' does not move until a statute or rule changes.",
+
+  "33-3041.00": {
+    "7935": "human_anchored",
+    "7936": "augmentable",
+    "7937": "human_anchored",
+    "7939": "augmentable",
+    "7940": "augmentable",
+    "7941": "augmentable",
+    "7942": "human_anchored",
+    "7943": "human_anchored"
+  },
+  "33-9032.00": {
+    "2131": "human_anchored",
+    "2132": "human_anchored",
+    "2133": "augmentable",
+    "2134": "augmentable",
+    "2135": "augmentable",
+    "2136": "human_anchored",
+    "2137": "automatable",
+    "2138": "human_anchored"
+  },
+  "29-2042.00": {
+    "22852": "human_anchored",
+    "22853": "human_anchored",
+    "22854": "human_anchored",
+    "22855": "human_anchored",
+    "22856": "augmentable",
+    "22857": "augmentable",
+    "22858": "human_anchored",
+    "22859": "human_anchored"
+  },
+  "37-2011.00": {
+    "9538": "human_anchored",
+    "9539": "human_anchored",
+    "9540": "human_anchored",
+    "9541": "human_anchored",
+    "9542": "human_anchored",
+    "9544": "augmentable",
+    "9545": "automatable",
+    "9546": "human_anchored"
+  },
+
+  "_anchors": {
+    "33-3041.00": {
+      "7935": "capability - P0, patrol requires physical presence in the assigned area.",
+      "7936": "n/a - P2 draft/route, D2. The field endpoint is still a person.",
+      "7937": "authority - D0 test 3 and 2. A parking summons is an appealable due-process record affirmed by the issuing agent; it looks clerical and is not.",
+      "7939": "n/a - context_dependent, read as radio communication at the lowest-consequence plausible use (rubric context-inheritance rule). D2.",
+      "7940": "n/a - P1, field mentoring is the material human portion; materials are producible. D2.",
+      "7941": "n/a - compound. 'Identify vehicles in violation' is P3/D3 automatable; the boot-or-tow clause is D1 (property seizure, falls on a member of the public, not cheaply reversible) and carries the statement.",
+      "7942": "capability - P0, bodily act on a vehicle.",
+      "7943": "capability - compound. 'Observe' is P0; 'report' alone would be automatable. This is the clearest erodes-with-sensors item in the set."
+    },
+    "33-9032.00": {
+      "2131": "capability - P0, patrol.",
+      "2132": "capability - P0, responding to an alarm is embodied.",
+      "2133": "n/a - compound. 'Monitor' is producible; 'authorize entrance' is D1 (consequence falls on a member of the public, not reversible in the moment).",
+      "2134": "n/a - P2/D1(nominal). The round-1 case-3 family: a signed, discoverable activity record. Under A3's proposed widened attestation test this would move to human_anchored/authority; A3 is NOT adopted in v0.1, so it stays augmentable and is flagged.",
+      "2135": "n/a - P1, recognising the emergency on scene is the material human portion; D1.",
+      "2136": "capability - P0, circulating among people to preserve order.",
+      "2137": "n/a - P3/D3. Off-hours message-taking and information provision names no consequence and no anchored consumer.",
+      "2138": "authority - D0 test 4. Apprehension, eviction, and use of force are coercive power over a person; delegation is void regardless of output quality."
+    },
+    "29-2042.00": {
+      "22852": "capability - P0, bodily act on a person. D0 test 5 also fires (reserved professional act, certified scope of practice); the decision procedure stops at P0 first.",
+      "22853": "capability - P0/P1 hands-on assessment. D0 test 5 also fires.",
+      "22854": "capability - the certification attaches to the person; the maintenance obligation cannot be delegated to a non-person.",
+      "22855": "capability - P0, physical presence with a patient.",
+      "22856": "n/a - P2, a structured handoff report is draftable; D1, the consequence lands on a patient and is not cheaply reversible.",
+      "22857": "n/a - P2 coordination messaging; D1, multi-agency scene coordination.",
+      "22858": "capability - compound. Decontamination is P0; the mandated case report alone would be augmentable.",
+      "22859": "capability - P0, driving. The single most likely item in this whole demo to erode with technology - and note that it erodes for the EMT and not for task 2138."
+    },
+    "37-2011.00": {
+      "9538": "capability - P0.",
+      "9539": "capability - P0.",
+      "9540": "capability - P0.",
+      "9541": "capability - P0, embodied use of chemicals and power equipment.",
+      "9542": "capability - P0.",
+      "9544": "n/a - P1/P2, spotting the fault needs presence; drafting the notification does not. D2, internal and correctable.",
+      "9545": "n/a - P3/D3. Requisitioning from consumption data names no external consequence and is cheaply reversible.",
+      "9546": "capability - P0."
+    }
+  }
+}
