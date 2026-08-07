@@ -234,6 +234,8 @@ scripts/build_top40.ps1          rebuilds top40_titles.json offline (Windows onl
 scripts/build_top40.py           same, portable. `--check` diffs instead of writing
 scoring/rubric.md                automatable / augmentable / human_anchored, v0.1
 scoring/classifications_round1.md  5 hand-scored tasks + 4 rubric ambiguities
+agents/                          two custom agents: spec + goldens + gated eval each
+.claude/agents/                  the runnable agent definitions (Claude Code subagents)
 ```
 
 `build_top40.py` reproduces the PowerShell output **byte for byte** — BOM, CRLF,
@@ -281,6 +283,11 @@ before "fixing" the matcher), `k397_agencies_2025.json` (employer checks),
   `scoring/classifications_round1.md` before scoring anything in bulk.
 - No O*NET→NYC mapping is committed yet; exact matching tops out at 32.3% by
   headcount. Suffix stripping and abbreviation expansion are the next lever — not a
-  fuzzy-similarity threshold, which would force the true negatives above.
+  fuzzy-similarity threshold, which would force the true negatives above. The
+  `title-matcher` agent (`agents/title-matcher/`) exists for exactly this: its
+  eval hard-fails forced matches, and its naive baseline demonstrates why
+  (37/41 recall, 12 corrupt matches).
+- The 27 open `DECISION:` lines are the `crosswalk-decider` agent's job
+  (`agents/crosswalk-decider/`); it is golden-tested against the 13 decided ones.
 - Grade level is unrecoverable for `TEACHER` / `TEACHER-GENERAL ED` /
   `TEACHER SPECIAL EDUCATION` (101,630 people). O*NET has no grade-agnostic K-12 code.

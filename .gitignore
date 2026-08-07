@@ -225,7 +225,10 @@ data/raw/*
 # ...except derived artifacts, which are small and are real deliverables.
 !data/raw/top40_titles.json
 scoring/cache/
-.claude/
+# Same glob trick as data/raw above: ignore Claude local state but track the
+# agent definitions, which are deliverables.
+.claude/*
+!.claude/agents/
 node_modules/
 *.csv
 !data/crosswalk*.csv
