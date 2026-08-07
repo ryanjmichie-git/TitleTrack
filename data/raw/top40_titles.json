@@ -1,0 +1,856 @@
+﻿{
+    "generated_as_of":  "2026-08-07",
+    "sources":  {
+                    "payroll":  {
+                                    "dataset":  "k397-673e",
+                                    "name":  "Citywide Payroll Data (Fiscal Year)",
+                                    "attribution":  "Office of Payroll Administration (OPA)",
+                                    "fiscal_year":  2025,
+                                    "rows_updated_at":  "2026-04-16"
+                                },
+                    "exams":  {
+                                  "dataset":  "4ptz-hmtc",
+                                  "name":  "Annual Examination Schedule of Each Fiscal Year",
+                                  "attribution":  "Department of Citywide Administrative Services (DCAS)",
+                                  "rows_updated_at":  "2026-07-22"
+                              }
+                },
+    "definitions":  {
+                        "headcount_fy2025":  "FY2025 payroll rows for this title_description, ALL pay bases. One row = one person-year per agency; a person in two agencies appears twice.",
+                        "salary_median":  "Median base_salary over FY2025 rows with pay_basis=\u0027per Annum\u0027 and non-null base_salary. per Day / per Hour / Prorated Annual rows are EXCLUDED, not converted - base_salary means a different unit in each basis and the per Hour column is known to contain misfiled annual figures (FY2025 max 190941.71).",
+                        "n_included":  "per Annum rows contributing to the median.",
+                        "n_excluded":  "headcount_fy2025 minus n_included: rows dropped for non-annual pay basis or null base_salary.",
+                        "open_exams":  "Exams from 4ptz-hmtc whose title matches this payroll title after uppercasing and stripping parentheticals, that are not Canceled, and whose application window is still open or entirely in the future as of generated_as_of.",
+                        "eligibility":  "Normalized from open_competitive_promotion. That column conflates eligibility with schedule status, so rows carrying only a status (Postponed) yield null. Raw value kept in eligibility_source_value.",
+                        "same_employer":  "False when the exam is for an employer absent from the citywide payroll file (NYC H+H, Hospitals, Transit Authority) - those hires can never appear in k397-673e. Verified against FY2025 agency_name list; NYC Housing Authority IS in payroll and is therefore true."
+                    },
+    "caveats":  [
+                    "A null salary.median means the title has zero per Annum rows - it is paid per Day, per Hour, or per Session. It is not missing data.",
+                    "Title matching is text-based: 4ptz-hmtc title_code is populated on only 367 of 2901 rows (12.7%), so it is unusable as a join key.",
+                    "CUNY exams are marked same_employer=true because CUNY CENTRAL OFFICE appears in payroll, but only 217 FY2025 rows do - CUNY college staff are largely absent. Treat CUNY matches as low confidence.",
+                    "work_location_borough is the agency location, not the employee location."
+                ],
+    "titles":  [
+                   {
+                       "rank":  1,
+                       "title_description":  "TEACHER- PER SESSION",
+                       "headcount_fy2025":  78618,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  78618
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  2,
+                       "title_description":  "TEACHER",
+                       "headcount_fy2025":  56041,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  110848,
+                                      "n_included":  56017,
+                                      "n_excluded":  24
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  3,
+                       "title_description":  "ELECTION WORKER",
+                       "headcount_fy2025":  36517,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  36517
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  4,
+                       "title_description":  "TEACHER SPECIAL EDUCATION",
+                       "headcount_fy2025":  30058,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  105520,
+                                      "n_included":  30058,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  5,
+                       "title_description":  "ANNUAL ED PARA",
+                       "headcount_fy2025":  28453,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  45212,
+                                      "n_included":  28452,
+                                      "n_excluded":  1
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  6,
+                       "title_description":  "POLICE OFFICER",
+                       "headcount_fy2025":  24153,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  109352,
+                                      "n_included":  24153,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7312",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2026-08-03",
+                                              "application_period_end":  "2026-08-17",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7313",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2026-09-01",
+                                              "application_period_end":  "2026-09-14",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7314",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2026-10-01",
+                                              "application_period_end":  "2026-10-14",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7315",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2026-11-02",
+                                              "application_period_end":  "2026-11-16",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7316",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2026-12-01",
+                                              "application_period_end":  "2026-12-14",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7317",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-01-04",
+                                              "application_period_end":  "2027-01-19",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7318",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-02-01",
+                                              "application_period_end":  "2027-02-16",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7319",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-03-01",
+                                              "application_period_end":  "2027-03-15",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7320",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-04-01",
+                                              "application_period_end":  "2027-04-14",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7321",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-05-03",
+                                              "application_period_end":  "2027-05-17",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7322",
+                                              "exam_title":  "Police Officer",
+                                              "application_period_start":  "2027-06-01",
+                                              "application_period_end":  "2027-06-14",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7528",
+                                              "exam_title":  "Police Officer (Prom)",
+                                              "application_period_start":  "2026-12-02",
+                                              "application_period_end":  "2026-12-22",
+                                              "eligibility":  "Promotion",
+                                              "eligibility_source_value":  "Promotion",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7529",
+                                              "exam_title":  "Police Officer (Prom)",
+                                              "application_period_start":  "2027-06-02",
+                                              "application_period_end":  "2027-06-22",
+                                              "eligibility":  "Promotion",
+                                              "eligibility_source_value":  "Promotion",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  7,
+                       "title_description":  "TEACHER-GENERAL ED",
+                       "headcount_fy2025":  15531,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  15531
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  8,
+                       "title_description":  "SUBSTITUTE ED PARA",
+                       "headcount_fy2025":  14166,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  14166
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  9,
+                       "title_description":  "F/T SCHOOL AIDE",
+                       "headcount_fy2025":  9217,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  9217
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  10,
+                       "title_description":  "FIREFIGHTER",
+                       "headcount_fy2025":  9187,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  109352,
+                                      "n_included":  9187,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  11,
+                       "title_description":  "CORRECTION OFFICER",
+                       "headcount_fy2025":  8082,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  105146,
+                                      "n_included":  8082,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7302",
+                                              "exam_title":  "Correction Officer",
+                                              "application_period_start":  "2026-09-02",
+                                              "application_period_end":  "2026-09-22",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7303",
+                                              "exam_title":  "Correction Officer",
+                                              "application_period_start":  "2027-01-06",
+                                              "application_period_end":  "2027-01-26",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7304",
+                                              "exam_title":  "Correction Officer",
+                                              "application_period_start":  "2027-04-07",
+                                              "application_period_end":  "2027-04-27",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  12,
+                       "title_description":  "SANITATION WORKER",
+                       "headcount_fy2025":  7263,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  92093,
+                                      "n_included":  7263,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  13,
+                       "title_description":  "COMMUNITY COORDINATOR",
+                       "headcount_fy2025":  6604,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  74363,
+                                      "n_included":  6473,
+                                      "n_excluded":  131
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  14,
+                       "title_description":  "COMMUNITY ASSOCIATE",
+                       "headcount_fy2025":  6364,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  54272,
+                                      "n_included":  6170,
+                                      "n_excluded":  194
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  15,
+                       "title_description":  "COLLEGE ASSISTANT",
+                       "headcount_fy2025":  4872,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  4872
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  16,
+                       "title_description":  "PRINCIPAL ADMINISTRATIVE ASSOCIATE -  NON SUPVR",
+                       "headcount_fy2025":  4242,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  68765,
+                                      "n_included":  4145,
+                                      "n_excluded":  97
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  17,
+                       "title_description":  "SERGEANT-",
+                       "headcount_fy2025":  4025,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  118056,
+                                      "n_included":  4025,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  18,
+                       "title_description":  "JOB TRAINING PARTICIPANT",
+                       "headcount_fy2025":  4021,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  39926,
+                                      "n_included":  18,
+                                      "n_excluded":  4003
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  19,
+                       "title_description":  "SCHOOL SAFETY AGENT",
+                       "headcount_fy2025":  4017,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  56508,
+                                      "n_included":  4017,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7324",
+                                              "exam_title":  "School Safety Agent",
+                                              "application_period_start":  "2026-10-07",
+                                              "application_period_end":  "2026-10-27",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7325",
+                                              "exam_title":  "School Safety Agent",
+                                              "application_period_start":  "2027-01-06",
+                                              "application_period_end":  "2027-01-26",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7326",
+                                              "exam_title":  "School Safety Agent",
+                                              "application_period_start":  "2027-04-07",
+                                              "application_period_end":  "2027-04-27",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  20,
+                       "title_description":  "CARETAKER",
+                       "headcount_fy2025":  4011,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  52086,
+                                      "n_included":  4011,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  21,
+                       "title_description":  "ASSISTANT PRINCIPAL",
+                       "headcount_fy2025":  3892,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  153562,
+                                      "n_included":  3726,
+                                      "n_excluded":  166
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  22,
+                       "title_description":  "F/T SCHOOL LUNCH HELPER",
+                       "headcount_fy2025":  3801,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  3801
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  23,
+                       "title_description":  "GUIDANCE COUNSELOR",
+                       "headcount_fy2025":  3722,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  118317,
+                                      "n_included":  3587,
+                                      "n_excluded":  135
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  24,
+                       "title_description":  "OCCUPATIONAL THERAPIST",
+                       "headcount_fy2025":  3494,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  88216,
+                                      "n_included":  2475,
+                                      "n_excluded":  1019
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7052",
+                                              "exam_title":  "Occupational Therapist (DOE)",
+                                              "application_period_start":  "2026-10-07",
+                                              "application_period_end":  "2026-10-27",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7053",
+                                              "exam_title":  "Occupational Therapist (DOE)",
+                                              "application_period_start":  "2027-02-03",
+                                              "application_period_end":  "2027-02-23",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  25,
+                       "title_description":  "STUDENT AIDE",
+                       "headcount_fy2025":  3341,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  3341
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  26,
+                       "title_description":  "P.O. DA DET GR3",
+                       "headcount_fy2025":  3330,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  119980,
+                                      "n_included":  3330,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  27,
+                       "title_description":  "SCHOOL SECRETARY",
+                       "headcount_fy2025":  3305,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  70784,
+                                      "n_included":  3305,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  28,
+                       "title_description":  "LIEUTENANT",
+                       "headcount_fy2025":  3076,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  141684,
+                                      "n_included":  3076,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7520",
+                                              "exam_title":  "Lieutenant (Police) (Prom)",
+                                              "application_period_start":  "2027-05-05",
+                                              "application_period_end":  "2027-05-25",
+                                              "eligibility":  "Promotion",
+                                              "eligibility_source_value":  "Promotion",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  29,
+                       "title_description":  "CHILD PROTECTIVE SPECIALIST",
+                       "headcount_fy2025":  2958,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  68309,
+                                      "n_included":  2958,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7301",
+                                              "exam_title":  "Child Protective Specialist",
+                                              "application_period_start":  "2027-05-05",
+                                              "application_period_end":  "2027-05-25",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  30,
+                       "title_description":  "EMERGENCY MEDICAL SPECIALIST-EMT",
+                       "headcount_fy2025":  2953,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  49047,
+                                      "n_included":  2953,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  31,
+                       "title_description":  "CLERICAL ASSOCIATE MOST MAYORAL AG",
+                       "headcount_fy2025":  2941,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  51227,
+                                      "n_included":  2726,
+                                      "n_excluded":  215
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  32,
+                       "title_description":  "F/T SR. SCHOOL LUNCH HELPER",
+                       "headcount_fy2025":  2744,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  2744
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  33,
+                       "title_description":  "ADJUNCT LECTURER",
+                       "headcount_fy2025":  2698,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  null,
+                                      "n_included":  0,
+                                      "n_excluded":  2698
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  34,
+                       "title_description":  "SCHOOL SOCIAL WORKER",
+                       "headcount_fy2025":  2638,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  115195,
+                                      "n_included":  2594,
+                                      "n_excluded":  44
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  35,
+                       "title_description":  "SCHOOL CROSSING GUARD",
+                       "headcount_fy2025":  2575,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  44533,
+                                      "n_included":  82,
+                                      "n_excluded":  2493
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  36,
+                       "title_description":  "TRAFFIC ENFORCEMENT AGENT",
+                       "headcount_fy2025":  2508,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  49830,
+                                      "n_included":  2508,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7331",
+                                              "exam_title":  "Traffic Enforcement Agent",
+                                              "application_period_start":  "2026-07-01",
+                                              "application_period_end":  "2026-08-25",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7332",
+                                              "exam_title":  "Traffic Enforcement Agent",
+                                              "application_period_start":  "2026-11-05",
+                                              "application_period_end":  "2026-11-25",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7333",
+                                              "exam_title":  "Traffic Enforcement Agent",
+                                              "application_period_start":  "2027-02-03",
+                                              "application_period_end":  "2027-02-23",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7334",
+                                              "exam_title":  "Traffic Enforcement Agent",
+                                              "application_period_start":  "2027-05-05",
+                                              "application_period_end":  "2027-05-25",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  37,
+                       "title_description":  "CITY SEASONAL AIDE",
+                       "headcount_fy2025":  2414,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  41527,
+                                      "n_included":  17,
+                                      "n_excluded":  2397
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  38,
+                       "title_description":  "ASSISTANT DISTRICT ATTORNEY",
+                       "headcount_fy2025":  2409,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  120000,
+                                      "n_included":  2389,
+                                      "n_excluded":  20
+                                  },
+                       "open_exams":  [
+
+                                      ]
+                   },
+                   {
+                       "rank":  39,
+                       "title_description":  "ELIGIBILITY SPECIALIST",
+                       "headcount_fy2025":  2275,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  50446,
+                                      "n_included":  2275,
+                                      "n_excluded":  0
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7073",
+                                              "exam_title":  "Eligibility Specialist",
+                                              "application_period_start":  "2027-02-03",
+                                              "application_period_end":  "2027-02-23",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   },
+                   {
+                       "rank":  40,
+                       "title_description":  "ADMINISTRATIVE STAFF ANALYST",
+                       "headcount_fy2025":  2151,
+                       "salary":  {
+                                      "basis":  "per Annum",
+                                      "median":  128296,
+                                      "n_included":  2140,
+                                      "n_excluded":  11
+                                  },
+                       "open_exams":  [
+                                          {
+                                              "exam_number":  "7005",
+                                              "exam_title":  "Administrative Staff Analyst",
+                                              "application_period_start":  "2027-03-03",
+                                              "application_period_end":  "2027-03-23",
+                                              "eligibility":  "Open Competitive",
+                                              "eligibility_source_value":  "Open Competitive",
+                                              "same_employer":  true
+                                          },
+                                          {
+                                              "exam_number":  "7504",
+                                              "exam_title":  "Administrative Staff Analyst (Prom)",
+                                              "application_period_start":  "2027-03-03",
+                                              "application_period_end":  "2027-03-23",
+                                              "eligibility":  "Promotion",
+                                              "eligibility_source_value":  "Promotion",
+                                              "same_employer":  true
+                                          }
+                                      ]
+                   }
+               ]
+}
