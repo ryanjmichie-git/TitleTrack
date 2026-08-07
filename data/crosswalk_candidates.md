@@ -689,7 +689,30 @@ wrong job. See flag #2.
 *Why medium:* confident once the euphemism is decoded, but this title will
 mis-map under any automated matcher.
 
-DECISION: ___
+DECISION: **`37-2011.00`** Janitors and Cleaners, Except Maids and Housekeeping
+Cleaners — confidence **medium**.
+The euphemism is decoded from repo structure, not from this file's own prose.
+`k397_all_titles.json` (2,026 titles) puts `CARETAKER` (48,340 all-time) inside an
+explicitly *housing* ladder — `SUPERVISOR OF HOUSING CARETAKER` 1,917 ·
+`HOUSING CARETAKER` 572 · `ASSISTANT CARETAKER` 345 · `CHIEF CARETAKER` 254 — and
+**no** animal-care or personal-care caretaker title exists anywhere in the payroll
+universe. The only caretaker exams DCAS runs are 5 rows of `Supervisor of Housing
+Caretakers`/`(Prom)` (`4ptz-hmtc_full.json`); there are zero animal or personal-care
+caretaker exams citywide. FY2025 is 4,011 rows, **all** per Annum (n_included 4,011,
+n_excluded 0), which fits inside `NYC HOUSING AUTHORITY`'s 14,297 FY2025 rows.
+Candidate 2 (`37-3011.00`) is a secondary duty NYCHA titles *separately*
+(`SUPERVISING HOUSING GROUNDSKEEPER` 1,696, `GARDENER` 2,578), so rule 1's residual
+is not triggered — this is one job with a primary duty, not two populations.
+Candidate 3 is the homonym trap rule 2 exists to block: bare `Caretaker` in
+`onet_Job_Titles.txt` hangs off `31-1122.00`, `37-3011.00`, `39-2021.00` and
+`49-9099.00` — **never** off the correct code — while `Building Custodian`,
+`Custodian` and `Janitor` hang off `37-2011.00`. Lexical evidence was overruled
+here, not followed.
+Not high: the grounds-work share inside the title is unmeasured and NYCHA
+concentration is inferred from title/exam structure rather than measured. The L09
+agency group-by with `title_description='CARETAKER'` would upgrade it.
+Verified against `onet_Occupation_Data.txt`: `37-2011.00	Janitors and Cleaners,
+Except Maids and Housekeeping Cleaners`.
 
 ---
 
@@ -727,7 +750,29 @@ Custodial-authority analogue; a stretch.
 *Why medium:* real occupation, but SSAs are NYPD-employed peace officers with
 arrest powers, which `Security Guards` understates.
 
-DECISION: ___
+DECISION: **`33-9032.00`** Security Guards — confidence **medium**.
+O*NET's own definition is a verbatim description of the duties: "Guard, patrol, or
+monitor premises to prevent theft, violence, or infractions of rules. **May operate
+x-ray and metal detector equipment**" — i.e. the school-entrance scanning post and
+building patrol. Candidate 3 is killed by its own definition (`33-3012.00` is
+"Guard inmates in penal or rehabilitative institutions"; schools are neither).
+Candidate 2 is not reachable under rule 1: `33-9099.00` covers protective service
+workers "not listed separately," and the remaining candidates disagree only about
+*status* (peace-officer authority), not about the nature of the work — so
+specificity is earned rather than laundered.
+This is a real occupation, not an L01/L10-style pay code: all 4,017 FY2025 rows are
+per Annum, min $34,937, median = max = $56,508 — a full-time flat-rate step
+schedule. DCAS runs 46 rows for `School Safety Agent` (title_code 60817) plus the
+promotional ladder `Supervisor of School Security` / `Associate Supervisor of School
+Security (Prom)` (60821), while **zero** exams exist for any DOE-payroll title
+(teacher, paraprofessional, school aide, school lunch, school secretary) — a
+citywide DCAS-tested career title, consistent with NYPD employment.
+⚠️ The employer is **not** confirmed in-repo. `k397_agencies_2025.json` has no
+school-safety agency, and both `POLICE DEPARTMENT` (55,424) and the seven DOE lines
+are large enough to absorb 4,017, so headcount arithmetic decides nothing. Not
+`BLOCKED` — this is the L08 pattern: NYPD or DOE, the duty and the SOC are
+identical. Resolver: the L09 group-by with `title_description='SCHOOL SAFETY AGENT'`.
+Verified against `onet_Occupation_Data.txt`: `33-9032.00	Security Guards`.
 
 ---
 
@@ -746,7 +791,36 @@ For higher-level TEAs who direct traffic rather than issue summonses.
 *Why medium:* option 1 is right for most incumbents, but senior TEA levels direct
 traffic in the roadway, which `Parking Enforcement` does not capture.
 
-DECISION: ___
+DECISION: **`33-3041.00`** Parking Enforcement Workers — confidence **medium**.
+The *Why medium* concern dissolves on inspection: O*NET files the
+roadway-traffic-direction side of this job under the **same** code as the
+ticket-writing side — `onet_Job_Titles.txt` carries both
+`33-3041.00	Traffic Control Officer` and `33-3041.00	Parking Enforcement Officer
+(PEO)` — so the senior levels do not split the title. Candidate 3 is unavailable by
+definition (`33-9099.00` covers protective service workers "not listed separately",
+and this work *is* listed separately). Candidate 2's `Traffic Agent` hit is a legacy
+transport-clerical entry sitting beside `Waterway Traffic Checker` in major group 43
+— the lexical trap rule 2 exists to block.
+2,508 FY2025 rows, **all** per Annum (n_included 2,508, n_excluded 0), so no `SKIP`
+question arises. All 4 open exams are the same undifferentiated open-competitive
+`Traffic Enforcement Agent` (title_code 71651); the senior tiers are tested
+separately (`Associate Traffic Enforcement Agent (Prom)`,
+`Administrative Traffic Enforcement Agent (Pro/Prom)`, title_code 10042) and appear
+as their own payroll titles in `k397_all_titles.json`
+(`ASSOCIATE TRAFFIC ENFORCEMENT AGENT` 5,572), so coding this title does not absorb
+them — the L01 double-count pattern is avoided. Payroll-internal corroboration that
+the function *is* parking enforcement: the city's own command line is named
+`ADM TRAFFIC ENFRCMNT AGENT-DIRECTOR OF PARKING ENFRCMNT DIST`.
+⚠️ The "NYPD-employed civilians" premise is **not** verified in this repo and this
+sheet should not claim it. The `k397_perannum_2025_chunk*.csv` files carry only
+`title_description` and `base_salary`, and no traffic-agency sibling to the
+L07/L08/L09 files exists; both `POLICE DEPARTMENT` (55,424) and
+`DEPARTMENT OF TRANSPORTATION` (6,724) are large enough to hold 2,508. Not
+`BLOCKED`, because unlike L09 the employer does not select the code — both plausible
+employers map to `33-3041.00`. Confidence rises to high if the L09 query returns
+`POLICE DEPARTMENT` ≈ 2,508 and a level-mix field ever appears.
+Verified against `onet_Occupation_Data.txt`: `33-3041.00	Parking Enforcement
+Workers`.
 
 ---
 
@@ -931,7 +1005,26 @@ The `-EMT` suffix argues for candidate 1; FDNY EMS employs both.
 *Why high:* the family is certain and the suffix resolves the EMT/paramedic split.
 Note O*NET split these into two codes; NYC has a separate Paramedic title.
 
-DECISION: ___
+DECISION: **`29-2042.00`** Emergency Medical Technicians — confidence **high**.
+The "NYC has a separate Paramedic title" note is confirmed rather than assumed:
+`k397_all_titles.json` carries a distinct `EMERGENCY MEDICAL SPECIALIST-PARAMEDIC`
+(plus a case-variant `…-PARAMEDIc` and `EMERGENCY MEDICAL SPECIALIST TRAINEE`), and
+`4ptz-hmtc_full.json` runs two non-overlapping exam series — 13 EMT rows
+(`Emergency Medical Specialist - EMT`, `… - EMT (Fire)`) against 12 Paramedic rows
+marked `(Prom)`/`(Pro)` (`Emergency Medical Specialist - Paramedic (Prom)`).
+Paramedic is a *promotional destination from* EMT, not the same job, so the `-EMT`
+suffix is a real certification-level distinction and the two must not be collapsed.
+Rule 1 does not push to the `29-2099.00` residual: candidates 1 and 2 agree on the
+nature of the work and differ only on certification level, so specificity is earned.
+A fully salaried occupation, not a pay code: 2,953 FY2025 rows, **all** per Annum
+(n_included 2,953, n_excluded 0), median $49,047.
+Lexical evidence is corroborating only and deliberately not decisive —
+`onet_Job_Titles.txt` lists `Emergency Medical Technician (EMT)` under `29-2042.00`
+but *also* lists `Paramedic` and `EMT Paramedic` there, so the alternate-title file
+cannot resolve the split; the payroll and exam structure does.
+Verified against `onet_Occupation_Data.txt`: `29-2042.00	Emergency Medical
+Technicians` — and line 487 is `29-2043.00	Paramedics`, so this release does carry
+the split.
 
 ---
 
