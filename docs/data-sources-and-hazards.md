@@ -79,3 +79,28 @@ Other hazards (FY2025):
   POSTPONED 23 | QIE 166 | Qualified Incumbent Exam 34 | (missing) 5`
   `QIE` == `Qualified Incumbent Exam`. Naive `GROUP BY` yields nine categories where
   there are five. Rows carrying only a *status* have no eligibility — treat as null.
+
+## What is committed under `data/raw/`, and one deliberate decision
+
+The snapshots in `data/raw/` are tracked on purpose. Six of them are the fixtures
+every gate reads, so they are load-bearing test data, not stray dumps —
+`.gitignore` carries explicit negations saying so.
+
+**`k397-673e_limit5.json` retains five named individuals.** It is the original
+five-row schema probe against the payroll API, and it carries the full record:
+`first_name`, `last_name`, `mid_init`, `agency_name`, `agency_start_date`,
+`work_location_borough`, `title_description`, `base_salary`, `regular_gross_paid`,
+`total_ot_paid` and the rest of the seventeen fields. Four of the five work for
+`ADMIN FOR CHILDREN'S SVCS`.
+
+This was reviewed before the repository was made public and **kept deliberately**.
+The reasoning: NYC publishes `k397-673e` with employee names — that is the
+dataset, not a leak of it — so republishing a five-row sample discloses nothing
+the city has not already published itself. No gate reads this file; it exists as
+the evidence of what the API actually returns, which is the same reason every
+other snapshot here is committed.
+
+Recorded so it reads as a decision rather than an oversight. If that call is ever
+revisited, the file is referenced by no code and can be dropped or redacted
+without touching any gate; removing it from history would need a rewrite, since
+it was introduced in a single commit (`2e1358f`).
