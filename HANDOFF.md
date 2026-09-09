@@ -95,6 +95,15 @@ Run **2026-09-08 in this session**, output shown:
 - `python demo/evaluate.py` → `GATE PASSED`, exit 0. **248 checks passed, 0 failed.**
 - `python scripts/build_top40.py --check` → `OK  byte-identical … (47524 bytes)`, exit 0.
 
+**Everything above now runs in CI** (`.github/workflows/gates.yml`) on every push to
+`main` and every pull request, across Python 3.9 and 3.13, via the single runner
+`scripts/verify.sh` that the local Stop hook also executes. First green run
+2026-09-09. The runner asserts the expected exit code for each gate, and both of its
+negative tests were exercised: inverting the "naive MUST FAIL" expectation yields one
+FAIL and exit 1, and removing `data/raw/** -text` yields one FAIL and exit 1.
+The CI run also proves the byte-identity gate survives a **Linux** checkout, which was
+previously the most fragile untested assumption in the repo.
+
 **Agent gates — verified 2026-09-09 against their adversarial baselines.** No real
 agent-prediction file is committed, so what is proven here is that *the gates
 discriminate*, not that a live agent run passes them:
@@ -134,12 +143,20 @@ Not verified:
 
 ## Risks and what's next
 
-1. **HIGHEST: six files are uncommitted and unpushed.** `CLAUDE.md` (modified) plus
+1. ~~**Six files uncommitted and unpushed.**~~ **Resolved 2026-09-09** — committed and
+   pushed; the `docs/onet-attribution.md` reference now resolves on the remote.
+   Original note kept for context: `CLAUDE.md` (modified) plus
    `HANDOFF.md` and the five `docs/*.md`. The remote's last push was 2026-08-07.
    This is not only a backup gap — the working-tree `CLAUDE.md` instructs readers to
    read `docs/onet-attribution.md` before shipping O*NET data, and **that file does
    not exist on the remote**, so a fresh clone points at nothing. Commit and push.
-2. **`data/raw/` is fully tracked despite the gitignore rule.** 47 files, including
+2. ~~**`data/raw/` silently depended on by CI.**~~ **Resolved 2026-09-09** — the six
+   gate fixtures now carry explicit `!` negations in `.gitignore` with a comment
+   saying they are load-bearing, and `scripts/verify.sh` checks the BOM and the
+   `-text` attribute directly. A licence problem surfaced while auditing this:
+   `socrata_app_tokens.html`/`.txt` are CC BY-NC-SA 3.0 (NonCommercial, ShareAlike)
+   and were sitting under a blanket MIT grant. Carved out in `LICENSE` before the
+   repo went public. Original note: 47 files, including
    all four payroll CSV chunks and the O*NET database files, were force-added, and
    `data/raw/*` has no effect on already-tracked paths. Checked 2026-09-08: the repo
    is **private**; the payroll CSVs carry only `title_description` and `base_salary`
@@ -165,3 +182,23 @@ Not verified:
    Gradio/Docker with the key in Space secrets. Log counts only, never session
    identity: this tool tells identifiable municipal workers their job may be
    automated, and title plus borough narrows to very few people.
+
+## Repository state as of 2026-09-09
+
+- **Public.** MIT for code; `data/raw/` carries three separate third-party licences.
+- **`main` is protected** by a ruleset: pull request required, `gates-ok` status check
+  required, force-push and deletion blocked, linear history required. Verified by an
+  attempted direct push, which was refused. There is deliberately **no admin bypass** —
+  on a solo repo the owner is the admin, so a bypass would defeat the rule. To push
+  directly you must disable the ruleset in the UI, which is the intended friction.
+- **History was rewritten** on 2026-09-09 to a single author and committer identity
+  (`Ryan Michie <rmichie@marinetiger.com>`), replacing four. Content is provably
+  unchanged: same tree hash, same 33 commits, identical per-commit author dates,
+  committer dates, trees and subjects. All 20 `Co-Authored-By: Claude` trailers
+  survived, which is the accurate record of how the work was done. A pre-rewrite
+  bundle is at `../TitleTrack-backup-prerewrite.bundle` — **keep it for a month**;
+  GitHub also keeps the old commits addressable by SHA.
+- **Secret scanning and push protection are on** (free once public). A history-wide
+  scan of all commits found no credentials.
+- One stale branch (`claude/title-track-repo-confirm-oqvxod`) was deleted; it held no
+  unmerged work.
