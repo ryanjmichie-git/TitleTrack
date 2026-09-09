@@ -1,4 +1,19 @@
-# Raw API snapshots are evidence: they must round-trip byte-identical.
-# Without this, core.autocrlf rewrites LF -> CRLF on checkout and a fresh
-# clone no longer matches the bytes the API actually returned.
+# Line endings are declared here, not inherited from the machine. Without this,
+# checkout behaviour depends on the user's system-level core.autocrlf, which is
+# how the same tree ends up different on two machines.
+* text=auto eol=lf
+
+# PowerShell 5.1 is happiest with CRLF source.
+*.ps1 text eol=crlf
+
+# Declared, rather than left to git's NUL-byte heuristic.
+*.pdf  binary
+*.pptx binary
+
+# Raw API snapshots are evidence and must round-trip byte-identical. They carry a
+# UTF-8 BOM and CRLF because PowerShell 5.1 wrote them, not because the API
+# emitted them (see docs/demo-prototype.md). scripts/build_top40.py --check
+# compares these bytes exactly, so normalizing them breaks that gate on Linux
+# with only a byte-count DIFF as a clue.
+# This rule MUST stay last: in .gitattributes the last matching pattern wins.
 data/raw/** -text
