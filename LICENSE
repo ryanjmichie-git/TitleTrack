@@ -19,3 +19,38 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Scope of this licence
+
+The MIT licence above covers **the code and documentation in this repository
+only** — everything under `scripts/`, `demo/`, `agents/`, `docs/`, `scoring/`, and
+the Markdown at the repository root.
+
+**It does not cover the contents of `data/raw/`.** Those files are third-party
+data redistributed under their own terms:
+
+- **O\*NET 30.3 Database** (`data/raw/onet_*.txt`, `onet_*.html`) — by the U.S.
+  Department of Labor, Employment and Training Administration (USDOL/ETA), used
+  under the **Creative Commons Attribution 4.0 International (CC BY 4.0)**
+  licence. The licence text as retrieved is committed at
+  `data/raw/onet_license_db.txt`. Attribution is mandatory and verbatim; the
+  required block and the rules for reproducing it are in
+  `docs/onet-attribution.md`.
+
+  > This product includes information from the O\*NET 30.3 Database by the U.S.
+  > Department of Labor, Employment and Training Administration (USDOL/ETA).
+  > Used under the CC BY 4.0 license. O\*NET® is a trademark of USDOL/ETA.
+  >
+  > TitleTrack has modified all or some of this information. USDOL/ETA has not
+  > approved, endorsed, or tested these modifications.
+
+- **NYC Open Data** (`data/raw/k397_*`, `data/raw/4ptz*`) — snapshots of the NYC
+  Citywide Payroll Data (`k397-673e`) and the DCAS Annual Examination Schedule
+  (`4ptz-hmtc`), published by the City of New York under the NYC Open Data terms
+  of use. Retrieval dates and dataset vintages are recorded in
+  `docs/data-sources-and-hazards.md`.
+
+Reusing anything from `data/raw/` means complying with the upstream terms, not
+this MIT grant.
