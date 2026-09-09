@@ -104,3 +104,17 @@ Recorded so it reads as a decision rather than an oversight. If that call is eve
 revisited, the file is referenced by no code and can be dropped or redacted
 without touching any gate; removing it from history would need a rewrite, since
 it was introduced in a single commit (`2e1358f`).
+
+### One licence trap in `data/raw/`
+
+`socrata_app_tokens.html` / `.txt` are verbatim copies of Socrata's app-token
+documentation page, kept as the evidence for the "no app token required" finding
+above. Their footer reads *"Licensed by Tyler Technologies under CC BY-NC-SA 3.0"* —
+**NonCommercial and ShareAlike**, which is not compatible with this repository's MIT
+grant. `LICENSE` carves them out explicitly. Do not assume everything under
+`data/raw/` shares one licence: O\*NET is CC BY 4.0, NYC Open Data has its own terms,
+and these two files have a third.
+
+For the record, the `X-App-Token : [REDACTED]` string in that file is Socrata's own
+placeholder in their documentation, not a redacted credential of ours. No token was
+ever committed.
