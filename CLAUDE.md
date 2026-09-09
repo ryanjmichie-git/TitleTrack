@@ -35,6 +35,10 @@ Run from the repo root. All are offline, stdlib-only, and exit non-zero on failu
   `crosswalk-decider`. An unrecognised mode silently falls through to the default
   instead of erroring, so passing `strict` to `crosswalk-decider` re-runs
   `first_soc` and looks like a second baseline. Verified 2026-09-09.
+- `sh scripts/verify.sh` — **runs every gate and asserts the expected exit code for
+  each**, including the three agent baselines that must exit 1. This is the single
+  runner CI and the local Stop hook both execute, so they cannot drift. Passing ends
+  `VERIFY PASSED`. Verified 2026-09-09.
 - `python demo/serve.py` → `http://localhost:8765` serves the demo (unverified here:
   long-running server, not started).
 
@@ -53,9 +57,19 @@ aggregate (verified once at 330,289 rows over 4 chunks). See
   glob must be `data/raw/*`, not `data/raw/` — excluding the *directory* stops git
   descending into it and makes the negation a silent no-op. Snapshots were force-added
   deliberately; use `-f` deliberately too, never casually.
-- `.gitattributes` sets `data/raw/** -text` so snapshots round-trip byte-identical.
-  `core.autocrlf` would rewrite LF→CRLF and a fresh clone would stop matching what the
-  APIs actually returned.
+- `.gitattributes` declares line endings for the whole repo (`* text=auto eol=lf`,
+  CRLF for `.ps1`, declared `binary` for pdf/pptx) and keeps `data/raw/** -text`
+  **last**, because the last matching pattern wins and that rule is load-bearing:
+  `--check` byte-compares an artifact carrying a UTF-8 BOM and 856 CRLFs. Before this,
+  behaviour depended on the machine's system-level `core.autocrlf`.
+- **Branch → PR → CI → merge. No direct pushes to `main`** — a ruleset refuses them,
+  refuses force-pushes and deletions, requires linear history, and requires the
+  `gates-ok` check. Merge with rebase or squash, never a merge commit.
+- `data/raw/` is fully tracked on purpose and is nominally gitignored; explicit
+  negations mark the six snapshots the gates read. Never `git rm --cached` them.
+- `data/raw/` holds **three** licences, not one: O*NET CC BY 4.0, NYC Open Data, and
+  `socrata_app_tokens.*` under CC BY-NC-SA 3.0, which is not MIT-compatible. See
+  `LICENSE`.
 
 ## Gotchas
 
