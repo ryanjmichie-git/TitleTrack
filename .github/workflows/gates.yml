@@ -1,0 +1,65 @@
+name: gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gates-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  gates:
+    name: gates (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.9', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      # The gates are stdlib-only and offline on purpose. If a dependency
+      # manifest ever appears, that is a deliberate decision that should be
+      # made in a PR, not discovered when CI silently starts installing things.
+      - name: Assert the gates are still dependency-free
+        run: |
+          for f in requirements.txt pyproject.toml setup.py setup.cfg Pipfile; do
+            if [ -e "$f" ]; then
+              echo "::error file=$f::$f appeared - the gates are stdlib-only and offline. Add dependencies deliberately."
+              exit 1
+            fi
+          done
+          echo "ok - nothing to install"
+
+      # scripts/verify.sh holds the expected-exit-code contract. It is the same
+      # command .claude/verify runs locally, so the two cannot drift.
+      - name: Run the gates
+        env:
+          PYTHON: python
+        run: sh scripts/verify.sh
+
+  # One stable context for branch protection to require, so changing the matrix
+  # later cannot silently orphan the required status check.
+  gates-ok:
+    name: gates-ok
+    if: always()
+    needs: gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every matrix leg to be green
+        run: |
+          echo "gates result: ${{ needs.gates.result }}"
+          [ "${{ needs.gates.result }}" = "success" ]
