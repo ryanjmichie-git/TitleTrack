@@ -233,3 +233,19 @@ node_modules/
 *.csv
 !data/crosswalk*.csv
 !data/*_verified.csv
+
+# The snapshots below are NOT stray dumps - they are the test fixtures every
+# gate reads, and they are tracked deliberately. They match `data/raw/*` and
+# `*.csv` above and survive only because gitignore does not apply to files
+# already tracked. Anyone reasoning from this file about what CI receives, or
+# running `git rm --cached` and re-adding, silently breaks all four gates.
+# These negations make the dependency explicit.
+!data/raw/k397_top40_headcount_2025.json
+!data/raw/k397_all_titles.json
+!data/raw/4ptz-hmtc_full.json
+!data/raw/k397_perannum_2025_chunk*.csv
+!data/raw/onet_Occupation_Data.txt
+!data/raw/onet_Task_Statements.txt
+
+# The verification script the Stop hook expects (see CLAUDE.md Commands).
+!.claude/verify
