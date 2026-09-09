@@ -52,5 +52,14 @@ data redistributed under their own terms:
   of use. Retrieval dates and dataset vintages are recorded in
   `docs/data-sources-and-hazards.md`.
 
+- **Socrata / Tyler Technologies developer documentation**
+  (`data/raw/socrata_app_tokens.html`, `socrata_app_tokens.txt`) — verbatim copies
+  of `dev.socrata.com/docs/app-tokens.html`, retained as evidence for the
+  "no app token required" finding in `docs/data-sources-and-hazards.md`. Their own
+  footer reads *"Licensed by Tyler Technologies under CC BY-NC-SA 3.0"* — a
+  **NonCommercial and ShareAlike** licence that is **not** compatible with the MIT
+  grant above and does not fall under it. Those terms apply to these two files and
+  to them alone. They are redistributed unmodified.
+
 Reusing anything from `data/raw/` means complying with the upstream terms, not
 this MIT grant.
