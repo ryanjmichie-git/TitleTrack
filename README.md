@@ -46,7 +46,10 @@ Everything else is offline.
 ## How to verify it
 
 There is no pytest suite — these gates are the tests. All are stdlib-only, offline,
-and finish in a few seconds. Python 3.7+ (developed on 3.11).
+and finish in a few seconds. Python 3.9+ — CI tests 3.9 and 3.13 on every
+push and pull request, so that floor is measured rather than asserted.
+`sh scripts/verify.sh` runs every gate at once and is what both CI and the
+local pre-stop hook execute.
 
 | Command | Asserts | Expected |
 |---|---|---|

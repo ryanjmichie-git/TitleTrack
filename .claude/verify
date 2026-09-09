@@ -1,13 +1,11 @@
-# Verification command for the Stop gate (~/.claude/hooks/stop_gate.py).
-# The first non-comment line below is the command; it runs from the repo root
-# and a non-zero exit blocks stopping.
+# TitleTrack verification for the user-level Stop gate (~/.claude/hooks/stop_gate.py).
+# First non-comment line is the command; it runs from the repo root and a
+# non-zero exit blocks stopping.
 #
 # shell: bash
-# timeout: 120
+# timeout: 300
 #
-# Why only these two: they are the project's real gates and both must exit 0.
-# The four agent baselines are deliberately NOT here - three of them exit 1 by
-# design (a passing adversarial baseline means the golden set lost its teeth),
-# so they need expected-exit-code assertions and live in CI instead
-# (.github/workflows/verify.yml).
-python scripts/build_top40.py --check && python demo/evaluate.py
+# Deliberately the SAME runner CI uses, so the hook and CI can never disagree
+# about what "verified" means. Three of the four agent baselines exit 1 by
+# design, so verify.sh asserts expected exit codes rather than success.
+sh scripts/verify.sh
